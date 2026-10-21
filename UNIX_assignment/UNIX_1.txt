@@ -1,0 +1,274 @@
+Last login: Mon Sep 28 11:50:52 on ttys000
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Thu Sep 24 12:06:14 2026 from 10.110.165.56
+    _______  __ ____  __    ____  ____  __________ 
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/ 
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|  
+                                                  
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters. 
+
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+[fang.xink@explorer-01 ~]$ cd ~
+[fang.xink@explorer-01 ~]$ ls
+bioinformatics-portfolio  ondemand  student_files_1.fastq
+[fang.xink@explorer-01 ~]$ cd ~/desktop
+[fang.xink@explorer-01 ~]$ cd ../Downloads
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+[fang.xink@explorer-01 ~]$ cd /
+[fang.xink@explorer-01 /]$ pwd
+/
+[fang.xink@explorer-01 /]$ cd ~
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+[fang.xink@explorer-01 ~]$ cd / 
+[fang.xink@explorer-01 /]$ pwd
+/
+[fang.xink@explorer-01 /]$ cd 
+[fang.xink@explorer-01 ~]$ owd
+-bash: owd: command not found
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+[fang.xink@explorer-01 ~]$ # task1&2 ls shows us all the files in my home directory and / takes you to the root directory. But both the ~ and cd take you home
+[fang.xink@explorer-01 ~]$ cd ~/desktop
+-bash: cd: /home/fang.xink/desktop: No such file or directory
+[fang.xink@explorer-01 ~]$ ls -1
+bioinformatics-portfolio
+ondemand
+student_files_1.fastq
+[fang.xink@explorer-01 ~]$ ls -R
+.:
+bioinformatics-portfolio  ondemand  student_files_1.fastq
+
+./bioinformatics-portfolio:
+README.md  README.md.save  README.md.save.1
+
+./ondemand:
+data  dev
+
+./ondemand/data:
+sys
+
+./ondemand/data/sys:
+dashboard
+
+./ondemand/data/sys/dashboard:
+batch_connect
+
+./ondemand/data/sys/dashboard/batch_connect:
+cache
+
+./ondemand/data/sys/dashboard/batch_connect/cache:
+
+./ondemand/dev:
+ReadMe.md
+
+./student_files_1.fastq:
+in_class
+
+./student_files_1.fastq/in_class:
+[fang.xink@explorer-01 ~]$ ls -i -t -r
+ 9782426420231666575 bioinformatics-portfolio   4525848861079951069 ondemand
+18092323210421412576 student_files_1.fastq
+[fang.xink@explorer-01 ~]$ ls -1h
+bioinformatics-portfolio
+ondemand
+student_files_1.fastq
+[fang.xink@explorer-01 ~]$ # task 3  ls -1 details the listings as permissions, they are distinguished by owner size and modification time
+[fang.xink@explorer-01 ~]$ # task 4 contents of the directory and its subdirectories
+[fang.xink@explorer-01 ~]$ # task 5 ls -1 -t -r details lsiting order by their mod time, from oldest to the newewst
+[fang.xink@explorer-01 ~]$ # task 6 ls -1h detailed listing with readable sizes such as KB and MB
+[fang.xink@explorer-01 ~]$ mkdir -p ~/Desktop/unix/Temp1/Temp2
+[fang.xink@explorer-01 ~]$ cd ~/Desktop/unix/Temp1/Temp2
+[fang.xink@explorer-01 Temp2]$ pwd
+/home/fang.xink/Desktop/unix/Temp1/Temp2
+[fang.xink@explorer-01 Temp2]$ cd ..
+[fang.xink@explorer-01 Temp1]$ pwd
+/home/fang.xink/Desktop/unix/Temp1
+[fang.xink@explorer-01 Temp1]$ cd ~/Desktop/unix/
+[fang.xink@explorer-01 unix]$ pwd
+/home/fang.xink/Desktop/unix
+[fang.xink@explorer-01 unix]$ # task 7 mkdir -p creates the nested folders. cd ..  moves up one lv
+[fang.xink@explorer-01 unix]$ from /Users/yourname/Desktop cd .. lands in the user domain aslong with the yourname. Unlike cd ../.. lands in /Users
+-bash: from: command not found
+[fang.xink@explorer-01 unix]$ cd ~/Downloads 
+-bash: cd: /home/fang.xink/Downloads: No such file or directory
+[fang.xink@explorer-01 unix]$ touch unix_delete_practice txt
+[fang.xink@explorer-01 unix]$ rm -i unix_delete_practice.txt
+rm: cannot remove 'unix_delete_practice.txt': No such file or directory
+[fang.xink@explorer-01 unix]$ y
+-bash: y: command not found
+[fang.xink@explorer-01 unix]$ # task 8&9 rm -i makes it that it asks before oyur files gets deleted
+[fang.xink@explorer-01 unix]$ cd ~
+[fang.xink@explorer-01 ~]$ mkdir -p ~/Deskytop/unix
+[fang.xink@explorer-01 ~]$ cd ~/Desktop/unix/
+[fang.xink@explorer-01 unix]$ cd ~/Desktop/unix
+[fang.xink@explorer-01 unix]$ mkdir -p Temp
+[fang.xink@explorer-01 unix]$ cd Temp
+[fang.xink@explorer-01 Temp]$ touch fat fit feet
+[fang.xink@explorer-01 Temp]$ ls f?t
+fat  fit
+[fang.xink@explorer-01 Temp]$ f*t
+[fang.xink@explorer-01 Temp]$ f??t
+-bash: feet: command not found
+[fang.xink@explorer-01 Temp]$ #task 10 ? matches exactly one character * matches any number of characters, including zero.
+[fang.xink@explorer-01 Temp]$ mkdir -P ~/Desktop/Temp
+mkdir: invalid option -- 'P'
+Try 'mkdir --help' for more information.
+[fang.xink@explorer-01 Temp]$ mkdir -p ~/Desktop/unix/Temp3
+[fang.xink@explorer-01 Temp]$ cd ~
+[fang.xink@explorer-01 ~]$ mv ~/Desktop/unix/Temp3 ~/desktop/Temp/
+mv: cannot move '/home/fang.xink/Desktop/unix/Temp3' to '/home/fang.xink/desktop/Temp/': No such file or directory
+[fang.xink@explorer-01 ~]$ ls ~/Desktop/Temp
+ls: cannot access '/home/fang.xink/Desktop/Temp': No such file or directory
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+[fang.xink@explorer-01 ~]$ cd ~
+[fang.xink@explorer-01 ~]$ ls Desktop
+unix
+[fang.xink@explorer-01 ~]$ ls Desktop/
+unix
+[fang.xink@explorer-01 ~]$ #task. 11 & 12 both commands show the contents, the slash is optional.
+[fang.xink@explorer-01 ~]$ cd ~/Desktop/unix
+[fang.xink@explorer-01 unix]$ touch dog.txt cat.txt owl.fa
+[fang.xink@explorer-01 unix]$ rm -i dog.txt cat.txt
+rm: remove regular empty file 'dog.txt'? y
+rm: remove regular empty file 'cat.txt'? y
+[fang.xink@explorer-01 unix]$ rm -i owl.fa 
+rm: remove regular empty file 'owl.fa'?   
+[fang.xink@explorer-01 unix]$ 
+[fang.xink@explorer-01 unix]$ cd ~/Downloads
+-bash: cd: /home/fang.xink/Downloads: No such file or directory
+[fang.xink@explorer-01 unix]$ touch unix_practice_1.txt unix_practice_2.txt
+[fang.xink@explorer-01 unix]$ rm -i unix_practice_$.txt
+rm: cannot remove 'unix_practice_$.txt': No such file or directory
+[fang.xink@explorer-01 unix]$ #task 13 & 14 The wildcard selects both practice files, and -i asks before deleting each one.
+[fang.xink@explorer-01 unix]$ cd ~/Desktop/unix
+[fang.xink@explorer-01 unix]$ touch file1
+[fang.xink@explorer-01 unix]$ cp file1 file2
+[fang.xink@explorer-01 unix]$ touch ~/file3
+[fang.xink@explorer-01 unix]$ cp ~/file3 .
+[fang.xink@explorer-01 unix]$ mkdir -p storage
+[fang.xink@explorer-01 unix]$ mv file1 file2 file3 storage/
+[fang.xink@explorer-01 unix]$ cp Storage Storage2
+cp: cannot stat 'Storage': No such file or directory
+[fang.xink@explorer-01 unix]$ # task 15&16 task error b/c storage is a directory
+[fang.xink@explorer-01 unix]$ cp -R Storage Storage2
+cp: cannot stat 'Storage': No such file or directory
+[fang.xink@explorer-01 unix]$ ls Storage Storage2
+ls: cannot access 'Storage': No such file or directory
+ls: cannot access 'Storage2': No such file or directory
+[fang.xink@explorer-01 unix]$ task 12
+-bash: task: command not found
+[fang.xink@explorer-01 unix]$ mkdir Storage 
+[fang.xink@explorer-01 unix]$ touch Storage/file1 Storage/file2 Storage/file3
+[fang.xink@explorer-01 unix]$ cp Storage Storage 2 
+cp: target '2' is not a directory
+[fang.xink@explorer-01 unix]$ cp -R Storage Storage2
+[fang.xink@explorer-01 unix]$ ls Storage Storage2 
+Storage:
+file1  file2  file3
+
+Storage2:
+file1  file2  file3
+[fang.xink@explorer-01 unix]$ # task 17,18,19 without the -R, cp cannot copy the directory. With -R, it copies the directory and all its content. 
+[fang.xink@explorer-01 unix]$ cd ..
+[fang.xink@explorer-01 Desktop]$ rm -ri unix 
+rm: descend into directory 'unix'? y
+rm: descend into directory 'unix/Storage'? cd ~
+rm: descend into directory 'unix/Storage2'? ls 
+rm: descend into directory 'unix/Temp'? mkdir -p ~/Desktop/Data
+rm: descend into directory 'unix/Temp1'? cd ~/Desktop/Data
+rm: remove directory 'unix/Temp3'? mkdir -p ~/Data 
+rm: remove regular empty file 'unix/owl.fa'? cd ~/Data
+rm: descend into directory 'unix/storage'? mkdir -p ~/Data
+rm: remove regular empty file 'unix/txt'? cd ~/Data
+rm: remove regular empty file 'unix/unix_delete_practice'? mkdir -p ~/Data
+rm: remove regular empty file 'unix/unix_practice_1.txt'? cd ~/Data
+rm: remove regular empty file 'unix/unix_practice_2.txt'? wget https://raw.githubusercontent.com/jamiehenzy/01_UNIX_HPC/refs/heads/main/At_proteins.fasta
+[fang.xink@explorer-01 Desktop]$ wget YOUR_PAASTED_RAW_LINK
+#task 20
+--2026-10-01 00:02:06--  http://your_paasted_raw_link/
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 503 Service Unavailable
+2026-10-01 00:02:06 ERROR 503: Service Unavailable.
+
+[fang.xink@explorer-01 Desktop]$ wget https://raw.githubusercontent.com/jamiehenzy/01_UNIX_HPC/refs/heads/main/At_proteins.fasta
+--2026-10-01 00:02:23--  https://raw.githubusercontent.com/jamiehenzy/01_UNIX_HPC/refs/heads/main/At_proteins.fasta
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 17891640 (17M) [text/plain]
+Saving to: ‘At_proteins.fasta’
+
+At_proteins.fasta   100%[===================>]  17.06M  --.-KB/s    in 0.1s    
+
+2026-10-01 00:02:24 (119 MB/s) - ‘At_proteins.fasta’ saved [17891640/17891640]
+
+[fang.xink@explorer-01 Desktop]$ wget /Users/kenfang/Downloads/At_genes.gff 
+/Users/kenfang/Downloads/At_genes.gff: Scheme missing.
+[fang.xink@explorer-01 Desktop]$ wget https://github.com/jamiehenzy/01_UNIX_HPC/raw/refs/heads/main/At_genes.gff.gz
+--2026-10-01 00:07:14--  https://github.com/jamiehenzy/01_UNIX_HPC/raw/refs/heads/main/At_genes.gff.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 302 Found
+Location: https://raw.githubusercontent.com/jamiehenzy/01_UNIX_HPC/refs/heads/main/At_genes.gff.gz [following]
+--2026-10-01 00:07:14--  https://raw.githubusercontent.com/jamiehenzy/01_UNIX_HPC/refs/heads/main/At_genes.gff.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 4603058 (4.4M) [application/octet-stream]
+Saving to: ‘At_genes.gff.gz’
+
+At_genes.gff.gz     100%[===================>]   4.39M  --.-KB/s    in 0.07s   
+
+2026-10-01 00:07:15 (61.3 MB/s) - ‘At_genes.gff.gz’ saved [4603058/4603058]
+
+[fang.xink@explorer-01 Desktop]$ gunzip At_genes.gff.gz 
+[fang.xink@explorer-01 Desktop]$ ls
+At_genes.gff  At_proteins.fasta  unix
+[fang.xink@explorer-01 Desktop]$ less At_proteins.fa
+At_proteins.fa: No such file or directory
+[fang.xink@explorer-01 Desktop]$ less At_proteins.fasta 
+[fang.xink@explorer-01 Desktop]$ 
+[fang.xink@explorer-01 Desktop]$ #task 21 I placed At_proteins.fasta in the data directory adn used ls to condirm it was there
+[fang.xink@explorer-01 Desktop]$ alias ls='ls -p'
+[fang.xink@explorer-01 Desktop]$ alias rm='rm-i'
+[fang.xink@explorer-01 Desktop]$ alias
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l.='ls -d .* --color=auto'
+alias ll='ls -l --color=auto'
+alias ls='ls -p'
+alias rm='rm-i'
+alias xzegrep='xzegrep --color=auto'
+alias xzfgrep='xzfgrep --color=auto'
+alias xzgrep='xzgrep --color=auto'
+alias zegrep='zegrep --color=auto'
+alias zfgrep='zfgrep --color=auto'
+alias zgrep='zgrep --color=auto'
+[fang.xink@explorer-01 Desktop]$ ls
+At_genes.gff  At_proteins.fasta  unix/
+#task 22
+[fang.xink@explorer-01 Desktop]$ cd ~ 
+[fang.xink@explorer-01 ~]$ nano profile
+[fang.xink@explorer-01 ~]$ less ~/profile
+[fang.xink@explorer-01 ~]$ Read from remote host login.explorer.northeastern.edu: Operation timed out
+Connection to login.explorer.northeastern.edu closed.
+client_loop: send disconnect: Broken pipe
+kenfang@Kens-MacBook-Pro ~ % 
