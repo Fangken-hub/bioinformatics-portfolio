@@ -1,0 +1,300 @@
+# BIOL2406 - Working with Genome Sequences
+# Cleaned Explorer terminal session - October 17, 2026
+# Commands and output retained from the provided terminal log.
+# Failed commands, duplicate attempts, and terminal display artifacts omitted.
+
+
+# Show the current working directory.
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+
+# List the files and folders in the current directory.
+[fang.xink@explorer-01 ~]$ ls
+bioinformatics-portfolio              ondemand
+Desktop                               profile
+Deskytop                              SRR098026.fastq
+GCF_000002985.6_WBcel235_genomic.fna  SRR098026_fastqc.html
+hACE2.gtf                             SRR098026_fastqc.zip
+Homo_sapiens.GRCh38.115.gtf           student_files_1.fastq
+human_genome.fna.gz
+
+# Navigate to the specified directory.
+[fang.xink@explorer-01 ~]$ cd /courses/BIOL2406.202710/students/
+
+# List the files and folders in the current directory.
+[fang.xink@explorer-01 students]$ ls
+ding.jo    fernandes.lui  harel.z  mao.al             patel.v9      zheng.je
+fang.xink  galgano.n      jhenzy   martinezamezaga.p  tabatabai.ar
+fan.zac    gottschalk.w   liu.ziz  mehdiyev.l         wahi.h
+
+# Navigate to the specified directory.
+[fang.xink@explorer-01 students]$ cd /courses/BIOL2406.202710/students/fang.xink/
+
+# Create the genome analysis directory or subdirectories.
+[fang.xink@explorer-01 fang.xink]$ mkdir -p Genomes_analysis
+
+# Navigate to the specified directory.
+[fang.xink@explorer-01 fang.xink]$ cd Genomes_analysis/
+
+# List the files and folders in the current directory.
+[fang.xink@explorer-01 Genomes_analysis]$ ls
+
+# Confirm the current cluster node.
+[fang.xink@explorer-01 Genomes_analysis]$ hostname
+explorer-01
+
+# Request an interactive computing node through Slurm.
+[fang.xink@explorer-01 Genomes_analysis]$ srun --pty --time=02:00:00 --mem=8G --cpus-per-task=2 bash
+srun: job 11166060 queued and waiting for resources
+srun: job 11166060 has been allocated resources
+
+# Confirm the current cluster node.
+[fang.xink@c0222 Genomes_analysis]$ hostname
+c0222
+
+# Create the genome analysis directory or subdirectories.
+[fang.xink@c0222 Genomes_analysis]$ mkdir -p Borrelia C_elegans Sea_cucumber Human Lambda Reads Annotation
+
+# List the files and folders in the current directory.
+[fang.xink@c0222 Genomes_analysis]$ ls
+Annotation  Borrelia  C_elegans  Human  Lambda  Reads  Sea_cucumber
+
+# List files in the home directory.
+[fang.xink@c0222 Genomes_analysis]$ ls ~
+bioinformatics-portfolio              ondemand
+Desktop                               profile
+Deskytop                              SRR098026.fastq
+GCF_000002985.6_WBcel235_genomic.fna  SRR098026_fastqc.html
+hACE2.gtf                             SRR098026_fastqc.zip
+Homo_sapiens.GRCh38.115.gtf           student_files_1.fastq
+human_genome.fna.gz
+
+# Copy an existing reference or annotation file into its designated directory.
+[fang.xink@c0222 Genomes_analysis]$ cp ~/GCF_000002985.6_WBcel235_genomic.fna C_elegans/
+
+# Copy an existing reference or annotation file into its designated directory.
+[fang.xink@c0222 Genomes_analysis]$ cp ~/Homo_sapiens.GRCh38.115.gtf Annotation/
+
+# Navigate to the specified directory.
+[fang.xink@c0222 Genomes_analysis]$ cd Human
+
+# Download the reference genome or sequencing reads from the specified source.
+[fang.xink@c0222 Human]$ wget https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+--2026-10-17 13:17:44--  https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 942484168 (899M) [application/x-gzip]
+Saving to: ‘Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz’
+Homo_sapiens.GRCh38 100%[===================>] 898.82M  1002KB/s    in 15m 1s  
+2026-10-17 13:32:46 (1021 KB/s) - ‘Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz’ saved [942484168/942484168]
+
+# Check the integrity of the downloaded compressed human genome.
+[fang.xink@c0222 Human]$ gzip -t Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+
+# Decompress the genome or FASTQ files.
+[fang.xink@c0222 Human]$ gunzip Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+
+# Check filenames and file sizes in the current directory.
+[fang.xink@c0222 Human]$ ls -lh
+total 3.0G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0G Mar 23  2026 Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+
+# Navigate to the specified directory.
+[fang.xink@c0222 Human]$ cd ..
+
+# List the files and folders in the current directory.
+[fang.xink@c0222 Genomes_analysis]$ ls
+Annotation  Borrelia  C_elegans  Human  Lambda  Reads  Sea_cucumber
+
+# Navigate to the specified directory.
+[fang.xink@c0222 Genomes_analysis]$ cd Borrelia
+
+# Download the reference genome or sequencing reads from the specified source.
+[fang.xink@c0222 Borrelia]$ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/685/GCF_000008685.2_ASM868v2/GCF_000008685.2_ASM868v2_genomic.fna.gz
+--2026-10-17 13:41:16--  https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/685/GCF_000008685.2_ASM868v2/GCF_000008685.2_ASM868v2_genomic.fna.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 406156 (397K) [application/x-gzip]
+Saving to: ‘GCF_000008685.2_ASM868v2_genomic.fna.gz’
+GCF_000008685.2_ASM 100%[===================>] 396.64K  --.-KB/s    in 0.04s   
+2026-10-17 13:41:17 (9.10 MB/s) - ‘GCF_000008685.2_ASM868v2_genomic.fna.gz’ saved [406156/406156]
+
+# Check filenames and file sizes in the current directory.
+[fang.xink@c0222 Borrelia]$ ls -lh
+total 397K
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 397K Sep 11  2021 GCF_000008685.2_ASM868v2_genomic.fna.gz
+
+# Decompress the genome or FASTQ files.
+[fang.xink@c0222 Borrelia]$ gunzip *.fna.gz
+
+# Check filenames and file sizes in the current directory.
+[fang.xink@c0222 Borrelia]$ ls -lh
+total 1.5M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.5M Sep 11  2021 GCF_000008685.2_ASM868v2_genomic.fna
+
+# Load the Anaconda module needed for EMBOSS.
+[fang.xink@c0222 Borrelia]$ module load anaconda3/2024.06
+
+# Confirm the loaded modules.
+[fang.xink@c0222 Borrelia]$ module list
+Currently Loaded Modulefiles:
+ 1) explorer/1.0   2) anaconda3/2024.06  
+
+# Activate the shared EMBOSS conda environment.
+[fang.xink@c0222 Borrelia]$ source activate /courses/BIOL2406.202710/shared/emboss_env/
+
+# Display sequence lengths, identifiers, and GC percentages with EMBOSS.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ infoseq GCF_000008685.2_ASM868v2_genomic.fna
+Display basic information about sequences
+USA                      Database  Name           Accession      Type Length %GC    Organism            Description 
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_001318.1 -              NC_001318.1    -              N    910724 28.60                      Borreliella burgdorferi B31, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_000957.1 -              NC_000957.1    -              N    5228   23.82                      Borreliella burgdorferi B31 plasmid lp5, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_001904.1 -              NC_001904.1    -              N    9386   23.69                      Borreliella burgdorferi B31 plasmid cp9, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_001849.2 -              NC_001849.2    -              N    16821  23.12                      Borreliella burgdorferi B31 plasmid lp17, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_000955.2 -              NC_000955.2    -              
+
+# Question: How many sequences are in the Borrelia genome?
+# Answer: 22 sequences (1 chromosome and 21 plasmids).
+# Question: Which Borrelia plasmid has the highest GC%? What is interesting about it?
+# Answer: lp28-1 (NC_001851.2), 32.75% GC, the highest of the plasmids.
+# Additional biological context: lp28-1 carries the vls antigenic variation locus.
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ cd ../C_elegans
+
+# Check filenames and file sizes in the current directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ ls -lh
+total 97M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 97M Oct 17 13:14 GCF_000002985.6_WBcel235_genomic.fna
+
+# Display sequence lengths, identifiers, and GC percentages with EMBOSS.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ infoseq GCF_000002985.6_WBcel235_genomic.fna
+Display basic information about sequences
+USA                      Database  Name           Accession      Type Length %GC    Organism            Description 
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003279.8 -              NC_003279.8    -              N    15072434 35.75                      Caenorhabditis elegans chromosome I
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003280.10 -              NC_003280.10   -              N    15279421 36.20                      Caenorhabditis elegans chromosome II
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003281.10 -              NC_003281.10   -              N    13783801 35.66                      Caenorhabditis elegans chromosome III
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003282.8 -              NC_003282.8    -              N    17493829 34.59                      Caenorhabditis elegans chromosome IV
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003283.11 -              NC_003283.11   -              N    20924180 35.43                      Caenorhabditis elegans chromosome V
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003284.9 -              NC_003284.9    -              N    17718942 35.20                      Caenorhabditis elegans chromosome X
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_001328.1 -              NC_001328.1    -              N    13794  23.78                      Caenorhabditis elegans mitochondrion, complete genome
+
+# Question: How many sequences are in the worm genome?
+# Answer: 7 sequences (6 nuclear chromosomes and 1 mitochondrial genome).
+# Question: Which worm sequence has the lowest GC%?
+# Answer: Mitochondrial genome NC_001328.1, with 23.78% GC.
+
+# Run the command and inspect its output.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C(/courses/BIOL2406.202710/shared/emboss_env) [fang.x(/courses/BIOL2406.202710/shared/emboss_en(/courses/BIOL2406.202710/shared/emboss_en(/courses/BIOL2406.202710/shared/emboss_env) 
+ [fang.xink@c0222 C_elegans]$ # Question 1 — How many sequences are in the worm genome?
+
+# Run the command and inspect its output.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ Question 2 — Which sequence has the lowest GC%?
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ cd ..
+
+# Locate the shared course data directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ ls /courses/BIOL2406.202710/data/
+fishBp.fasta  new_fish.fasta  Sea_cuke  untrimmed_fastq  variant_calling
+
+# Copy the sea cucumber course dataset into the student directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cp -r /courses/BIOL2406.202710/data/Sea_cuke/. Sea_cucumber/
+
+# Verify the copied sea cucumber files and their sizes.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ ls -lh Sea_cucumber/
+total 23M
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 22M Oct 17 13:47 Ppar_tinygenome.fna.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805880.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805881.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805882.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805883.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805884.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805885.tiny.fastq.gz
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cd Sea_cucumber
+
+# Decompress the genome or FASTQ files.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ gunzip Ppar_tinygenome.fna.gz
+
+# Decompress the genome or FASTQ files.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ gunzip *.fastq.gz
+
+# Check filenames and file sizes in the current directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ ls -lh
+total 82M
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff  80M Oct 17 13:47 Ppar_tinygenome.fna
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805880.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805881.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805882.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805883.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805884.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805885.tiny.fastq
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ cd ..
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cd Lambda/
+
+# Download the reference genome or sequencing reads from the specified source.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ wget 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=fasta&retmode=text' -O lambda_virus.fa
+--2026-10-17 13:51:13--  https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=fasta&retmode=text
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: ‘lambda_virus.fa’
+lambda_virus.fa         [ <=>                ]  48.10K  --.-KB/s    in 0.02s   
+2026-10-17 13:51:14 (2.14 MB/s) - ‘lambda_virus.fa’ saved [49254]
+
+# Check filenames and file sizes in the current directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ ls -lh
+total 49K
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 49K Oct 17 13:51 lambda_virus.fa
+
+# Inspect the first lines of the downloaded reference FASTA.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ head  lambda_virus.fa
+>NC_001416.1 Enterobacteria phage lambda, complete genome
+GGGCGGCGACCTCGCGGGTTTTCGCTATTTATGAAAATTTTCCGGTTTAAGGCGTTTCCGTTCTTCTTCG
+TCATAACTTAATGTTTTTATTTAAAATACCCTCTGAAAAGAAAGGAAACGACAGGTGCTGAAAGCGAGGC
+TTTTTGGCCTCTGTCGTTTCCTTTCTCTGTTTTTGTCCGTGGAATGAACAATGGAAGTCAACAAAAAGCA
+GCTGGCTGACATTTTCGGTGCGAGTATCCGTACCATTCAGAACTGGCAGGAACAGGGAATGCCCGTTCTG
+CGAGGCGGTGGCAAGGGTAATGAGGTGCTTTATGACTCTGCCGCCGTCATAAAATGGTATGCCGAAAGGG
+ATGCTGAAATTGAGAACGAAAAGCTGCGCCGGGAGGTTGAAGAACTGCGGCAGGCCAGCGAGGCAGATCT
+CCAGCCAGGAACTATTGAGTACGAACGCCATCGACTTACGCGTGCGCAGGCCGACGCACAGGAACTGAAG
+AATGCCAGAGACTCCGCTGAAGTGGTGGAAACCGCATTCTGTACTTTCGTGCTGTCGCGGATCGCAGGTG
+AAATTGCCAGTATTCTCGACGGGCTCCCCCTGTCGGTGCAGCGGCGTTTTCCGGAACTGGAAAACCGACA
+
+# Count FASTA sequence headers.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ grep -c '^>' lambda_virus.fa
+1
+
+# Navigate to the specified directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ cd ../Reads
+
+# Download the reference genome or sequencing reads from the specified source.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_1.fq
+--2026-10-17 13:52:33--  https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_1.fq
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 2285692 (2.2M) [text/plain]
+Saving to: ‘reads_1.fq’
+reads_1.fq          100%[===================>]   2.18M  --.-KB/s    in 0.08s   
+2026-10-17 13:52:33 (27.1 MB/s) - ‘reads_1.fq’ saved [2285692/2285692]
+
+# Download the reference genome or sequencing reads from the specified source.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_2.fq
+--2026-10-17 13:52:38--  https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_2.fq
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 2288866 (2.2M) [text/plain]
+Saving to: ‘reads_2.fq’
+reads_2.fq          100%[===================>]   2.18M  --.-KB/s    in 0.08s   
+2026-10-17 13:52:39 (25.8 MB/s) - ‘reads_2.fq’ saved [2288866/2288866]
+
+# Check filenames and file sizes in the current directory.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ ls -lh
+total 4.4M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.2M Oct 17 13:52 reads_1.fq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.2M Oct 17 13:52 reads_2.fq

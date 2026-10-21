@@ -1,0 +1,851 @@
+Last login: Thu Oct 15 12:07:49 on ttys000
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Mon Oct  5 12:40:45 2026 from 10.110.62.249
+    _______  __ ____  __    ____  ____  __________ 
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/ 
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|  
+                                                  
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters. 
+
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+# Confirm the current working directory before creating or processing files.
+[fang.xink@explorer-01 ~]$ pwd
+/home/fang.xink
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@explorer-01 ~]$ ls
+bioinformatics-portfolio              ondemand
+Desktop                               profile
+Deskytop                              SRR098026.fastq
+GCF_000002985.6_WBcel235_genomic.fna  SRR098026_fastqc.html
+hACE2.gtf                             SRR098026_fastqc.zip
+Homo_sapiens.GRCh38.115.gtf           student_files_1.fastq
+human_genome.fna.gz
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@explorer-01 ~]$ cd /courses/BIOL2406.202710/students/
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@explorer-01 students]$ ls
+ding.jo    fernandes.lui  harel.z  mao.al             patel.v9      zheng.je
+fang.xink  galgano.n      jhenzy   martinezamezaga.p  tabatabai.ar
+fan.zac    gottschalk.w   liu.ziz  mehdiyev.l         wahi.h
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@explorer-01 students]$ cd /courses/BIOL2406.202710/students/fang.xink/
+# Create a directory to organize the files for this analysis.
+[fang.xink@explorer-01 fang.xink]$ mkdir -p Genomes_analysis
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@explorer-01 fang.xink]$ cd Genomes_analysis/
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@explorer-01 Genomes_analysis]$ ls
+[fang.xink@explorer-01 Genomes_analysis]$ ^
+-bash: :s^: no previous substitution
+# Attempt to start an interactive compute-node session.
+[fang.xink@explorer-01 Genomes_analysis]$ srun --pty 
+srun: fatal: No command given to execute.
+# Check whether the session is on the login node or an allocated compute node.
+[fang.xink@explorer-01 Genomes_analysis]$ hostname
+explorer-01
+# Request an interactive compute node with enough time, memory, and CPUs to run the analysis.
+[fang.xink@explorer-01 Genomes_analysis]$ srun --pty --time=02:00:00 --mem=8G --cpus-per-task=2 bash
+srun: job 11166060 queued and waiting for resources
+srun: job 11166060 has been allocated resources
+# Check whether the session is on the login node or an allocated compute node.
+[fang.xink@c0222 Genomes_analysis]$ hostname
+c0222
+# Create a directory to organize the files for this analysis.
+[fang.xink@c0222 Genomes_analysis]$ mkdir -p Borrelia C_elegans Sea_cucumber Human Lambda Reads Annotation
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Genomes_analysis]$ ls
+Annotation  Borrelia  C_elegans  Human  Lambda  Reads  Sea_cucumber
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Genomes_analysis]$ ls ~
+bioinformatics-portfolio              ondemand
+Desktop                               profile
+Deskytop                              SRR098026.fastq
+GCF_000002985.6_WBcel235_genomic.fna  SRR098026_fastqc.html
+hACE2.gtf                             SRR098026_fastqc.zip
+Homo_sapiens.GRCh38.115.gtf           student_files_1.fastq
+human_genome.fna.gz
+# Copy the needed reference, annotation, or class-provided data into the working folder.
+[fang.xink@c0222 Genomes_analysis]$ cp ~/GCF_000002985.6_WBcel235_genomic.fna C_elegans/
+# Copy the needed reference, annotation, or class-provided data into the working folder.
+[fang.xink@c0222 Genomes_analysis]$ cp ~/Homo_sapiens.GRCh38.115.gtf Annotation/
+ 
+
+
+[fang.xink@c0222 Genomes_analysis]$ 
+[fang.xink@c0222 Genomes_analysis]$ 
+[fang.xink@c0222 Genomes_analysis]$ 
+# Copy the needed reference, annotation, or class-provided data into the working folder.
+[fang.xink@c0222 Genomes_analysis]$ cp ~/Homo_sapiens.GRCh38.115.gtf Annotation/
+ 
+[fang.xink@c0222 Genomes_analysis]$ 
+# Preview the compressed reference to check whether the download is readable.
+[fang.xink@c0222 Genomes_analysis]$ gzip -dc ~/human_genome.fna.gz | head -n 5
+
+gzip: /home/fang.xink/human_genome.fna.gz: unexpected end of file
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Genomes_analysis]$ ls -lh ~/human_genome.fna.gz
+-rw-r--r-- 1 fang.xink users 0 Sep 30 23:49 /home/fang.xink/human_genome.fna.gz
+# Preview the compressed reference to check whether the download is readable.
+[fang.xink@c0222 Genomes_analysis]$ gzip -dc ~/human_genome.fna.gz | head -n 5
+
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@c0222 Genomes_analysis]$ cd Human
+# Download the reference genome or sequencing reads required for this exercise.
+[fang.xink@c0222 Human]$ wget https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+--2026-10-17 13:17:44--  https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 942484168 (899M) [application/x-gzip]
+Saving to: ‘Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz’
+
+Homo_sapiens.GRCh38 100%[===================>] 898.82M  1002KB/s    in 15m 1s  
+
+2026-10-17 13:32:46 (1021 KB/s) - ‘Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz’ saved [942484168/942484168]
+
+# Test the compressed genome file for corruption before extracting it.
+[fang.xink@c0222 Human]$ gzip -t Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+# Decompress the downloaded sequence files so analysis programs can read them.
+[fang.xink@c0222 Human]$ gunzip Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa.gz
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Human]$ ls -lh
+total 3.0G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0G Mar 23  2026 Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@c0222 Human]$ cd ..
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Genomes_analysis]$ ls
+Annotation  Borrelia  C_elegans  Human  Lambda  Reads  Sea_cucumber
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@c0222 Genomes_analysis]$ cd Borrelia
+# Download the reference genome or sequencing reads required for this exercise.
+[fang.xink@c0222 Borrelia]$ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/685/GCF_000008685.2_ASM868v2/GCF_000008685.2_ASM868v2_genomic.fna.gz
+--2026-10-17 13:41:16--  https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/685/GCF_000008685.2_ASM868v2/GCF_000008685.2_ASM868v2_genomic.fna.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 406156 (397K) [application/x-gzip]
+Saving to: ‘GCF_000008685.2_ASM868v2_genomic.fna.gz’
+
+GCF_000008685.2_ASM 100%[===================>] 396.64K  --.-KB/s    in 0.04s   
+
+2026-10-17 13:41:17 (9.10 MB/s) - ‘GCF_000008685.2_ASM868v2_genomic.fna.gz’ saved [406156/406156]
+
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Borrelia]$ ls -lh
+total 397K
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 397K Sep 11  2021 GCF_000008685.2_ASM868v2_genomic.fna.gz
+# Decompress the downloaded sequence files so analysis programs can read them.
+[fang.xink@c0222 Borrelia]$ gunzip *.fna.gz
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0222 Borrelia]$ ls -lh
+total 1.5M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.5M Sep 11  2021 GCF_000008685.2_ASM868v2_genomic.fna
+# Load the software module required for the next analysis command.
+[fang.xink@c0222 Borrelia]$ module load anaconda3/2024.06
+# Verify which software modules are currently loaded.
+[fang.xink@c0222 Borrelia]$ module list
+Currently Loaded Modulefiles:
+ 1) explorer/1.0   2) anaconda3/2024.06  
+# Activate the shared EMBOSS environment for sequence-information tools.
+[fang.xink@c0222 Borrelia]$ source activate /courses/BIOL2406.202710/shared/emboss_env/
+# Inspect sequence lengths and GC percentages to answer the genome questions.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ infoseq GCF_000008685.2_ASM868v2_genomic.fna
+Display basic information about sequences
+USA                      Database  Name           Accession      Type Length %GC    Organism            Description 
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_001318.1 -              NC_001318.1    -              N    910724 28.60                      Borreliella burgdorferi B31, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_000957.1 -              NC_000957.1    -              N    5228   23.82                      Borreliella burgdorferi B31 plasmid lp5, complete sequence
+fasta::GCF_000008685.2_ASM868v2_genomic.fna:NC_001904.1 -              NC_001904.1    -              N    9386   23.69                      Borreliella burgdorferi B31 plasmid cp9, complete sequence
+# deleted extra sequences
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ # Question 1 — How many sequences are in the Borrelia genome?
+Answer: 22 sequences total.
+- 1 linear chromosome
+- 21 plasmids
+
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ # Question 2 — Which Borrelia plasmid has the highest GC%?
+Answer: Plasmid lp28-1, with 32.75% GC content.
+
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Borrelia]$ cd ../C_elegans
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ ls -lh
+total 97M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 97M Oct 17 13:14 GCF_000002985.6_WBcel235_genomic.fna
+# Inspect sequence lengths and GC percentages to answer the genome questions.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ infoseq GCF_000002985.6_WBcel235_genomic.fna 
+Display basic information about sequences
+USA                      Database  Name           Accession      Type Length %GC    Organism            Description 
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003279.8 -              NC_003279.8    -              N    15072434 35.75                      Caenorhabditis elegans chromosome I
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003280.10 -              NC_003280.10   -              N    15279421 36.20                      Caenorhabditis elegans chromosome II
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003281.10 -              NC_003281.10   -              N    13783801 35.66                      Caenorhabditis elegans chromosome III
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003282.8 -              NC_003282.8    -              N    17493829 34.59                      Caenorhabditis elegans chromosome IV
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003283.11 -              NC_003283.11   -              N    20924180 35.43                      Caenorhabditis elegans chromosome V
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_003284.9 -              NC_003284.9    -              N    17718942 35.20                      Caenorhabditis elegans chromosome X
+fasta::GCF_000002985.6_WBcel235_genomic.fna:NC_001328.1 -              NC_001328.1    -              N    13794  23.78                      Caenorhabditis elegans mitochondrion, complete genome
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C(/courses/BIOL2406.202710/shared/emboss_env) [fang.x(/courses/BIOL2406.202710/shared/emboss_en(/courses/BIOL2406.202710/shared/emboss_en(/courses/BIOL2406.202710/shared/emboss_env) [fang.xin(/courses/BIOL2406.202710/shared/(/courses/BIOL2406.202710/shared/em(/courses/BIOL2406.202710/shared/emboss_(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/e(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 (/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegan(/courses/BIOL2406.202710/shared/emboss_env) [fa(/courses/BIOL2406.202710/shared/emboss_(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_eleg(/courses/BIOL2406.202710/shared/emboss_env) [f(/courses/BIOL2406.202710/shared/emboss_env(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans](/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_el(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_el(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_eleg(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegan(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans](/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ (/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/embo(/courses/BIOL2406.202710/shared/emboss(/courses/BIOL2406.202710/shared/embos(/courses/BIOL2406.202710/shared/embos(/courses/BIOL2406.202710/shared/embos(/courses/BIOL2406.202710/shared/embos(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ # Question 1 — How many sequences are in the worm genome?
+Answer: 7 sequences total.
+- 6 nuclear chromosomes: I, II, III, IV, V, and X
+- 1 mitochondrial genome
+bash: Answer:: command not found
+bash: -: command not found
+bash: -: command not found
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ Question 2 — Which sequence has the lowest GC%?
+Answer: The mitochondrial genome (NC_001328.1), with 23.78% GC content.
+bash: Question: command not found
+bash: syntax error near unexpected token `('
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 C_elegans]$ cd ..
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ ls /courses/BIOL2406.202710/data/
+fishBp.fasta  new_fish.fasta  Sea_cuke  untrimmed_fastq  variant_calling
+# Copy the needed reference, annotation, or class-provided data into the working folder.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cp -r /courses/BIOL2406.202710/data/Sea_cuke/. Sea_cucumber/
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ ls -lh Sea_cucumber/
+total 23M
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 22M Oct 17 13:47 Ppar_tinygenome.fna.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805880.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805881.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805882.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805883.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 85K Oct 17 13:47 SRR6805884.tiny.fastq.gz
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 86K Oct 17 13:47 SRR6805885.tiny.fastq.gz
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cd Sea_cucumber
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ 
+# Decompress the downloaded sequence files so analysis programs can read them.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ gunzip Ppar_tinygenome.fna.gz
+# Decompress the downloaded sequence files so analysis programs can read them.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ gunzip *.fastq.gz
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ ls -lh
+total 82M
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff  80M Oct 17 13:47 Ppar_tinygenome.fna
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805880.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805881.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805882.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805883.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805884.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805885.tiny.fastq
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Sea_cucumber]$ cd ..
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Genomes_analysis]$ cd Lambda/
+# Download the reference genome or sequencing reads required for this exercise.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ wget 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=fasta&retmode=text' -O lambda_virus.fa
+--2026-10-17 13:51:13--  https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_001416.1&rettype=fasta&retmode=text
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: ‘lambda_virus.fa’
+
+lambda_virus.fa         [ <=>                ]  48.10K  --.-KB/s    in 0.02s   
+
+2026-10-17 13:51:14 (2.14 MB/s) - ‘lambda_virus.fa’ saved [49254]
+
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ ls -lh
+total 49K
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 49K Oct 17 13:51 lambda_virus.fa
+# Preview the first lines to verify the file content and format.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ head  lambda_virus.fa 
+>NC_001416.1 Enterobacteria phage lambda, complete genome
+GGGCGGCGACCTCGCGGGTTTTCGCTATTTATGAAAATTTTCCGGTTTAAGGCGTTTCCGTTCTTCTTCG
+TCATAACTTAATGTTTTTATTTAAAATACCCTCTGAAAAGAAAGGAAACGACAGGTGCTGAAAGCGAGGC
+TTTTTGGCCTCTGTCGTTTCCTTTCTCTGTTTTTGTCCGTGGAATGAACAATGGAAGTCAACAAAAAGCA
+GCTGGCTGACATTTTCGGTGCGAGTATCCGTACCATTCAGAACTGGCAGGAACAGGGAATGCCCGTTCTG
+CGAGGCGGTGGCAAGGGTAATGAGGTGCTTTATGACTCTGCCGCCGTCATAAAATGGTATGCCGAAAGGG
+ATGCTGAAATTGAGAACGAAAAGCTGCGCCGGGAGGTTGAAGAACTGCGGCAGGCCAGCGAGGCAGATCT
+CCAGCCAGGAACTATTGAGTACGAACGCCATCGACTTACGCGTGCGCAGGCCGACGCACAGGAACTGAAG
+AATGCCAGAGACTCCGCTGAAGTGGTGGAAACCGCATTCTGTACTTTCGTGCTGTCGCGGATCGCAGGTG
+AAATTGCCAGTATTCTCGACGGGCTCCCCCTGTCGGTGCAGCGGCGTTTTCCGGAACTGGAAAACCGACA
+# Count FASTA headers to determine how many reference sequences are present.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ grep -c '^>' lambda_virus.fa 
+1
+# Move into the directory needed for the next part of the analysis.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Lambda]$ cd ../Reads
+# Download the reference genome or sequencing reads required for this exercise.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_1.fq
+--2026-10-17 13:52:33--  https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_1.fq
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 2285692 (2.2M) [text/plain]
+Saving to: ‘reads_1.fq’
+
+reads_1.fq          100%[===================>]   2.18M  --.-KB/s    in 0.08s   
+
+2026-10-17 13:52:33 (27.1 MB/s) - ‘reads_1.fq’ saved [2285692/2285692]
+
+# Download the reference genome or sequencing reads required for this exercise.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_2.fq
+--2026-10-17 13:52:38--  https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/reads_2.fq
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 2288866 (2.2M) [text/plain]
+Saving to: ‘reads_2.fq’
+
+reads_2.fq          100%[===================>]   2.18M  --.-KB/s    in 0.08s   
+
+2026-10-17 13:52:39 (25.8 MB/s) - ‘reads_2.fq’ saved [2288866/2288866]
+
+# Check which files are present and verify the expected outputs were created.
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ ls -lh
+total 4.4M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.2M Oct 17 13:52 reads_1.fq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.2M Oct 17 13:52 reads_2.fq
+(/courses/BIOL2406.202710/shared/emboss_env) [fang.xink@c0222 Reads]$ Read from remote host login.explorer.northeastern.edu: Operation timed out
+Connection to login.explorer.northeastern.edu closed.
+client_loop: send disconnect: Broken pipe
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Thu Oct 15 12:19:12 2026 from 129.10.0.146
+    _______  __ ____  __    ____  ____  __________
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|
+
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters.                                                                                                                                                                   
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@explorer-02 ~]$ cd /courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/
+# Create a directory to organize the files for this analysis.
+[fang.xink@explorer-02 Genomes_analysis]$ mkdir -p Bowtie2_analysis
+# Move into the directory needed for the next part of the analysis.
+[fang.xink@explorer-02 Genomes_analysis]$ cd Bowtie2_analysis/
+# Confirm the current working directory before creating or processing files.
+[fang.xink@explorer-02 Bowtie2_analysis]$ pwd
+/courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/Bowtie2_analysis
+# Request an interactive compute node with enough time, memory, and CPUs to run the analysis.
+[fang.xink@explorer-02 Bowtie2_analysis]$ srun --pty --time=02:00:00 --mem=8G --cpus-per-task=2 bash
+srun: job 11190641 queued and waiting for resources
+srun: job 11190641 has been allocated resources
+# Load the software module required for the next analysis command.
+[fang.xink@c0607 Bowtie2_analysis]$ module load bowtie2
+# Verify Bowtie 2 is installed and record the software version.
+[fang.xink@c0607 Bowtie2_analysis]$ bowtie2 --version
+/shared/EL9/explorer/bowtie2/2.5.4/src/bowtie2-2.5.4-linux-x86_64/bowtie2-align-s version 2.5.4
+64-bit
+Built on 9df741605325
+Thu May 16 16:51:17 UTC 2024
+Compiler: gcc version 9.3.1 20200408 (Red Hat 9.3.1-2) (GCC) 
+Options: -O3 -msse2 -funroll-loops -g3 -g -O2 -fvisibility=hidden -I/hbb_exe_gc_hardened/include -ffunction-sections -fdata-sections -fstack-protector -D_FORTIFY_SOURCE=2 -fPIE -std=c++11 -Wall -Wno-unused-but-set-variable -DPOPCNT_CAPABILITY -DNO_SPINLOCK -DWITH_QUEUELOCK=1 -DWITH_ZSTD
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}
+# Preview the first lines to verify the file content and format.
+[fang.xink@c0607 Bowtie2_analysis]$ head ../Lambda/lambda_virus.fa 
+>NC_001416.1 Enterobacteria phage lambda, complete genome
+GGGCGGCGACCTCGCGGGTTTTCGCTATTTATGAAAATTTTCCGGTTTAAGGCGTTTCCGTTCTTCTTCG
+TCATAACTTAATGTTTTTATTTAAAATACCCTCTGAAAAGAAAGGAAACGACAGGTGCTGAAAGCGAGGC
+
+# Preview the first lines to verify the file content and format.
+[fang.xink@c0607 Bowtie2_analysis]$ head ../Reads/reads_1.fq 
+@r1
+TGAATGCGAACTCCGGGACGCTCAGTAATGTGACGATAGCTGAAAACTGTACGATAAACNGTACGCTGAGGGCAGAAAAAATCGTCGGGGACATTNTAAAGGCGGCGAGCGCGGCTTTTCCG
++
++"@6<:27(F&5)9)"B:%B+A-%5A?2$HCB0B+0=D<7E/<.03#!.F77@6B==?C"7>;))%;,3-$.A06+<-1/@@?,26">=?*@'0;$:;??G+:#+(A?9+10!8!?()?7C>
+@r2
+NTTNTGATGCGGGCTTGTGGAGTTCAGCCGATCTGACTTATGTCATTACCTATGAAATGTGAGGACGCTATGCCTGTACCAAATCCTACAATGCCGGTGAAAGGTGCCGGGATCACCCTGTGGGTTTATAAGGGGATCGGTGACCCCTACGCGAATCCGCTTTCAGACGTTGACTGGTCGCGTCTGGCAAAAGTTAAAGACCTGACGCCCGGCGAACTGACCGCTGAGNCCTATGACGACAGCTATCTCGATGATGAAGATGCAGACTGGACTGC
++
+(#!!'+!$""%+(+)'%)%!+!(&++)''"#"#&#"!'!("%'""("+&%$%*%%#$%#%#!)*'(#")(($&$'&%+&#%*)*#*%*')(%+!%%*"$%"#+)$&&+)&)*+!"*)!*!("&&"*#+"&"'(%)*("'!$*!!%$&&&$!!&&"(*"$&"#&!$%'%"#)$#+%*+)!&*)+(""#!)!%*#"*)*')&")($+*%%)!*)!('(%""+%"$##"#+(('!*(($*'!"*('"+)&%#&$+('**$$&+*&!#%)')'(+(!%+
+@r3
+ATCGCCCGCAGACACCTTCACGCTGGACTGTTTCGGCTTTTACAGCGTCGCTTCATAATCCTTTTTCGCCGCCGCCATCAGCGTGTTGTAATCCGCCTGCAGGATTTTCCCGTCTTTCNGTGCCTTGNTCAGTTCTTCCTGACGGGCGGTATATTTCTGCAGCGGCGTCTGCAGCCGTTCGTNAGCCTTCTGCGCCTCTTCGGTATATTTCAGCCGTGACGCTTCGGTATCGCTCCGCTGCTGCGCATTTTTCTCCTCTTGAGTCTGCTGCTCAGCCTTCTTTCGGGCGGCTTCAAGCGCAAGACGGGCCTTTTCACGATCATCCCAGTAACGCGCCC
+# Preview the first lines to verify the file content and format.
+[fang.xink@c0607 Bowtie2_analysis]$ head ../Reads/reads_2.fq 
+@r1
+NAACGTCAGCGGAAGCACCACTATCTGGCGATCAAAAGGATGGTCATCGGTCACGGTGACAGTACGGGTACCTGACGGCCAGTCCACACTGCTTTCACGCTGGCGCGGNAAAGCCGCGCTCGCCGCCTNTACNATGTCCCCGACGATTTTTTCCGCCCTCAGCGTACCGTTTATCGTACAGTTTTCAGCTATCGTCAC
++
+&?$F&9AC8H49@5<*>=E;2/G+;9?&8D.;E!2:0B/)++#F-><E,-/&F:&/#B=*'C?@$0!+#1?.ABC?:-?9GA?,11.2>3$&@-'6;!6@D?&#*E:C#9-4&8?"))H>H9-->((E99;:@::1=1-!+$@$8+#@%(<B,+%6!>@0G*D5A'(>9AC<;@01:7@:@0D&D=@:>7"1)D+9+B
+@r2
+GCANTCCAGTCTGCATCTTCATCATCGAGATAGCTGTCGTCATAGGACTCAGCGGTCAGTTCGCCGGGCGTCAGGTCTTTAACTTTTGCCAGACGCGACCAGTCAACGTCTGAAAGCGGATTCGCGTAAGGGTCACCGCTCCCCTTATAAACCCACAGGGTGGTCCCGGCACCTTTCACCGGCATTAT
++
+%-&7%D%5D@%:9.#F(5B/(;"=C@G5"/-7248$;D7%7-A8&=A1;=1$('(9)E,'(2>=!98A7$652">"+G<9=>7<64@#&$<58(*$*&!2)*BE';$@69)EAG*+?5C8E@'>02$E755%(0$E0H7=9HH*7182)((#A2=>E=%DD79106=.*3"1(6E.HB44-##)F$<2
+@r3
+CGCGGGCGCGTTACTGGGATGATNGNGAAAAGGCCCGTCTTGCGCTTGAAGCCGCCCGAAAGAAGNC
+# Count reference bases without FASTA headers or line breaks.
+[fang.xink@c0607 Bowtie2_analysis]$ grep -v '^>' ../Lambda/lambda_virus.fa | tr -d '\n\r' | wc -c
+48502
+# Calculate the number of FASTQ reads using four lines per read.
+[fang.xink@c0607 Bowtie2_analysis]$ echo $(( $(wc -l < ../Reads/reads_1.fq) / 4 ))
+10000
+# Calculate the number of FASTQ reads using four lines per read.
+[fang.xink@c0607 Bowtie2_analysis]$ echo $(( $(wc -l < ../Reads/reads_2.fq) / 4 ))
+10000
+# Build the Bowtie 2 index so reads can be aligned to the Lambda reference genome.
+[fang.xink@c0607 Bowtie2_analysis]$ bowtie2-build ../Lambda/lambda_virus.fa lambda_virus
+Settings:
+  Output files: "lambda_virus.*.bt2"
+  Line rate: 6 (line is 64 bytes)
+  Lines per side: 1 (side is 64 bytes)
+  Offset rate: 4 (one in 16)
+  FTable chars: 10
+  Strings: unpacked
+  Max bucket size: default
+  Max bucket size, sqrt multiplier: default
+  Max bucket size, len divisor: 4
+  Difference-cover sample period: 1024
+  Endianness: little
+  Actual local endianness: little
+  Sanity checking: disabled
+  Assertions: disabled
+  Random seed: 0
+  Sizeofs: void*:8, int:4, long:8, size_t:8
+Input files DNA, FASTA:
+  ../Lambda/lambda_virus.fa
+Building a SMALL index
+Reading reference sizes
+  Time reading reference sizes: 00:00:01 00:00:00
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 1, merged 6; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 6928 (target: 9093)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering Ebwt loop
+Getting block 1 of 7
+  Reserving size (9094) for bucket 1
+  Calculating Z arrays for bucket 1
+  Entering block accumulator loop for bucket 1:
+  bucket 1: 10%
+  bucket 1: 20%
+  bucket 1: 30%
+  bucket 1: 40%
+  bucket 1: 50%
+  bucket 1: 60%
+  bucket 1: 70%
+  bucket 1: 80%
+  bucket 1: 90%
+  bucket 1: 100%
+  Sorting block of length 6943 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 6944 for bucket 1
+  Reserving size (9094) for bucket 7
+  Calculating Z arrays for bucket 7
+  Entering block accumulator loop for bucket 7:
+  bucket 7: 10%
+  bucket 7: 20%
+  bucket 7: 30%
+  bucket 7: 40%
+  bucket 7: 50%
+  bucket 7: 60%
+  bucket 7: 70%
+  bucket 7: 80%
+  bucket 7: 90%
+  bucket 7: 100%
+  Sorting block of length 8439 for bucket 7
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 8440 for bucket 7
+Exited Ebwt loop
+fchr[A]: 0
+fchr[C]: 12334
+fchr[G]: 23696
+fchr[T]: 36516
+fchr[$]: 48502
+Exiting Ebwt::buildToDisk()
+Returning from initFromVector
+Wrote 4210714 bytes to primary EBWT file: lambda_virus.1.bt2.tmp
+Wrote 12132 bytes to secondary EBWT file: lambda_virus.2.bt2.tmp
+Re-opening _in1 and _in2 as input streams
+Returning from Ebwt constructor
+Headers:
+    len: 48502
+    bwtLen: 48503
+    sz: 12126
+    bwtSz: 12126
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 20
+    eftabSz: 80
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 3032
+    offsSz: 12128
+    lineSz: 64
+    sideSz: 64
+    sideBwtSz: 48
+    sideBwtLen: 192
+    numSides: 253
+    numLines: 253
+    ebwtTotLen: 16192
+    ebwtTotSz: 16192
+    color: 0
+    reverse: 0
+Total time for call to driver() for forward index: 00:00:02
+Reading reference sizes
+  
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh lambda_virus*.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.1M Oct 18 14:27 lambda_virus.1.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.2.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff   17 Oct 18 14:27 lambda_virus.3.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.4.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.1M Oct 18 14:27 lambda_virus.rev.1.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.rev.2.bt2
+[fang.xink@c0607 Bowtie2_analysis]$ # Align reads_1.fq to the Lambda reference genome and save results as eg1.sam
+bowtie2 -x lambda_virus -U ../Reads/reads_1.fq -S eg1.sam
+10000 reads; of these:
+  10000 (100.00%) were unpaired; of these:
+    596 (5.96%) aligned 0 times
+    9404 (94.04%) aligned exactly 1 time
+    0 (0.00%) aligned >1 times
+94.04% overall alignment rate
+# Preview the SAM header and alignment records to confirm Bowtie 2 produced alignments.
+[fang.xink@c0607 Bowtie2_analysis]$ head eg1.sam
+@HD	VN:1.5	SO:unsorted	GO:query
+@SQ	SN:NC_001416.1	LN:48502
+@PG	ID:bowtie2	PN:bowtie2	VN:2.5.4	CL:"/shared/EL9/explorer/bowtie2/2.5.4/src/bowtie2-2.5.4-linux-x86_64/bowtie2-align-s --wrapper basic-0 -x lambda_virus -S eg1.sam -U ../Reads/reads_1.fq"
+r1	0	NC_001416.1	18401	42	122M	*	0	0	TGAATGCGAACTCCGGGACGCTCAGTAATGTGACGATAGCTGAAAACTGTACGATAAACNGTACGCTGAGGGCAGAAAAAATCGTCGGGGACATTNTAAAGGCGGCGAGCGCGGCTTTTCCG	+"@6<:27(F&5)9)"B:%B+A-%5A?2$HCB0B+0=D<7E/<.03#!.F77@6B==?C"7>;))%;,3-$.A06+<-1/@@?,26">=?*@'0;$:;??G+:#+(A?9+10!8!?()?7C>	AS:i:-5	XN:i:0	XM:i:3	XO:i:0	XG:i:0	NM:i:3	MD:Z:59G13G21G26	YT:Z:UU
+r2	0	NC_001416.1	8886	42	275M	*	0	0	NTTNTGATGCGGGCTTGTGGAGTTCAGCCGATCTGACTTATGTCATTACCTATGAAATGTGAGGACGCTATGCCTGTACCAAATCCTACAATGCCGGTGAAAGGTGCCGGGATCACCCTGTGGGTTTATAAGGGGATCGGTGACCCCTACGCGAATCCGCTTTCAGACGTTGACTGGTCGCGTCTGGCAAAAGTTAAAGACCTGACGCCCGGCGAACTGACCGCTGAGNCCTATGACGACAGCTATCTCGATGATGAAGATGCAGACTGGACTGC	(#!!'+!$""%+(+)'%)%!+!(&++)''"#"#&#"!'!("%'""("+&%$%*%%#$%#%#!)*'(#")(($&$'&%+&#%*)*#*%*')(%+!%%*"$%"#+)$&&+)&)*+!"*)!*!("&&"*#+"&"'(%)*("'!$*!!%$&&&$!!&&"(*"$&"#&!$%'%"#)$#+%*+)!&*)+(""#!)!%*#"*)*')&")($+*%%)!*)!('(%""+%"$##"#+(('!*(($*'!"*('"+)&%#&$+('**$$&+*&!#%)')'(+(!%+	AS:i:-14	XN:i:0	XM:i:8	XO:i:0	XG:i:0	NM:i:8	MD:Z:0A0C0G0A108C23G9T81T46	YT:Z:UU
+r3	16	NC_001416.1	11599	42	338M	*	0	0	
+r296	147	NC_001416.1	22846	42	46M	=	22663	-229	TTATTTGAATCAATTCCAATTACCTGAAGTCTTTCATCTAAAATTG	3D71,!9)EH25*H#.3++4@1C96-3935315=#!#8G9%>"C#B	AS:i:-2	XN:i:0	XM:i:1	XO:i:0	XG:i:0	NM:i:1	MD:Z:40T5	YS:i:-4	YT:Z:CP
+r297	83	NC_001416.1	23		GGGCCAATGCGCTTACTGATGCGGAATTACGCCGTAAGGCCGCAGATGAGCTTGTCCATATGACTGCGAGAATTAACNGTGGTGAGGCGATCCCTGAACCAGTAAAACAACTTCCTGTCATGGGCGGTAGACCTCTAAATCGTGCACAGGCTCTGGCGAAGATCGCAGAAATCAAAGCTAAGTT	(=8B)GD04*G%&4F,1'A>.C&7=F$,+#6!))43C,5/5+)?-/0>/D3=-,2/+.1?@->;)00!'3!7BH$G)HG+ADC'#-9F)7<7"$?&.>0)@5;4,!0-#C!15CF8&HB+B==H>7,/)C5)5*+(F5A%D,EA<(>G9E0>7&/E?4%;#'92)<5+@7:A.(BG@BG86@.G	AS:i:-1	XN:i:0	XM:i:1	XO:i:0	XG:i:0	NM:i:1	MD:Z:77C106	YS:i:-11	YT:Z:CP
+[fang.xink@c0607 Bowtie2_analysis]$ # Load SAMtools for processing alignment files
+module load samtools
+
+# Load BCFtools for later variant analysis
+module load bcftools
+
+# Verify SAMtools is available
+samtools --version | head -n 2
+
+# Verify BCFtools is available
+bcftools --version | head -n 2
+samtools 1.21
+Using htslib 1.21
+bcftools 1.21
+Using htslib 1.21
+# Load the software module required for the next analysis command.
+[fang.xink@c0607 Bowtie2_analysis]$ module load samtools
+# Load the software module required for the next analysis command.
+[fang.xink@c0607 Bowtie2_analysis]$ module load bcftools
+# Confirm the installed version of the alignment or variant-processing software.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools --version | head -n 2
+samtools 1.21
+Using htslib 1.21
+# Confirm the installed version of the alignment or variant-processing software.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools --version | head -n 2
+bcftools 1.21
+Using htslib 1.21
+# Convert the paired-end SAM file into a smaller binary BAM file.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools view -bS eg2.sam > eg2.bam
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh eg2.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0M Oct 18 14:35 eg2.bam
+# Sort the BAM alignments by reference position for downstream analysis.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools sort eg2.bam -o eg2.sorted.bam
+[fang.xink@c0607 Bowtie2_analysis]$ # Sort the paired-end BAM file by genomic coordinate
+# Save the sorted alignments as eg2.sorted.bam
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh eg2.sorted.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.5M Oct 18 14:36 eg2.sorted.bam
+[fang.xink@c0607 Bowtie2_analysis]$ # Check that the sorted BAM file was created
+# Check the BAM header to confirm the alignments are coordinate-sorted.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools view -H eg2.sorted.bam | grep '^@HD'
+@HD	VN:1.5	SO:coordinate
+[fang.xink@c0607 Bowtie2_analysis]$ # Examine the header to confirm coordinate sorting
+# Check that the BAM file is structurally complete and readable.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools quickcheck -v eg2.sorted.bam
+[fang.xink@c0607 Bowtie2_analysis]$ # Check the integrity of the sorted BAM file
+# Summarize aligned bases against the Lambda reference and save pileup records in VCF format.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools mpileup -f ../Lambda/lambda_virus.fa eg2.sorted.bam | bcftools view -Ov - > eg2.raw.vcf
+[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
+[fang.xink@c0607 Bowtie2_analysis]$ # Compare aligned reads against the Lambda reference genome
+# Generate pileup data and save the resulting VCF records
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh eg2.raw.vcf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:38 eg2.raw.vcf
+[fang.xink@c0607 Bowtie2_analysis]$ # Confirm that the variant data file exists
+# Inspect the VCF metadata and format after producing pileup records.
+[fang.xink@c0607 Bowtie2_analysis]$ head -n 15 eg2.raw.vcf
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##bcftoolsVersion=1.21+htslib-1.21
+##bcftoolsCommand=mpileup -f ../Lambda/lambda_virus.fa eg2.sorted.bam
+##reference=file://../Lambda/lambda_virus.fa
+##contig=<ID=NC_001416.1,length=48502>
+##ALT=<ID=*,Description="Represents allele(s) other than observed.">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel">
+##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">
+##INFO=<ID=RPBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Read Position Bias (closer to 0 is better)">
+##INFO=<ID=MQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality Bias (closer to 0 is better)">
+##INFO=<ID=BQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Base Quality Bias (closer to 0 is better)">
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the beginning of the VCF file
+# Save a readable text copy of the VCF records for inspection.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools view eg2.raw.vcf > variants.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Convert the VCF records into a text file for inspection
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh variants.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:40 variants.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Confirm that the output file was created
+# Display a few VCF data rows without the header to inspect the pileup results.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools view -H eg2.raw.vcf | head -n 5
+NC_001416.1	1	.	G	A,<*>	0	.	DP=1;I16=0,0,1,0,0,0,7,49,0,0,24,576,0,0,0,0;QS=0,1,0;SGB=-0.379885;MQ0F=0	PL:AD	7,3,0,7,3,7:0,1,0
+NC_001416.1	2	.	G	A,<*>	0	.	DP=2;I16=0,0,1,0,0,0,1,1,0,0,24,576,0,0,1,1;QS=0,1,0;SGB=-0.379885;MQ0F=0	PL:AD	4,3,0,4,3,4:0,1,0
+NC_001416.1	3	.	G	T,<*>	0	.	DP=2;I16=1,0,1,0,5,25,4,16,42,1764,24,576,9,81,2,4;QS=0.555556,0.444444,0;SGB=-0.379885;RPBZ=-1;MQBZ=-1;BQBZ=-1;SCBZ=0;MQ0F=0	PL:A0,1,1,3,4,3:1,1,0
+NC_001416.1	4	.	C	<*>	0	.	DP=3;I16=2,0,0,0,5,13,0,0,66,2340,0,0,13,109,0,0;QS=1,0;MQ0F=0	PL:AD	0,6,7:2,0
+NC_001416.1	5	.	G	<*>	0	.	DP=3;I16=1,0,0,0,1,1,0,0,42,1764,0,0,11,121,0,0;QS=1,0;MQ0F=0	PL:AD	0,3,4:1,0
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the column headings and first five data records
+# Count VCF data records, not confirmed variant calls.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools view -H eg2.raw.vcf | wc -l
+48561
+[fang.xink@c0607 Bowtie2_analysis]$ # Count the number of VCF data records
+# Count VCF records with a non-dot ALT field; this does not establish confirmed mutations.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools view -H eg2.raw.vcf | awk '$5 != "." {count++} END {print count+0}'
+48561
+[fang.xink@c0607 Bowtie2_analysis]$ # Count records with an alternate allele other than a dot
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh lambda_virus*.bt2 eg1.sam eg2.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.1M Oct 18 14:28 eg1.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 6.5M Oct 18 14:32 eg2.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.1M Oct 18 14:27 lambda_virus.1.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.2.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff   17 Oct 18 14:27 lambda_virus.3.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.4.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.1M Oct 18 14:27 lambda_virus.rev.1.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  12K Oct 18 14:27 lambda_virus.rev.2.bt2
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the Bowtie 2 index files and alignment outputs
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh eg2.bam eg2.sorted.bam eg2.raw.vcf variants.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0M Oct 18 14:35 eg2.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:38 eg2.raw.vcf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.5M Oct 18 14:36 eg2.sorted.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:40 variants.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the BAM and variant analysis files
+# Count the alignment records in the sorted BAM file.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools view -c eg2.sorted.bam
+20000
+[fang.xink@c0607 Bowtie2_analysis]$ # Count the number of alignment records in the paired-end BAM file
+# Preview the saved text version of the VCF data.
+[fang.xink@c0607 Bowtie2_analysis]$ head -n 3 variants.txt
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##bcftoolsVersion=1.21+htslib-1.21
+[fang.xink@c0607 Bowtie2_analysis]$ # Confirm that the variant output contains the expected VCF header
+# Save the shell command history as a record of the work performed.
+[fang.xink@c0607 Bowtie2_analysis]$ history > bowtie2_command_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Save the commands from the current terminal session
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh bowtie2_command_history.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 20K Oct 18 14:43 bowtie2_command_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Verify the history file was created
+# Inspect the most recent commands in the saved history.
+[fang.xink@c0607 Bowtie2_analysis]$ tail -n 20 bowtie2_command_history.txt
+  607  # Display the beginning of the VCF file
+  608  bcftools view eg2.raw.vcf > variants.txt
+  609  # Convert the VCF records into a text file for inspection
+  610  ls -lh variants.txt
+  611  # Confirm that the output file was created
+  612  bcftools view -H eg2.raw.vcf | head -n 5
+  613  # Display the column headings and first five data records
+  614  bcftools view -H eg2.raw.vcf | wc -l
+  615  # Count the number of VCF data records
+  616  bcftools view -H eg2.raw.vcf | awk '$5 != "." {count++} END {print count+0}'
+  617  # Count records with an alternate allele other than a dot
+  618  ls -lh lambda_virus*.bt2 eg1.sam eg2.sam
+  619  # Display the Bowtie 2 index files and alignment outputs
+  620  ls -lh eg2.bam eg2.sorted.bam eg2.raw.vcf variants.txt
+  621  # Display the BAM and variant analysis files
+  622  samtools view -c eg2.sorted.bam
+  623  # Count the number of alignment records in the paired-end BAM file
+  624  head -n 3 variants.txt
+  625  # Confirm that the variant output contains the expected VCF header
+  626  history > bowtie2_command_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the last 20 recorded commands
+# Find the recorded alignment or indexing commands and their line numbers.
+[fang.xink@c0607 Bowtie2_analysis]$ grep -n 'bowtie2-build' bowtie2_command_history.txt
+561:  561  bowtie2-build ../Lambda/lambda_virus.fa lambda_virus
+[fang.xink@c0607 Bowtie2_analysis]$ # Find the commands used to build the Bowtie 2 index
+# Find the recorded alignment or indexing commands and their line numbers.
+[fang.xink@c0607 Bowtie2_analysis]$ grep -n 'bowtie2 -x' bowtie2_command_history.txt
+564:  564  bowtie2 -x lambda_virus -U ../Reads/reads_1.fq -S eg1.sam
+567:  567  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -s eg2.sam
+575:  575  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -S eg2.sam
+[fang.xink@c0607 Bowtie2_analysis]$ # Find the commands used for single-end and paired-end alignment
+# Extract the relevant assignment commands into a separate history file.
+[fang.xink@c0607 Bowtie2_analysis]$ sed -n '561,$p' bowtie2_command_history.txt > bowtie2_assignment_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Extract the Bowtie 2 assignment commands from the full terminal history
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh bowtie2_assignment_history.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.2K Oct 18 14:46 bowtie2_assignment_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Confirm that the assignment history file was created
+# Preview the first lines to verify the file content and format.
+[fang.xink@c0607 Bowtie2_analysis]$ head -n 20 bowtie2_assignment_history.txt
+  561  bowtie2-build ../Lambda/lambda_virus.fa lambda_virus
+  562  ls -lh lambda_virus*.bt2
+  563  # Align reads_1.fq to the Lambda reference genome and save results as eg1.sam
+  564  bowtie2 -x lambda_virus -U ../Reads/reads_1.fq -S eg1.sam
+  565  head eg1.sam
+  566  ls -lh eg1.sam 
+  567  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -s eg2.sam
+  568  head eg2.sam
+  569  # Display the first 10 lines of the paired-end SAM file
+  570  head eg2.sam
+  571  # Verify the paired-end SAM file was created
+  572  ls -lh eg2.sam
+  573  # Align both paired-end FASTQ files to the Lambda reference genome
+  574  # Save the paired-end alignment results as eg2.sam
+  575  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -S eg2.sam
+  576  ls -lh  eg2.sam 
+  577  head eg2.sam 
+  578  # Load SAMtools for processing alignment files
+  579  module load samtools
+  580  # Load BCFtools for later variant analysis
+[fang.xink@c0607 Bowtie2_analysis]$ # Display the beginning of the assignment history
+# Count lines to check the size of the saved assignment history.
+[fang.xink@c0607 Bowtie2_analysis]$ wc -l bowtie2_assignment_history.txt
+66 bowtie2_assignment_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Count the lines in the assignment history
+# Start recording the terminal session into a transcript file.
+[fang.xink@c0607 Bowtie2_analysis]$ script -a bowtie2_terminal_session.txt
+Script started, output log file is 'bowtie2_terminal_session.txt'.
+[fang.xink@c0607 Bowtie2_analysis]$ # Start recording the terminal session into a text file
+# Display the saved command history inside the terminal recording.
+[fang.xink@c0607 Bowtie2_analysis]$ cat bowtie2_assignment_history.txt
+  561  bowtie2-build ../Lambda/lambda_virus.fa lambda_virus
+  562  ls -lh lambda_virus*.bt2
+  563  # Align reads_1.fq to the Lambda reference genome and save results as eg1.sam
+  564  bowtie2 -x lambda_virus -U ../Reads/reads_1.fq -S eg1.sam
+  565  head eg1.sam
+  566  ls -lh eg1.sam 
+  567  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -s eg2.sam
+  568  head eg2.sam
+  569  # Display the first 10 lines of the paired-end SAM file
+  570  head eg2.sam
+  571  # Verify the paired-end SAM file was created
+  572  ls -lh eg2.sam
+  573  # Align both paired-end FASTQ files to the Lambda reference genome
+  574  # Save the paired-end alignment results as eg2.sam
+  575  bowtie2 -x lambda_virus -1 ../Reads/reads_1.fq -2 ../Reads/reads_2.fq -S eg2.sam
+  576  ls -lh  eg2.sam 
+  577  head eg2.sam 
+  578  # Load SAMtools for processing alignment files
+  579  module load samtools
+  580  # Load BCFtools for later variant analysis
+  581  module load bcftools
+  582  # Verify SAMtools is available
+  583  samtools --version | head -n 2
+  584  # Verify BCFtools is available
+  585  bcftools --version | head -n 2
+  586  module load samtools
+  587  module load bcftools
+  588  samtools --version | head -n 2
+  589  bcftools --version | head -n 2
+  590  samtools view -bS eg2.sam > eg2.bam
+  591  ls -lh eg2.bam
+  592  samtools sort eg2.bam -o eg2.sorted.bam
+  593  # Sort the paired-end BAM file by genomic coordinate
+  594  # Save the sorted alignments as eg2.sorted.bam
+  595  ls -lh eg2.sorted.bam
+  596  # Check that the sorted BAM file was created
+  597  samtools view -H eg2.sorted.bam | grep '^@HD'
+  598  # Examine the header to confirm coordinate sorting
+  599  samtools quickcheck -v eg2.sorted.bam
+  600  # Check the integrity of the sorted BAM file
+  601  bcftools mpileup -f ../Lambda/lambda_virus.fa eg2.sorted.bam | bcftools view -Ov - > eg2.raw.vcf
+  602  # Compare aligned reads against the Lambda reference genome
+  603  # Generate pileup data and save the resulting VCF records
+  604  ls -lh eg2.raw.vcf
+  605  # Confirm that the variant data file exists
+  606  head -n 15 eg2.raw.vcf
+  607  # Display the beginning of the VCF file
+  608  bcftools view eg2.raw.vcf > variants.txt
+  609  # Convert the VCF records into a text file for inspection
+  610  ls -lh variants.txt
+  611  # Confirm that the output file was created
+  612  bcftools view -H eg2.raw.vcf | head -n 5
+  613  # Display the column headings and first five data records
+  614  bcftools view -H eg2.raw.vcf | wc -l
+  615  # Count the number of VCF data records
+  616  bcftools view -H eg2.raw.vcf | awk '$5 != "." {count++} END {print count+0}'
+  617  # Count records with an alternate allele other than a dot
+  618  ls -lh lambda_virus*.bt2 eg1.sam eg2.sam
+  619  # Display the Bowtie 2 index files and alignment outputs
+  620  ls -lh eg2.bam eg2.sorted.bam eg2.raw.vcf variants.txt
+  621  # Display the BAM and variant analysis files
+  622  samtools view -c eg2.sorted.bam
+  623  # Count the number of alignment records in the paired-end BAM file
+  624  head -n 3 variants.txt
+  625  # Confirm that the variant output contains the expected VCF header
+  626  history > bowtie2_command_history.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Show the commands used during the Bowtie 2 assignment
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh eg1.sam eg2.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.1M Oct 18 14:28 eg1.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 6.5M Oct 18 14:32 eg2.sam
+[fang.xink@c0607 Bowtie2_analysis]$ # Verify the single-end and paired-end alignment files
+[fang.xink@c0607 Bowtie2_analysis]$ 
+ls -lh eg2.bam eg2.sorted.bam eg2.raw.vcf variants.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0M Oct 18 14:35 eg2.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:38 eg2.raw.vcf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.5M Oct 18 14:36 eg2.sorted.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.2M Oct 18 14:40 variants.txt
+[fang.xink@c0607 Bowtie2_analysis]$ # Verify the BAM and variant output files
+# Check the BAM header to confirm the alignments are coordinate-sorted.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools view -H eg2.sorted.bam | grep '^@HD'
+@HD	VN:1.5	SO:coordinate
+[fang.xink@c0607 Bowtie2_analysis]$ # Confirm the BAM file is sorted by genomic coordinate
+# Count the alignment records in the sorted BAM file.
+[fang.xink@c0607 Bowtie2_analysis]$ samtools view -c eg2.sorted.bam
+20000
+[fang.xink@c0607 Bowtie2_analysis]$ # Count the paired-end alignment records
+# Count VCF data records, not confirmed variant calls.
+[fang.xink@c0607 Bowtie2_analysis]$ bcftools view -H eg2.raw.vcf | wc -l
+48561
+[fang.xink@c0607 Bowtie2_analysis]$ # Count the VCF data records
+# End the terminal recording session.
+[fang.xink@c0607 Bowtie2_analysis]$ exit
+exit
+Script done.
+# Check which files are present and verify the expected outputs were created.
+[fang.xink@c0607 Bowtie2_analysis]$ ls -lh bowtie2_assignment_history.txt bowtie2_terminal_session.txt 
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.2K Oct 18 14:46 bowtie2_assignment_history.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  11K Oct 18 14:49 bowtie2_terminal_session.txt
+[fang.xink@c0607 Bowtie2_analysis]$ 

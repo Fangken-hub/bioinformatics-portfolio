@@ -1,0 +1,1023 @@
+Last login: Sat Oct 17 12:41:57 on ttys000
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Sun Oct 18 14:21:59 2026 from 10.110.162.158
+    _______  __ ____  __    ____  ____  __________
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|
+
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters.                                                                                                                                                                   
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+[fang.xink@explorer-02 ~]$ cd /courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/Sea_cucumber
+[fang.xink@explorer-02 Sea_cucumber]$ # access sea cucumber directory containing our genome and sequencing reads
+[fang.xink@explorer-02 Sea_cucumber]$ ls -lh
+total 82M
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff  80M Oct 17 13:47 Ppar_tinygenome.fna
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805880.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805881.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805882.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805883.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805884.tiny.fastq
+-rwxr-xr-x 1 fang.xink BIOL2406.202710-staff 207K Oct 17 13:47 SRR6805885.tiny.fastq
+[fang.xink@explorer-02 Sea_cucumber]$ # checking the reference genome and six FASTQ files
+[fang.xink@explorer-02 Sea_cucumber]$ srun --pty --time=02:00:00 --mem=8G --cpus-per-task=2 bash
+srun: job 11191970 queued and waiting for resources
+srun: job 11191970 has been allocated resources
+[fang.xink@c0607 Sea_cucumber]$ #accessed computing node
+[fang.xink@c0607 Sea_cucumber]$ hostname
+c0607
+[fang.xink@c0607 Sea_cucumber]$ #in the right computing node
+[fang.xink@c0607 Sea_cucumber]$ head -n 5 Ppar_tinygenome.fna
+>KN893585.1 Parastichopus parvimensis isolate Sea Cucumber 01 unplaced genomic scaffold Scaffold11424, whole genome shotgun sequence
+CATATATGTGAGAGAAAAGTGCATTGACCTGGCTTTAACTTGACAACAAGACTGTTTCCCGCTCGTTACGAATAATCTTCTATATCCTAATAATCGCTATGCAAGGCTATAAGcaatatcacataatatcacACCAGCTTGTAAGGTTACATTTAAACATCAGGTGGTTATTTCCAATTAGACAGTGTTGAAATCCATCAACGCTTCCTGGAAAGTAAAATCCAAACCGTTAAATCATAACCCATCCATATGGTATTGGCTTCCTTGTATATGCTACCACCTATATACATGTGAGCCTACAGCAATAATGATTCCTTCCATACACACCACCAAGGAAACCCAACTGCTGGTTTTTGACACATGCCGTAGGAGTTACAGCCTGTCTTTCATTGCCAACAACATGAGATGACATGATGTTTTCTCTGTCACATTTTGGTGTGAATTTTTCTCGTTTGCTATAACCACCGATTTTTACTGTAGGGTTTTAATTCTCAAATTTATCAATAAGTTTGGGTAAGACAAACATGCATTAAACTAAAGTTAGTTTCTCTGATCCTCCATTTTGTTCCCAGTCATTGAGGATTATTAAAAGTGACAAAAG
+>JXUT01146130.1 Apostichopus parvimensis isolate Sea Cucumber 01 contig_146132, whole genome shotgun sequence
+[fang.xink@c0607 Sea_cucumber]$ # Display the header and first few DNA sequences of the sea cucumber reference genome
+[fang.xink@c0607 Sea_cucumber]$ head -n 4 SRR6805880.tiny.fastq
+@SRR6805880.2151832 OCD6D:00225:02960 length=80
+TGCAGAAGGCATGACCTTACCTACTGAATAAAAGATGAGACACCTTCTCATTGGCCAAGAAGAAACAACACTCTATTACA
++
+47:7775<59999995:6;;5:7664621111*/52245554404/33533/3/30436724461./,.:79999:4:9:
+[fang.xink@c0607 Sea_cucumber]$ # Examine the first sequencing read, including its ID, DNA sequence, and quality scores
+[fang.xink@c0607 Sea_cucumber]$ echo "$file: $(( $(wc -l < "$file") / 4 )) reads"
+bash: : No such file or directory
+bash: / 4 : syntax error: operand expected (error token is "/ 4 ")
+[fang.xink@c0607 Sea_cucumber]$ for file in *.tiny.fastq; do
+    echo "$file: $(( $(wc -l < "$file") / 4 )) reads"
+done
+SRR6805880.tiny.fastq: 1000 reads
+
+[fang.xink@c0607 Sea_cucumber]$ # Count the number of sequencing reads in each FASTQ file
+# Each FASTQ read occupies four lines, so divide the line count by four
+[fang.xink@c0607 Sea_cucumber]$ module load fastqc
+Loading fastqc/0.12.1
+  Loading requirement: OpenJDK/22.0.2 perl/5.40.0
+[fang.xink@c0607 Sea_cucumber]$ # Load FastQC to evaluate the quality of our raw sequencing reads
+[fang.xink@c0607 Sea_cucumber]$ fastqc SRR6805880.tiny.fastq 
+null
+Started analysis of SRR6805880.tiny.fastq
+Approx 100% complete for SRR6805880.tiny.fastq
+Analysis complete for SRR6805880.tiny.fastq
+[fang.xink@c0607 Sea_cucumber]$ # Run quality control on the first sea cucumber FASTQ file
+[fang.xink@c0607 Sea_cucumber]$ ls -lh SRR6805880.tiny_fastqc*
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 606K Oct 18 16:25 SRR6805880.tiny_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 445K Oct 18 16:25 SRR6805880.tiny_fastqc.zip
+[fang.xink@c0607 Sea_cucumber]$ fastqc SRR6805880.tiny.fastq 
+null
+Started analysis of SRR6805880.tiny.fastq
+Approx 100% complete for SRR6805880.tiny.fastq
+Analysis complete for SRR6805880.tiny.fastq
+[fang.xink@c0607 Sea_cucumber]$ # Run FastQC on the remaining five sea cucumber sequencing files
+# This checks their read quality before adapter trimming
+[fang.xink@c0607 Sea_cucumber]$ ls -lh *_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 606K Oct 18 16:26 SRR6805880.tiny_fastqc.html
+[fang.xink@c0607 Sea_cucumber]$ # Verify that all six FastQC HTML reports were generated
+[fang.xink@c0607 Sea_cucumber]$ 
+[fang.xink@c0607 Sea_cucumber]$ fastqc SRR680588[1-5].tiny.fastq
+null
+null
+Started analysis of SRR6805881.tiny.fastq
+null
+null
+null
+Approx 100% complete for SRR6805881.tiny.fastq
+Analysis complete for SRR6805881.tiny.fastq
+
+[fang.xink@c0607 Sea_cucumber]$ # Analyze the remaining five sequencing files to check their quality before trimming _I forgot to add them to the command
+[fang.xink@c0607 Sea_cucumber]$ ls -lh *_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 606K Oct 18 16:26 SRR6805880.tiny_fastqc.html
+
+[fang.xink@c0607 Sea_cucumber]$ # Confirm that all six FastQC HTML reports were successfully created
+[fang.xink@c0607 Sea_cucumber]$ /courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/Sea_cucumber
+bash: /courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/Sea_cucumber: Is a directory
+[fang.xink@c0607 Sea_cucumber]$ ls
+Ppar_tinygenome.fna          SRR6805882.tiny.fastq        SRR6805884.tiny_fastqc.html
+SRR6805880.tiny.fastq        SRR6805882.tiny_fastqc.html  SRR6805884.tiny_fastqc.zip
+SRR6805880.tiny_fastqc.html  SRR6805882.tiny_fastqc.zip   SRR6805885.tiny.fastq
+SRR6805880.tiny_fastqc.zip   SRR6805883.tiny.fastq        SRR6805885.tiny_fastqc.html
+SRR6805881.tiny.fastq        SRR6805883.tiny_fastqc.html  SRR6805885.tiny_fastqc.zip
+SRR6805881.tiny_fastqc.html  SRR6805883.tiny_fastqc.zip
+SRR6805881.tiny_fastqc.zip   SRR6805884.tiny.fastq
+[fang.xink@c0607 Sea_cucumber]$ Find SRR6805880.tiny_fastqc.html
+bash: Find: command not found
+[fang.xink@c0607 Sea_cucumber]$ SRR6805880.tiny_fastqc.html
+bash: SRR6805880.tiny_fastqc.html: command not found
+[fang.xink@c0607 Sea_cucumber]$ cd SRR6805880.tiny_fastqc.html
+bash: cd: SRR6805880.tiny_fastqc.html: Not a directory
+[fang.xink@c0607 Sea_cucumber]$ awk 'NR % 4 == 2 {print; count++; if (count == 10) exit}' SRR6805880.tiny.fast
+awk: fatal: cannot open file `SRR6805880.tiny.fast' for reading: No such file or directory
+[fang.xink@c0607 Sea_cucumber]$ awk 'NR % 4 == 2 {print; count++; if (count == 10) exit}' SRR6805880.tiny.fastq
+
+TGCAGAAGGCATGACCTTACCTACTGAATAAAAGATGAGACACCTTCTCATTGGCCAAGAAGAAACAACACTCTATTACA
+TGCAGTCGTAATCTAGGAACACACCTACGGGATTATTTACTATTTTACAATCCATAGTCGGAGTCTACAAACAGTTACCA
+
+
+[fang.xink@c0607 Sea_cucumber]$ # Display the first 10 DNA sequences to check for the TGCAG adapter
+[fang.xink@c0607 Sea_cucumber]$ cutadapt --version
+bash: cutadapt: command not found
+[fang.xink@c0607 Sea_cucumber]$ module avail cutadapt
+[fang.xink@c0607 Sea_cucumber]$ conda --version
+bash: conda: command not found
+[fang.xink@c0607 Sea_cucumber]$ module load anaconda3
+[fang.xink@c0607 Sea_cucumber]$ conda  --version
+conda 24.5.0
+[fang.xink@c0607 Sea_cucumber]$ # Load Anaconda so we can access the Conda environment required for Cutadapt
+[fang.xink@c0607 Sea_cucumber]$ # Check whether Conda is now available
+[fang.xink@c0607 Sea_cucumber]$ conda  env list
+# conda environments:
+#
+base                     /shared/EL9/explorer/anaconda3/2024.06
+info6105_env             /shared/EL9/explorer/anaconda3/2024.06/envs/info6105_env
+mongo_env                /shared/EL9/explorer/anaconda3/2024.06/envs/mongo_env
+qiime2-amplicon-2025.7     /shared/EL9/explorer/anaconda3/2024.06/envs/qiime2-amplicon-2025.7
+
+[fang.xink@c0607 Sea_cucumber]$ # List the available Conda environments to find the one containing Cutadapt
+[fang.xink@c0607 Sea_cucumber]$ conda  list -n cutadapt
+
+EnvironmentLocationNotFound: Not a conda environment: /home/fang.xink/.conda/envs/cutadapt
+
+[fang.xink@c0607 Sea_cucumber]$ conda list -n base cutadapt
+
+# packages in environment at /shared/EL9/explorer/anaconda3/2024.06:
+#
+# Name                    Version                   Build  Channel
+[fang.xink@c0607 Sea_cucumber]$ conda list -n qiime2-amplicon-2025.7 cutadapt
+# packages in environment at /shared/EL9/explorer/anaconda3/2024.06/envs/qiime2-amplicon-2025.7:
+#
+# Name                    Version                   Build  Channel
+cutadapt                  5.1             py310h1fe012e_0    bioconda
+q2-cutadapt               2025.7.0        py310hf7664fe_0    https://packages.qiime2.org/qiime2/2025.7/amplicon/released
+[fang.xink@c0607 Sea_cucumber]$ conda activate qiime2-amplicon-2025.7
+
+CondaError: Run 'conda init' before 'conda activate'
+
+[fang.xink@c0607 Sea_cucumber]$ # Activate the existing QIIME2 environment that contains Cutadapt
+[fang.xink@c0607 Sea_cucumber]$ cutadapt --version
+bash: cutadapt: command not found
+[fang.xink@c0607 Sea_cucumber]$ eval "$(conda shell.bash hook)"
+(base) [fang.xink@c0607 Sea_cucumber]$ # Initialize Conda for the current terminal session
+(base) [fang.xink@c0607 Sea_cucumber]$ conda activate qiime2-amplicon-2025.7
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ # Activate the existing environment containing Cutadapt
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ cutadapt --version
+5.1
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ cutadapt -g TGCAG SRR6805880.tiny.fastq -o SRR6805880.tiny_trimmed.fastq
+This is cutadapt 5.1 with Python 3.10.14
+Command line parameters: -g TGCAG SRR6805880.tiny.fastq -o SRR6805880.tiny_trimmed.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @  17.0 µs/read;   3.54 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads with adapters:                     1,000 (100.0%)
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        80,000 bp
+Total written (filtered):         75,000 bp (93.8%)
+
+=== Adapter 1 ===
+
+Sequence: TGCAG; Type: regular 5'; Length: 5; Trimmed: 1000 times
+
+Minimum overlap: 3
+No. of allowed errors:
+1-5 bp: 0
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+5	1000	1.0	0	1000
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ # Remove the TGCAG sequence from the 5' end of reads in the first sample
+# Save the trimmed reads in a new FASTQ file without changing the original
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ ls -lh SRR6805880.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:41 SRR6805880.tiny_trimmed.fastq
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ # Verify that the trimmed FASTQ file was created
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[1-5].tiny.fastq; do
+> 
+> # Loop through the remaining five FASTQ files to remove the TGCAG adapter
+> for filename in SRR680588[1-5].tiny.fastq; do
+>
+bash: syntax error near unexpected token `newline'
+(qiime2-amplicon-2025.7) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[1-5].tiny.fastq; do
+> base=$(basename "$filename" .tiny.fastq)
+>  cutadapt -g TGCAG "${base}.tiny.fastq" -o "${base}.tiny_trimmed.fastq"
+done
+This is cutadapt 5.1 with Python 3.10.14
+Command line parameters: -g TGCAG SRR6805881.tiny.fastq -o SRR6805881.tiny_trimmed.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @  14.5 µs/read;   4.15 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads with adapters:                     1,000 (100.0%)
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        80,000 bp
+Total written (filtered):         75,000 bp (93.8%)
+
+=== Adapter 1 ===
+
+genome.4.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  28M Oct 18 16:46 Ppar_tinygenome.rev.1.bt2
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  18M Oct 18 16:46 Ppar_tinygenome.rev.2.bt2
+(base) [fang.xink@c0607 Sea_cucumber]$ # Verify that all six Bowtie2 index files were successfully created
+(base) [fang.xink@c0607 Sea_cucumber]$ mkdir -p index
+(base) [fang.xink@c0607 Sea_cucumber]$ # Create a folder to store the Bowtie2 reference genome index files
+(base) [fang.xink@c0607 Sea_cucumber]$ mv Ppar_tinygenome*.bt2 index/
+(base) [fang.xink@c0607 Sea_cucumber]$ bowtie2 files into the folder 
+No index, query, or output file specified!
+Bowtie 2 version 2.5.4 by Ben Langmead (langmea@cs.jhu.edu, www.cs.jhu.edu/~langmea)
+Usage: 
+  bowtie2 [options]* -x <bt2-idx> {-1 <m1> -2 <m2> | -U <r> | --interleaved <i> | -b <bam>} [-S <sam>]
+
+  <bt2-idx>  Index filename prefix (minus trailing .X.bt2).
+             NOTE: Bowtie 1 and Bowtie 2 indexes are not compatible.
+  <m1>       Files with #1 mates, paired with files in <m2>.
+             Could be gzip'ed (extension: .gz) or bzip2'ed (extension: .bz2).
+  <m2>       Files with #2 mates, paired with files in <m1>.
+             Could be gzip'ed (extension: .gz) or bzip2'ed (extension: .bz2).
+  <r>        Files with unpaired reads.
+             Could be gzip'ed (extension: .gz) or bzip2'ed (extension: .bz2).
+  <i>        Files with interleaved paired-end FASTQ/FASTA reads
+             Could be gzip'ed (extension: .gz) or bzip2'ed (extension: .bz2).
+  <bam>      Files are unaligned BAM sorted by read name.
+  <sam>      File for SAM output (default: stdout)
+
+  <m1>, <m2>, <r> can be comma-separated lists (no whitespace) and can be
+  specified many times.  E.g. '-U file1.fq,file2.fq -U file3.fq'.
+
+Options (defaults in parentheses):
+
+ Input:
+  -q                 query input files are FASTQ .fq/.fastq (default)
+  --tab5             query input files are TAB5 .tab5
+  --tab6             query input files are TAB6 .tab6
+  --qseq             query input files are in Illumina's qseq format
+  -f                 query input files are (multi-)FASTA .fa/.mfa
+  -r                 query input files are raw one-sequence-per-line
+  -F k:<int>,i:<int> query input files are continuous FASTA where reads
+                     are substrings (k-mers) extracted from the FASTA file
+                     and aligned at offsets 1, 1+i, 1+2i ... end of reference
+  -c                 <m1>, <m2>, <r> are sequences themselves, not files
+  -s/--skip <int>    skip the first <int> reads/pairs in the input (none)
+  -u/--upto <int>    stop after first <int> reads/pairs (no limit)
+  -5/--trim5 <int>   trim <int> bases from 5'/left end of reads (0)
+  -3/--trim3 <int>   trim <int> bases from 3'/right end of reads (0)
+  --trim-to [3:|5:]<int> trim reads exceeding <int> bases from either 3' or 5' end
+                     If the read end is not specified then it defaults to 3 (0)
+  --phred33          qualities are Phred+33 (default)
+  --phred64          qualities are Phred+64
+  --int-quals        qualities encoded as space-delimited integers
+
+ Presets:                 Same as:
+  For --end-to-end:
+   --very-fast            -D 5 -R 1 -N 0 -L 22 -i S,0,2.50
+   --fast                 -D 10 -R 2 -N 0 -L 22 -i S,0,2.50
+   --sensitive            -D 15 -R 2 -N 0 -L 22 -i S,1,1.15 (default)
+   --very-sensitive       -D 20 -R 3 -N 0 -L 20 -i S,1,0.50
+
+  For --local:
+   --very-fast-local      -D 5 -R 1 -N 0 -L 25 -i S,1,2.00
+   --fast-local           -D 10 -R 2 -N 0 -L 22 -i S,1,1.75
+   --sensitive-local      -D 15 -R 2 -N 0 -L 20 -i S,1,0.75 (default)
+   --very-sensitive-local -D 20 -R 3 -N 0 -L 20 -i S,1,0.50
+
+ Alignment:
+  -N <int>           max # mismatches in seed alignment; can be 0 or 1 (0)
+  -L <int>           length of seed substrings; must be >3, <32 (22)
+  -i <func>          interval between seed substrings w/r/t read len (S,1,1.15)
+  --n-ceil <func>    func for max # non-A/C/G/Ts permitted in aln (L,0,0.15)
+  --dpad <int>       include <int> extra ref chars on sides of DP table (15)
+  --gbar <int>       disallow gaps within <int> nucs of read extremes (4)
+  --ignore-quals     treat all quality values as 30 on Phred scale (off)
+  --nofw             do not align forward (original) version of read (off)
+  --norc             do not align reverse-complement version of read (off)
+  --no-1mm-upfront   do not allow 1 mismatch alignments before attempting to
+                     scan for the optimal seeded alignments
+  --end-to-end       entire read must align; no clipping (on)
+   OR
+  --local            local alignment; ends might be soft clipped (off)
+
+ Scoring:
+  --ma <int>         match bonus (0 for --end-to-end, 2 for --local) 
+  --mp <int>         max penalty for mismatch; lower qual = lower penalty (6)
+  --np <int>         penalty for non-A/C/G/Ts in read/ref (1)
+  --rdg <int>,<int>  read gap open, extend penalties (5,3)
+  --rfg <int>,<int>  reference gap open, extend penalties (5,3)
+  --score-min <func> min acceptable alignment score w/r/t read length
+                     (G,20,8 for local, L,-0.6,-0.6 for end-to-end)
+
+ Reporting:
+  (default)          look for multiple alignments, report best, with MAPQ
+   OR
+  -k <int>           report up to <int> alns per read; MAPQ not meaningful
+   OR
+  -a/--all           report all alignments; very slow, MAPQ not meaningful
+
+ Effort:
+  -D <int>           give up extending after <int> failed extends in a row (15)
+  -R <int>           for reads w/ repetitive seeds, try <int> sets of seeds (2)
+
+ Paired-end:
+  -I/--minins <int>  minimum fragment length (0)
+  -X/--maxins <int>  maximum fragment length (500)
+  --fr/--rf/--ff     -1, -2 mates align fw/rev, rev/fw, fw/fw (--fr)
+  --no-mixed         suppress unpaired alignments for paired reads
+  --no-discordant    suppress discordant alignments for paired reads
+  --dovetail         concordant when mates extend past each other
+  --no-contain       not concordant when one mate alignment contains other
+  --no-overlap       not concordant when mates overlap at all
+
+ BAM:
+  --align-paired-reads
+                     Bowtie2 will, by default, attempt to align unpaired BAM reads.
+                     Use this option to align paired-end reads instead.
+  --preserve-tags    Preserve tags from the original BAM record by
+                     appending them to the end of the corresponding SAM output.
+
+ Output:
+  -t/--time          print wall-clock time taken by search phases
+  --un <path>        write unpaired reads that didn't align to <path>
+  --al <path>        write unpaired reads that aligned at least once to <path>
+  --un-conc <path>   write pairs that didn't align concordantly to <path>
+  --al-conc <path>   write pairs that aligned concordantly at least once to <path>
+    (Note: for --un, --al, --un-conc, or --al-conc, add '-gz' to the option name, e.g.
+    --un-gz <path>, to gzip compress output, or add '-bz2' to bzip2 compress output.)
+  --quiet            print nothing to stderr except serious errors
+  --met-file <path>  send metrics to file at <path> (off)
+  --met-stderr       send metrics to stderr (off)
+  --met <int>        report internal counters & metrics every <int> secs (1)
+  --no-unal          suppress SAM records for unaligned reads
+  --no-head          suppress header lines, i.e. lines starting with @
+  --no-sq            suppress @SQ header lines
+  --rg-id <text>     set read group id, reflected in @RG line and RG:Z: opt field
+  --rg <text>        add <text> ("lab:value") to @RG line of SAM header.
+                     Note: @RG line only printed when --rg-id is set.
+  --omit-sec-seq     put '*' in SEQ and QUAL fields for secondary alignments.
+  --sam-no-qname-trunc
+                     Suppress standard behavior of truncating readname at first whitespace 
+                     at the expense of generating non-standard SAM.
+  --xeq              Use '='/'X', instead of 'M,' to specify matches/mismatches in SAM record.
+  --soft-clipped-unmapped-tlen
+                     Exclude soft-clipped bases when reporting TLEN.
+  --sam-append-comment
+                     Append FASTA/FASTQ comment to SAM record.
+  --sam-opt-config <config>
+                     Use <config>, example '-MD,YP,-AS', to toggle SAM Optional fields.
+
+ Performance:
+  -p/--threads <int> number of alignment threads to launch (1)
+  --reorder          force SAM output order to match order of input reads
+  --mm               use memory-mapped I/O for index; many 'bowtie's can share
+
+ Other:
+  --qc-filter        filter out reads that are bad according to QSEQ filter
+  --seed <int>       seed for random number generator (0)
+  --non-deterministic
+                     seed rand. gen. arbitrarily instead of using read attributes
+  --version          print version information and quit
+  -h/--help          print this usage message
+(ERR): bowtie2-align exited with value 1
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lh *.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:41 SRR6805880.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:43 SRR6805881.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:43 SRR6805882.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:43 SRR6805883.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 197K Oct 18 16:43 SRR6805884.tiny_trimmed.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 198K Oct 18 16:43 SRR6805885.tiny_trimmed.fastq
+(base) [fang.xink@c0607 Sea_cucumber]$ bowtie2 -x index/Ppar_tinygenome -U SRR6805880.tiny_trimmed.fastq -S SRR6805880.sam
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    782 (78.20%) aligned 0 times
+    111 (11.10%) aligned exactly 1 time
+    107 (10.70%) aligned >1 times
+21.80% overall alignment rate
+(base) [fang.xink@c0607 Sea_cucumber]$ # Align the first trimmed FASTQ sample to the sea cucumber reference genome
+# -x specifies the reference genome index
+# -U specifies the single-end sequencing reads
+# -S specifies the output SAM alignment file
+(base) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[1-5].tiny_trimmed.fastq; do
+>  base=$(basename "$filename" .tiny_trimmed.fastq)
+>  bowtie2 -x index/Ppar_tinygenome -U "$filename" -S "${base}.sam"
+> done
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    782 (78.20%) aligned 0 times
+    109 (10.90%) aligned exactly 1 time
+    109 (10.90%) aligned >1 times
+21.80% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    772 (77.20%) aligned 0 times
+    116 (11.60%) aligned exactly 1 time
+    112 (11.20%) aligned >1 times
+22.80% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    792 (79.20%) aligned 0 times
+    103 (10.30%) aligned exactly 1 time
+    105 (10.50%) aligned >1 times
+20.80% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    789 (78.90%) aligned 0 times
+    110 (11.00%) aligned exactly 1 time
+    101 (10.10%) aligned >1 times
+21.10% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    766 (76.60%) aligned 0 times
+    115 (11.50%) aligned exactly 1 time
+    119 (11.90%) aligned >1 times
+23.40% overall alignment rate
+(base) [fang.xink@c0607 Sea_cucumber]$ # Align the remaining five trimmed FASTQ files to the reference genome, Extract the sample name from each trimmed FASTQ filename,Verify that all six SAM alignment files were created 
+(base) [fang.xink@c0607 Sea_cucumber]$ 
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lh *.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 263K Oct 18 16:49 SRR6805880.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 262K Oct 18 16:50 SRR6805881.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 264K Oct 18 16:50 SRR6805882.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 262K Oct 18 16:50 SRR6805883.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 262K Oct 18 16:50 SRR6805884.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 264K Oct 18 16:50 SRR6805885.sam
+(base) [fang.xink@c0607 Sea_cucumber]$ module load samtools/
+(base) [fang.xink@c0607 Sea_cucumber]$ #load  samtools to convert the alignment files
+(base) [fang.xink@c0607 Sea_cucumber]$ samtools --version
+samtools 1.21
+Using htslib 1.21
+Copyright (C) 2024 Genome Research Ltd.
+
+Samtools compilation details:
+    Features:       build=configure curses=yes 
+    CC:             gcc
+    CPPFLAGS:       
+    CFLAGS:         -Wall -g -O2
+    LDFLAGS:        
+    HTSDIR:         htslib-1.21
+    LIBS:           
+    CURSES_LIB:     -lncursesw
+
+HTSlib compilation details:
+    Features:       build=configure libcurl=yes S3=yes GCS=yes libdeflate=no lzma=yes bzip2=yes plugins=no htscodecs=1.6.1
+    CC:             gcc
+    CPPFLAGS:       
+    CFLAGS:         -Wall -g -O2 -fvisibility=hidden
+    LDFLAGS:        -fvisibility=hidden 
+
+HTSlib URL scheme handlers present:
+    built-in:	 file, preload, data
+    S3 Multipart Upload:	 s3w+https, s3w+http, s3w
+    Amazon S3:	 s3+https, s3, s3+http
+    Google Cloud Storage:	 gs+http, gs+https, gs
+    libcurl:	 gophers, smtp, smb, rtsp, tftp, pop3, smbs, imaps, pop3s, ftps, https, http, ftp, gopher, imap, sftp, smtps, scp, dict, mqtt, telnet
+    crypt4gh-needed:	 crypt4gh
+    mem:	 mem
+(base) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[0-5].sam; do
+>  base=$(basename "$filename" .sam)
+>  samtools view -bhS "$filename" | samtools sort -o "${base}.bam"
+> done
+(base) [fang.xink@c0607 Sea_cucumber]$ # Loop through all six SAM alignment files, extract  info needed and convert sam to bam
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lh *.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 110K Oct 18 16:52 SRR6805880.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 108K Oct 18 16:52 SRR6805881.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 110K Oct 18 16:52 SRR6805882.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 110K Oct 18 16:52 SRR6805883.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 109K Oct 18 16:52 SRR6805884.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 110K Oct 18 16:52 SRR6805885.bam
+(base) [fang.xink@c0607 Sea_cucumber]$ # Verify that all six sorted BAM files were created
+(base) [fang.xink@c0607 Sea_cucumber]$ ls *.bam > bam.filelist
+
+(base) [fang.xink@c0607 Sea_cucumber]$ # Create a text file containing the names of all six sorted BAM files
+(base) [fang.xink@c0607 Sea_cucumber]$ cat bam.filelist 
+SRR6805880.bam
+SRR6805881.bam
+SRR6805882.bam
+SRR6805883.bam
+SRR6805884.bam
+SRR6805885.bam
+(base) [fang.xink@c0607 Sea_cucumber]$ # Display the file list to verify that all six BAM files are included
+(base) [fang.xink@c0607 Sea_cucumber]$ wc -l bam.filelist
+6 bam.filelist
+(base) [fang.xink@c0607 Sea_cucumber]$ # list contains six samples making sure that it has exactly the 6 we wanted
+(base) [fang.xink@c0607 Sea_cucumber]$ angsd -bam bam.filelist -GL 1 -out genotype_likelihoods -doMaf 2 -SNP_pval 1e-2 -doMajorMinor 1
+bash: angsd: command not found
+(base) [fang.xink@c0607 Sea_cucumber]$ # Analyze all six BAM files to estimate genotype likelihoods and identify SNPs
+# -GL 1 uses the SAMtools genotype likelihood model
+(base) [fang.xink@c0607 Sea_cucumber]$ # -GL 1 uses the SAMtools genotype likelihood model
+# -doMaf 2 estimates minor allele frequencies
+# -SNP_pval 1e-2 sets the SNP significance threshold to 0.01
+# -doMajorMinor 1 determines major and minor alleles
+# -out specifies the output filename prefix
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lh genotype_likelihoods*
+ls: cannot access 'genotype_likelihoods*': No such file or directory
+(base) [fang.xink@c0607 Sea_cucumber]$ which angsd
+/usr/bin/which: no angsd in (/shared/EL9/explorer/samtools/1.21/bin:/shared/EL9/explorer/bowtie2/2.5.4/src/bowtie2-2.5.4-linux-x86_64/scripts:/shared/EL9/explorer/bowtie2/2.5.4/src/bowtie2-2.5.4-linux-x86_64:/shared/EL9/explorer/anaconda3/2024.06/bin:/shared/EL9/explorer/anaconda3/2024.06/condabin:/shared/EL9/explorer/anaconda3/2024.06/sbin:/shared/EL9/explorer/anaconda3/2024.06/bin:/shared/EL9/explorer/fastqc/0.12.1:/shared/EL9/explorer/perl/5.40.0/bin:/shared/EL9/explorer/OpenJDK/22.0.2/jdk-22.0.2/bin:/shared/EL9/explorer/fastqc/0.12.1/src/FastQC:/shared/EL9/explorer/explorer/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/fang.xink/.local/bin:/home/fang.xink/bin)
+(base) [fang.xink@c0607 Sea_cucumber]$ module avail angsd
+(base) [fang.xink@c0607 Sea_cucumber]$ conda list -n base angsd
+WARNING conda.gateways.disk.delete:unlink_or_rename_to_trash(182): Could not remove or rename /shared/EL9/explorer/anaconda3/2024.06/conda-meta/scipy-1.13.1-py312hc5e2394_0.json.  Please remove this file manually (you may need to reboot to free file handles)
+WARNING conda.gateways.disk.delete:unlink_or_rename_to_trash(182): Could not remove or rename /shared/EL9/explorer/anaconda3/2024.06/conda-meta/numpy-base-1.26.4-py312h0da6c21_0.json.  Please remove this file manually (you may need to reboot to free file handles)
+# Check whether ANGSD is installed in the base Conda environment
+# packages in environment at /shared/EL9/explorer/anaconda3/2024.06:
+#
+# Name                    Version                   Build  Channel
+(base) [fang.xink@c0607 Sea_cucumber]$ # Check whether ANGSD is installed in the base Conda environment
+(base) [fang.xink@c0607 Sea_cucumber]$ 
+(base) [fang.xink@c0607 Sea_cucumber]$ conda list -n qiime2-amplicon-2025.7 angsd
+# packages in environment at /shared/EL9/explorer/anaconda3/2024.06/envs/qiime2-amplicon-2025.7:
+#
+# Name                    Version                   Build  Channel
+(base) [fang.xink@c0607 Sea_cucumber]$ # Check whether ANGSD is installed in the existing QIIME2 environment
+  (asked the internet)
+bash: asked: command not found
+(base) [fang.xink@c0607 Sea_cucumber]$ module spider angsd
+ERROR: Invalid command 'spider'
+  Try 'module --help' for more information.
+(base) [fang.xink@c0607 Sea_cucumber]$ module avail 2>&1 | grep -i angsd
+(base) [fang.xink@c0607 Sea_cucumber]$ conda list -n qiime2-amplicon-2025.7 angsd
+# packages in environment at /shared/EL9/explorer/anaconda3/2024.06/envs/qiime2-amplicon-2025.7:
+#
+# Name                    Version                   Build  Channel
+(base) [fang.xink@c0607 Sea_cucumber]$ ls /courses/BIOL2406.202710/
+data  misc  shared  staff  students
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lah /courses/BIOL2406.202710/shared/
+total 0
+drwxrwsr-x  2 root   BIOL2406.202710-staff 4.0K Oct 14 11:09 .
+drwxrws---+ 2 root   BIOL2406.202710-staff 4.0K Sep 24 10:08 ..
+drwxr-sr-x  2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 angsd_env
+drwxr-sr-x  2 jhenzy BIOL2406.202710-staff 4.0K Oct  8 10:46 cutadapt_env
+drwxr-sr-x  2 jhenzy BIOL2406.202710-staff 4.0K Sep 16 17:25 emboss_env
+drwxr-sr-x  2 jhenzy BIOL2406.202710-staff 4.0K Sep 26 13:24 star_env
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lah /courses/BIOL2406.202710/shared/angsd_env/
+total 0
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 .
+drwxrwsr-x 2 root   BIOL2406.202710-staff 4.0K Oct 14 11:09 ..
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 bin
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 conda-meta
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:08 etc
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 include
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 lib
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 libexec
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 sbin
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:09 share
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4.0K Oct 14 11:08 ssl
+(base) [fang.xink@c0607 Sea_cucumber]$ conda activate /courses/BIOL2406.202710/shared/angsd_env
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Activate the ANGSD environment provided in the BIOL2406 shared directory
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ which angsd
+/courses/BIOL2406.202710/shared/angsd_env/bin/angsd
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Confirm that ANGSD is now accessible
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ angsd -version
+	-> angsd version: 0.940-dirty (htslib: 1.24) build(Dec 15 2024 09:11:59)
+	-> angsd -version 
+	-> Analysis helpbox/synopsis information:
+	-> Sun Oct 18 17:01:06 2026
+	-> doMcall=0
+
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Analyze the six sorted BAM files to estimate allele frequencies and identify potential SNPs
+# Use the SAMtools genotype likelihood model and a SNP significance threshold of 0.01
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh genotype_likelihoods*
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.3K Oct 18 17:01 genotype_likelihoods.arg
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  295 Oct 18 17:01 genotype_likelihoods.mafs.gz
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Verify that ANGSD generated the expected analysis output files
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ zcat genotype_likelihoods.mafs.gz
+chromo	position	major	minor	unknownEM	pu-EM	nInd
+KN882277.1	41498	G	T	0.332737	3.127339e-03	3
+KN885472.1	10712	C	G	0.126253	1.118604e-03	6
+KN885472.1	10741	T	A	0.205533	2.729806e-03	6
+KN885472.1	10746	C	T	0.113382	1.394211e-03	6
+KN894013.1	22082	T	C	0.098327	3.551274e-03	2
+KN894013.1	22084	C	T	0.106562	3.241062e-03	2
+KN883616.1	31041	C	A	0.422659	2.070393e-03	3
+KN883616.1	31042	T	G	0.424129	1.269827e-03	3
+KN883758.1	179190	A	T	0.336645	3.103740e-03	3
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Display the SNP results stored in ANGSD's compressed output file
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ bowtie2 -x index/Ppar_tinygenome -U SRR6805880.tiny.fastq -S SRR6805880_untrimmed.sam
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    780 (78.00%) aligned 0 times
+    111 (11.10%) aligned exactly 1 time
+    109 (10.90%) aligned >1 times
+22.00% overall alignment rate
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ #assemble and aligned one sample first
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ #left off at step 29^^^
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[1-5].tiny.fastq; do
+> base=$(basename "$filename" .tiny.fastq)
+> bowtie2 -x index/Ppar_tinygenome -U "$filename" -S "${base}_untrimmed.sam"
+> done
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    787 (78.70%) aligned 0 times
+    101 (10.10%) aligned exactly 1 time
+    112 (11.20%) aligned >1 times
+21.30% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    777 (77.70%) aligned 0 times
+    105 (10.50%) aligned exactly 1 time
+    118 (11.80%) aligned >1 times
+22.30% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    787 (78.70%) aligned 0 times
+    104 (10.40%) aligned exactly 1 time
+    109 (10.90%) aligned >1 times
+21.30% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    788 (78.80%) aligned 0 times
+    110 (11.00%) aligned exactly 1 time
+    102 (10.20%) aligned >1 times
+21.20% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    769 (76.90%) aligned 0 times
+    120 (12.00%) aligned exactly 1 time
+    111 (11.10%) aligned >1 times
+23.10% overall alignment rate
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh *_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 273K Oct 18 17:02 SRR6805880_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 272K Oct 18 17:03 SRR6805881_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 273K Oct 18 17:03 SRR6805882_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 272K Oct 18 17:03 SRR6805883_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 272K Oct 18 17:03 SRR6805884_untrimmed.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 274K Oct 18 17:03 SRR6805885_untrimmed.sam
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[0-5]_untrimmed.sam; do
+    echo "Sample: $filename"
+    samtools flagstat "$filename" | grep -E "in total|mapped \("
+> echo "Sample: $filename"
+> samtools flagstat "$filename" | grep -E "in total|mapped \("
+> done
+Sample: SRR6805880_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+220 + 0 mapped (22.00% : N/A)
+220 + 0 primary mapped (22.00% : N/A)
+Sample: SRR6805880_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+220 + 0 mapped (22.00% : N/A)
+220 + 0 primary mapped (22.00% : N/A)
+Sample: SRR6805881_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+213 + 0 mapped (21.30% : N/A)
+213 + 0 primary mapped (21.30% : N/A)
+Sample: SRR6805881_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+213 + 0 mapped (21.30% : N/A)
+213 + 0 primary mapped (21.30% : N/A)
+Sample: SRR6805882_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+223 + 0 mapped (22.30% : N/A)
+223 + 0 primary mapped (22.30% : N/A)
+Sample: SRR6805882_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+223 + 0 mapped (22.30% : N/A)
+223 + 0 primary mapped (22.30% : N/A)
+Sample: SRR6805883_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+213 + 0 mapped (21.30% : N/A)
+213 + 0 primary mapped (21.30% : N/A)
+Sample: SRR6805883_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+213 + 0 mapped (21.30% : N/A)
+213 + 0 primary mapped (21.30% : N/A)
+Sample: SRR6805884_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+212 + 0 mapped (21.20% : N/A)
+212 + 0 primary mapped (21.20% : N/A)
+Sample: SRR6805884_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+212 + 0 mapped (21.20% : N/A)
+212 + 0 primary mapped (21.20% : N/A)
+Sample: SRR6805885_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+231 + 0 mapped (23.10% : N/A)
+231 + 0 primary mapped (23.10% : N/A)
+Sample: SRR6805885_untrimmed.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+231 + 0 mapped (23.10% : N/A)
+231 + 0 primary mapped (23.10% : N/A)
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ cutadapt -l 70 SRR6805880.tiny_trimmed.fastq -o SRR6805880_70bp.fastq
+bash: cutadapt: command not found
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Trim the first adapter-cleaned FASTQ sample to a maximum length of 70 bp
+# Save the result separately to preserve the existing 75 bp trimmed reads
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ conda deactivate
+(base) [fang.xink@c0607 Sea_cucumber]$ conda activate /courses/BIOL2406.202710/shared/cutadapt_env
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ cutadapt --version
+5.2
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ # Confirm that Cutadapt is available
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ cutadapt -l 70 SRR6805880.tiny_trimmed.fastq -o SRR6805880_70bp.fastq
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805880.tiny_trimmed.fastq -o SRR6805880_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @   8.2 µs/read;   7.36 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh SRR6805880_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:08 SRR6805880_70bp.fastq
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ #shoten the first adapter trimmed dsample from 75 to 70
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ #ls to check if the 70 bp file was created
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[1-5].tiny_trimmed.fastq; do
+
+    # Extract the sample identifier from each filename
+    base=$(basename "$filename" .tiny_trimmed.fastq)
+
+    # Shorten each read to 70 bp and save it in a separate FASTQ file
+    cutadapt -l 70 "$filename" -o "${base}_70bp.fastq"
+
+done
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805881.tiny_trimmed.fastq -o SRR6805881_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @   9.8 µs/read;   6.10 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805882.tiny_trimmed.fastq -o SRR6805882_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @   8.5 µs/read;   7.06 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805883.tiny_trimmed.fastq -o SRR6805883_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @   7.2 µs/read;   8.34 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805884.tiny_trimmed.fastq -o SRR6805884_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @  10.3 µs/read;   5.80 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+This is cutadapt 5.2 with Python 3.13.16
+Command line parameters: -l 70 SRR6805885.tiny_trimmed.fastq -o SRR6805885_70bp.fastq
+Processing single-end reads on 1 core ...
+Done           00:00:00         1,000 reads @   6.7 µs/read;   8.95 M reads/minute
+
+=== Summary ===
+
+Total reads processed:                   1,000
+Reads written (passing filters):         1,000 (100.0%)
+
+Total basepairs processed:        75,000 bp
+Total written (filtered):         70,000 bp (93.3%)
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh *_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:08 SRR6805880_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:09 SRR6805881_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:09 SRR6805882_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:09 SRR6805883_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 187K Oct 18 17:09 SRR6805884_70bp.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 188K Oct 18 17:09 SRR6805885_70bp.fastq
+(/courses/BIOL2406.202710/shared/cutadapt_env) [fang.xink@c0607 Sea_cucumber]$ conda deactivate
+(base) [fang.xink@c0607 Sea_cucumber]$ module laod bowtie2
+ERROR: Invalid command 'laod'
+  Try 'module --help' for more information.
+(base) [fang.xink@c0607 Sea_cucumber]$ module load bowtie2
+(base) [fang.xink@c0607 Sea_cucumber]$ bowtie2 --version
+/shared/EL9/explorer/bowtie2/2.5.4/src/bowtie2-2.5.4-linux-x86_64/bowtie2-align-s version 2.5.4
+64-bit
+Built on 9df741605325
+Thu May 16 16:51:17 UTC 2024
+Compiler: gcc version 9.3.1 20200408 (Red Hat 9.3.1-2) (GCC) 
+Options: -O3 -msse2 -funroll-loops -g3 -g -O2 -fvisibility=hidden -I/hbb_exe_gc_hardened/include -ffunction-sections -fdata-sections -fstack-protector -D_FORTIFY_SOURCE=2 -fPIE -std=c++11 -Wall -Wno-unused-but-set-variable -DPOPCNT_CAPABILITY -DNO_SPINLOCK -DWITH_QUEUELOCK=1 -DWITH_ZSTD
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}
+(base) [fang.xink@c0607 Sea_cucumber]$ #load bowtie 2 to align to 70 bp and making sure its avaible and read
+(base) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[0-5]_70bp.fastq; do
+
+    # Extract the sample identifier from the filename
+    base=$(basename "$filename" _70bp.fastq)
+
+    # Align the 70 bp reads to the same reference genome
+    # Save each alignment separately to preserve previous SAM files
+    bowtie2 -x index/Ppar_tinygenome -U "$filename" -S "${base}_70bp.sam"
+> done
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    789 (78.90%) aligned 0 times
+    108 (10.80%) aligned exactly 1 time
+    103 (10.30%) aligned >1 times
+21.10% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    788 (78.80%) aligned 0 times
+    104 (10.40%) aligned exactly 1 time
+    108 (10.80%) aligned >1 times
+21.20% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    774 (77.40%) aligned 0 times
+    116 (11.60%) aligned exactly 1 time
+    110 (11.00%) aligned >1 times
+22.60% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    795 (79.50%) aligned 0 times
+    104 (10.40%) aligned exactly 1 time
+    101 (10.10%) aligned >1 times
+20.50% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    795 (79.50%) aligned 0 times
+    109 (10.90%) aligned exactly 1 time
+    96 (9.60%) aligned >1 times
+20.50% overall alignment rate
+1000 reads; of these:
+  1000 (100.00%) were unpaired; of these:
+    774 (77.40%) aligned 0 times
+    112 (11.20%) aligned exactly 1 time
+    114 (11.40%) aligned >1 times
+22.60% overall alignment rate
+(base) [fang.xink@c0607 Sea_cucumber]$ ls -lh *_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 252K Oct 18 17:10 SRR6805880_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 252K Oct 18 17:10 SRR6805881_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 253K Oct 18 17:10 SRR6805882_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 252K Oct 18 17:10 SRR6805883_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 251K Oct 18 17:10 SRR6805884_70bp.sam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 253K Oct 18 17:10 SRR6805885_70bp.sam
+(base) [fang.xink@c0607 Sea_cucumber]$ # Verify that all six 70 bp SAM files were created
+(base) [fang.xink@c0607 Sea_cucumber]$ for filename in SRR680588[0-5]_70bp.sam; do
+    echo "Sample: $filename"
+    samtools flagstat "$filename" | grep -E "in total|primary mapped"
+done
+Sample: SRR6805880_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+211 + 0 primary mapped (21.10% : N/A)
+Sample: SRR6805881_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+212 + 0 primary mapped (21.20% : N/A)
+Sample: SRR6805882_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+226 + 0 primary mapped (22.60% : N/A)
+Sample: SRR6805883_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+205 + 0 primary mapped (20.50% : N/A)
+Sample: SRR6805884_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+205 + 0 primary mapped (20.50% : N/A)
+Sample: SRR6805885_70bp.sam
+1000 + 0 in total (QC-passed reads + QC-failed reads)
+226 + 0 primary mapped (22.60% : N/A)
+(base) [fang.xink@c0607 Sea_cucumber]$ conda activate /courses/BIOL2406.202710/shared/angsd_env
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ which angsd
+/courses/BIOL2406.202710/shared/angsd_env/bin/angsd
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Confirm that ANGSD is accessible
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ angsd -bam bam.filelist -GL 1 -out genotype_likelihoods_1e-3 -doMaf 2 -SNP_pval 1e-3 -doMajorMinor 1
+	-> angsd version: 0.940-dirty (htslib: 1.24) build(Dec 15 2024 09:11:59)
+	-> angsd -bam bam.filelist -GL 1 -out genotype_likelihoods_1e-3 -doMaf 2 -SNP_pval 1e-3 -doMajorMinor 1 
+	-> Inputtype is BAM/CRAM
+[multiReader] 6 samples in 6 input files
+	-> SNP-filter using a pvalue: 1.000000e-03 correspond to 10.827566 likelihood units
+	-> Parsing 6 number of samples 
+No data for chromoId=0 chromoname=KN893585.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=6
+	-> Printing at chr: KN886318.1 pos:10526 chunknumber 500 contains 75 sitesses
+	-> Done reading data waiting for calculations to finish
+	-> Done waiting for threads
+	-> Output filenames:
+		->"genotype_likelihoods_1e-3.arg"
+		->"genotype_likelihoods_1e-3.mafs.gz"
+	-> Sun Oct 18 17:12:19 2026
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 71450
+	-> Number of sites retained after filtering: 0 
+	[ALL done] cpu-time used =  0.98 sec
+	[ALL done] walltime used =  1.00 sec
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh genotype_likelihoods_1e-3*
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.3K Oct 18 17:12 genotype_likelihoods_1e-3.arg
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  102 Oct 18 17:12 genotype_likelihoods_1e-3.mafs.gz
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Run ANGSD using a stricter SNP significance threshold of 0.001
+# Keep all other parameters the same as the original analysis
+# Save the results under a new name to preserve the original output
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ angsd -bam bam.filelist -GL 1 -out genotype_likelihoods_1e-4 -doMaf 2 -SNP_pval 1e-4 -doMajorMinor 1
+	-> angsd version: 0.940-dirty (htslib: 1.24) build(Dec 15 2024 09:11:59)
+	-> angsd -bam bam.filelist -GL 1 -out genotype_likelihoods_1e-4 -doMaf 2 -SNP_pval 1e-4 -doMajorMinor 1 
+	-> Inputtype is BAM/CRAM
+[multiReader] 6 samples in 6 input files
+	-> SNP-filter using a pvalue: 1.000000e-04 correspond to 15.136705 likelihood units
+	-> Parsing 6 number of samples 
+No data for chromoId=0 chromoname=KN893585.1
+This could either indicate that there really is no data for this chromosome
+Or it could be problem with this program regSize=0 notDone=6
+	-> Printing at chr: KN886318.1 pos:10526 chunknumber 500 contains 75 sitesses
+	-> Done reading data waiting for calculations to finish
+	-> Done waiting for threads
+	-> Output filenames:
+		->"genotype_likelihoods_1e-4.arg"
+		->"genotype_likelihoods_1e-4.mafs.gz"
+	-> Sun Oct 18 17:13:35 2026
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 71450
+	-> Number of sites retained after filtering: 0 
+	[ALL done] cpu-time used =  1.02 sec
+	[ALL done] walltime used =  2.00 sec
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Run ANGSD with a second, more stringent SNP threshold of 0.0001
+# Keep all other parameters identical to the original analysis
+# Use a new output prefix to preserve previous results
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh genotype_likelihoods_1e-4*
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.3K Oct 18 17:13 genotype_likelihoods_1e-4.arg
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  102 Oct 18 17:13 genotype_likelihoods_1e-4.mafs.gz
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ zcat genotype_likelihoods_1e-4.mafs.gz | tail -n +2 | wc -l
+0
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ #subtract 1 to exclude the column header and count the snp sites in the 1e-4
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ pwd
+/courses/BIOL2406.202710/students/fang.xink/Genomes_analysis/Sea_cucumber
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ #current working directory
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh *answer*.txt 2>/dev/null
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Check whether an exercise-answer file already exists
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ nano Tutorial3_exercise_answers.txt
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ ls -lh Tutorial3_exercise_answers.txt 
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.3K Oct 18 17:17 Tutorial3_exercise_answers.txt
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ cat Tutorial3_exercise_answers.txt 
+Tutorial3_exercise_answers.txtBIOL2406 - Tutorial 3: What Is a Genetic Variant?
+Exercise Answers
+
+Exercise 1: Compare alignment rates before and after adapter trimming.
+
+I aligned six untrimmed FASTQ files (80 bp reads) and compared their alignment rates with the adapter-trimmed FASTQ files (75 bp reads) using Bowtie2 and the same reference genome.
+
+Sample       Untrimmed (80 bp)   Adapter-trimmed (75 bp)
+SRR6805880   22.00%              21.80%
+SRR6805881   21.30%              21.80%
+SRR6805882   22.30%              22.80%
+SRR6805883   21.30%              20.80%
+SRR6805884   21.20%              21.10%
+SRR6805885   23.10%              23.40%
+Average      21.87%              21.95%
+
+Adapter trimming increased the average alignment rate by approximately 0.08 percentage points. Three samples improved and three decreased. Overall, adapter trimming had very little effect on alignment rates in this dataset.
+
+Exercise 2: Trim reads to 70 bp and compare alignment rates.
+
+I shortened the six adapter-trimmed FASTQ files from 75 bp to 70 bp using Cutadapt, then aligned them to the same reference genome with Bowtie2.
+
+Sample       75 bp alignment   70 bp alignment
+SRR6805880   21.80%            21.10%
+SRR6805881   21.80%            21.20%
+SRR6805882   22.80%            22.60%
+SRR6805883   20.80%            20.50%
+SRR6805884   21.10%            20.50%
+SRR6805885   23.40%            22.60%
+Average      21.95%            21.42%
+
+Reducing read length to 70 bp decreased the alignment rate in all six samples. The average decreased by approximately 0.53 percentage points. In this dataset, shortening reads to 70 bp did not improve mapping compared with the 75 bp adapter-trimmed reads.
+
+Exercise 3: Compare different SNP p-value thresholds in ANGSD.
+
+I ran ANGSD using the same six BAM files and the same analysis parameters, changing only the -SNP_pval threshold.
+
+Threshold       Sites analyzed   SNP sites retained
+0.01 (1e-2)     71,450           9
+0.001 (1e-3)    71,450           0
+0.0001 (1e-4)   71,450           0
+
+The original threshold of 0.01 retained nine potential SNP sites. The more stringent thresholds of 0.001 and 0.0001 retained zero sites. Therefore, stricter significance thresholds reduced the number of candidate SNPs detected in this dataset.
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ nano Tutorial3_exercise_answers.txt
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ head -n 3 Tutorial3_exercise_answers.txt
+BIOL2406 - Tutorial 3: What Is a Genetic Variant?
+Exercise Answers
+
+(/courses/BIOL2406.202710/shared/angsd_env) [fang.xink@c0607 Sea_cucumber]$ # Display the first three lines to confirm the correction 
+

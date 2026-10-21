@@ -1,0 +1,1949 @@
+Last login: Sun Oct 18 16:15:31 on ttys000
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Sat Oct 17 12:42:12 2026 from 10.110.253.83
+    _______  __ ____  __    ____  ____  __________ 
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/ 
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|  
+                                                  
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters. 
+
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+[fang.xink@explorer-01 ~]$ # Request a computing node for initial setup
+srun --pty --time=02:00:00 --mem=8G --cpus-per-task=2 bash
+srun: job 11227334 queued and waiting for resources
+srun: job 11227334 has been allocated resources
+[fang.xink@c0592 ~]$ cd /courses/BIOL2406.202710/students/fang.xink/
+[fang.xink@c0592 fang.xink]$ pwd
+/courses/BIOL2406.202710/students/fang.xink
+[fang.xink@c0592 fang.xink]$ ls -lh
+total 141M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  38M Oct  1 13:02 At_genes.gff
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.4M Oct  1 13:02 At_genes.gff.gz.1
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  40K Oct  1 13:18 At_genes_last500.gff
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.8K Sep 14 12:58 At_prot_abr.fasta
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 11:47 bioinformatics-portfolio
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  30M Oct  1 13:03 chr1.fasta
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  118 Oct  1 13:03 excel_data.csv
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.1K Sep 28 13:17 fishBp.fasta
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.1K Sep 28 13:22 fishBp_short.fasta
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 12:28 Genomes
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 18 14:21 Genomes_analysis
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  777 Sep 24 13:03 grep_asnwers.txt
+drwxr-xr-x 2 fang.xink users                 4.0K Sep 17 12:51 in_class_work
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  11M Oct  1 13:03 intron_IME_data.fasta
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff    1 Sep 24 12:15 KF_AA_names
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  30M Oct  1 13:17 renamed_header_chr1.fasta
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  30M Oct  1 13:15 smallcase_chr1.fasta
+[fang.xink@c0592 fang.xink]$ ls
+At_genes.gff              excel_data.csv      in_class_work
+At_genes.gff.gz.1         fishBp.fasta        intron_IME_data.fasta
+At_genes_last500.gff      fishBp_short.fasta  KF_AA_names
+At_prot_abr.fasta         Genomes             renamed_header_chr1.fasta
+bioinformatics-portfolio  Genomes_analysis    smallcase_chr1.fasta
+chr1.fasta                grep_asnwers.txt
+[fang.xink@c0592 fang.xink]$ ls -lh Genomes
+total 512
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 12:26 annotations
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 12:28 genomes
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  504 Oct  1 15:17 genomes_session.txt
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 12:26 reads
+[fang.xink@c0592 fang.xink]$ ls -lh Genomes/genomes
+total 0
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct  1 12:28 Sea_cuke
+[fang.xink@c0592 fang.xink]$ ls -lh Genomes/annotations
+total 0
+[fang.xink@c0592 fang.xink]$ find . -type f \( -iname "*Homo_sapiens*" -o -iname "*GRCh38*" -o -iname "*.gtf" -o -iname "*.gtf.gz" \)
+./Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+./Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+[fang.xink@c0592 fang.xink]$ ls -lh Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0G Mar 23  2026 Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+[fang.xink@c0592 fang.xink]$ # Check the size of the human reference genome
+[fang.xink@c0592 fang.xink]$ ls -lh Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf 
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 928M Oct 17 13:15 Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+[fang.xink@c0592 fang.xink]$ mkdir -p Mapping_tutorial
+[fang.xink@c0592 fang.xink]$ # Create the main folder for Tutorial 4
+[fang.xink@c0592 fang.xink]$ mkdir -p Mapping_tutorial/sra_files
+mkdir -p Mapping_tutorial/fastq_files
+mkdir -p Mapping_tutorial/scripts
+mkdir -p Mapping_tutorial/GenomeDir
+mkdir -p Mapping_tutorial/aligned_output
+[fang.xink@c0592 fang.xink]$ ls -lh Mapping_tutorial
+total 0
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:38 aligned_output
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:38 fastq_files
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:38 GenomeDir
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:38 scripts
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:38 sra_files
+[fang.xink@c0592 fang.xink]$ cd Mapping_tutorial/
+[fang.xink@c0592 Mapping_tutorial]$ nano accessions.txt
+[fang.xink@c0592 Mapping_tutorial]$ cat accessions.txt 
+SRR1039516
+SRR1039517
+SRR1039508
+SRR1039509
+SRR1039512
+SRR1039513
+SRR1039520
+SRR1039521
+
+
+[fang.xink@c0592 Mapping_tutorial]$ wc -l accessions.txt 
+10 accessions.txt
+[fang.xink@c0592 Mapping_tutorial]$ #script downloaded
+^[[200~sed -i '/^[[:space:]]*$/d' accessions.txt^[[201~[fang.xink@c0592 Mapping_tutorial]$ sed -i '/^[[:space:]]*$/d' accessions.tsed -i '/^[[:space:]]*$/d' accessions.txt
+[fang.xink@c0592 Mapping_tutorial]$ 
+[fang.xink@c0592 Mapping_tutorial]$ wc -l accessions.txt
+8 accessions.txt
+[fang.xink@c0592 Mapping_tutorial]$ cat accessions.txt
+SRR1039516
+SRR1039517
+SRR1039508
+SRR1039509
+SRR1039512
+SRR1039513
+SRR1039520
+SRR1039521
+[fang.xink@c0592 Mapping_tutorial]$ nano scripts/prefetch.sh
+[fang.xink@c0592 Mapping_tutorial]$ cat scripts/prefetch.sh
+#!/bin/bash
+
+#SBATCH -J prefetch_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+# Load the SRA Toolkit module provided on Explorer
+module load sratoolkit/12Dec2024
+
+# Download the eight accessions listed in accessions.txt
+# Save the downloaded SRA data in the sra_files directory
+prefetch --option-file accessions.txt --output-directory sra_files
+[fang.xink@c0592 Mapping_tutorial]$ head -n 10 scripts/prefetch.sh
+#!/bin/bash
+
+#SBATCH -J prefetch_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+# Load the SRA Toolkit module provided on Explorer
+[fang.xink@c0592 Mapping_tutorial]$ # Check the beginning of the batch script
+[fang.xink@c0592 Mapping_tutorial]$ sbatch scripts/prefetch.sh
+
+Submitted batch job 11229530
+[fang.xink@c0592 Mapping_tutorial]$ 
+[fang.xink@c0592 Mapping_tutorial]$ squeue -j 11229530
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11229530     short prefetch fang.xin  R       2:48      1 c0615
+[fang.xink@c0592 Mapping_tutorial]$ # Check whether your SRA download job is running or waiting
+[fang.xink@c0592 Mapping_tutorial]$ ls -lh output_11229530.txt error_11229530.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff    0 Oct 19 12:47 error_11229530.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.2K Oct 19 12:51 output_11229530.txt
+[fang.xink@c0592 Mapping_tutorial]$ # Check the SLURM output and error files
+[fang.xink@c0592 Mapping_tutorial]$ tail -n 20 output_11229530.txt
+2026-10-19T16:47:56 prefetch.3.2.0: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2026-10-19T16:47:57 prefetch.3.2.0: 1) Downloading 'SRR1039516'...
+2026-10-19T16:47:57 prefetch.3.2.0:  SRA Normalized Format file is being retrieved
+2026-10-19T16:47:57 prefetch.3.2.0:  Downloading via HTTPS...
+2026-10-19T16:48:44 prefetch.3.2.0:  HTTPS download succeed
+2026-10-19T16:49:26 prefetch.3.2.0:  'SRR1039516' is valid: 2251401710 bytes were streamed from 2251394448
+2026-10-19T16:49:26 prefetch.3.2.0: 1) 'SRR1039516' was downloaded successfully
+2026-10-19T16:49:26 prefetch.3.2.0: 1) Resolving 'SRR1039516's dependencies...
+2026-10-19T16:49:26 prefetch.3.2.0: 'SRR1039516' has 0 unresolved dependencies
+2026-10-19T16:49:26 prefetch.3.2.0: 2) Resolving 'SRR1039517'...
+2026-10-19T16:49:27 prefetch.3.2.0: 2) Downloading 'SRR1039517'...
+2026-10-19T16:49:27 prefetch.3.2.0:  SRA Normalized Format file is being retrieved
+2026-10-19T16:49:27 prefetch.3.2.0:  Downloading via HTTPS...
+2026-10-19T16:50:36 prefetch.3.2.0:  HTTPS download succeed
+2026-10-19T16:51:28 prefetch.3.2.0:  'SRR1039517' is valid: 2783418296 bytes were streamed from 2783404193
+2026-10-19T16:51:28 prefetch.3.2.0: 2) 'SRR1039517' was downloaded successfully
+2026-10-19T16:51:28 prefetch.3.2.0: 3) Resolving 'SRR1039508'...
+2026-10-19T16:51:29 prefetch.3.2.0: 3) Downloading 'SRR1039508'...
+2026-10-19T16:51:29 prefetch.3.2.0:  SRA Normalized Format file is being retrieved
+2026-10-19T16:51:29 prefetch.3.2.0:  Downloading via HTTPS...
+[fang.xink@c0592 Mapping_tutorial]$ # View the latest download messages
+[fang.xink@c0592 Mapping_tutorial]$ tail -n 20 error_11229530.txt
+[fang.xink@c0592 Mapping_tutorial]$ # Check for warnings, errors, or progress messages
+[fang.xink@c0592 Mapping_tutorial]$ squeue -j 11229530
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+[fang.xink@c0592 Mapping_tutorial]$ nano scripts/fasterq_dump.sh
+[fang.xink@c0592 Mapping_tutorial]$ cat scripts/fasterq_dump.sh
+#!/bin/bash
+
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+
+# Load the SRA Toolkit module
+module load sratoolkit/12Dec2024
+
+# Create the output directory if needed
+mkdir -p fastq_files
+
+# Convert all eight SRA datasets into paired-end FASTQ files
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each dataset into separate read 1 and read 2 FASTQ files
+    fasterq-dump --split-files --outdir fastq_files "sra_files/$acc"
+
+done
+
+[fang.xink@c0592 Mapping_tutorial]$ ls -lh sra_files
+total 0
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:53 SRR1039508
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:54 SRR1039509
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:55 SRR1039512
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:56 SRR1039513
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:49 SRR1039516
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:51 SRR1039517
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:58 SRR1039520
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 13:00 SRR1039521
+[fang.xink@c0592 Mapping_tutorial]$ du -sh sra_files
+find sra_files -maxdepth 2 -name "*.sra" -exec ls -lh {} \;
+17G	sra_files
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.6G Oct 19 12:52 sra_files/SRR1039508/SRR1039508.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.5G Oct 19 12:53 sra_files/SRR1039509/SRR1039509.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.1G Oct 19 12:54 sra_files/SRR1039512/SRR1039512.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.3G Oct 19 12:56 sra_files/SRR1039513/SRR1039513.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.1G Oct 19 12:48 sra_files/SRR1039516/SRR1039516.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.6G Oct 19 12:50 sra_files/SRR1039517/SRR1039517.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.1G Oct 19 12:57 sra_files/SRR1039520/SRR1039520.sra
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.4G Oct 19 12:59 sra_files/SRR1039521/SRR1039521.sra
+[fang.xink@c0592 Mapping_tutorial]$ df -h
+Filesystem                                   Size  Used Avail Use% Mounted on
+devtmpfs                                     4.0M     0  4.0M   0% /dev
+tmpfs                                        126G   92K  126G   1% /dev/shm
+tmpfs                                         51G  263M   50G   1% /run
+/dev/sda5                                     20G  5.9G   14G  31% /
+/dev/sda2                                    2.0G  322M  1.7G  17% /boot
+/dev/sda3                                     30G  1.4G   28G   5% /var
+/dev/sda7                                    9.8G  102M  9.7G   2% /srv
+/dev/sda11                                  1022M  4.7M 1018M   1% /boot/efi
+/dev/sda10                                   9.8G  102M  9.7G   2% /var/tmp
+/dev/sda8                                    9.8G  196M  9.6G   2% /var/log
+/dev/sda12                                   821G  5.8G  815G   1% /tmp
+/dev/sda9                                    9.8G  142M  9.6G   2% /var/log/audit
+vast1-mghpcc-eth.neu.edu:/courses             36T  7.7T   28T  22% /courses
+vast1-mghpcc-eth.neu.edu:/datasets            40T   13T   28T  31% /datasets
+vast1-mghpcc-eth.neu.edu:/discovery/home     255T  150T  106T  59% /home
+vast1-mghpcc-eth.neu.edu:/vast_shared         30T   25T  6.0T  81% /shared
+vast1-mghpcc-eth.neu.edu:/discovery/scratch  1.5P  1.3P  305T  81% /scratch
+vast1-mghpcc-eth.neu.edu:/work_project       3.5P  3.4P  153T  96% /projects
+[fang.xink@c0592 Mapping_tutorial]$ #We want to make sure the eight SRA files actually exist inside those directories and that Explorer has enough space for the converted FASTQ files and temporary data.
+[fang.xink@c0592 Mapping_tutorial]$ quota -squota -s
+quota: Bad output format units for human readable output: quota
+[fang.xink@c0592 Mapping_tutorial]$ quota -s
+quota: error while getting quota from vast1-mghpcc-eth.neu.edu:/vast_shared for fang.xink (id 104702): Operation not permitted
+[fang.xink@c0592 Mapping_tutorial]$ Read from remote host login.explorer.northeastern.edu: Operation timed out
+Connection to login.explorer.northeastern.edu closed.
+[fang.xink@explorer-02 ~]$ cd /courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/
+[fang.xink@explorer-02 Mapping_tutorial]$ pwd
+/courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial
+[fang.xink@explorer-02 Mapping_tutorial]$ ls
+accessions.txt  error_11229530.txt  GenomeDir            scripts
+aligned_output  fastq_files         output_11229530.txt  sra_files
+[fang.xink@explorer-02 Mapping_tutorial]$ cat scripts/fasterq_dump.sh 
+#!/bin/bash
+
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+
+# Load the SRA Toolkit module
+module load sratoolkit/12Dec2024
+
+# Create the output directory if needed
+mkdir -p fastq_files
+
+# Convert all eight SRA datasets into paired-end FASTQ files
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each dataset into separate read 1 and read 2 FASTQ files
+    fasterq-dump --split-files --outdir fastq_files "sra_files/$acc"
+
+done
+
+[fang.xink@explorer-02 Mapping_tutorial]$ nano scripts/fasterq_dump.sh 
+[fang.xink@explorer-02 Mapping_tutorial]$ grep 'fasterq-dump' scripts/fasterq_dump.sh
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"#!/bin/bash
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+[fang.xink@explorer-02 Mapping_tutorial]$ cat -n scripts/fasterq_dump.sh
+     1	fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"#!/bin/bash
+     2	
+     3	#SBATCH -J fastq_Fang
+     4	#SBATCH -N 1
+     5	#SBATCH -n 4
+     6	#SBATCH -o output_%j.txt
+     7	#SBATCH -e error_%j.txt
+     8	#SBATCH -t 24:00:00
+     9	
+    10	
+    11	# Load the SRA Toolkit module
+    12	module load sratoolkit/12Dec2024
+    13	
+    14	# Create the output directory if needed
+    15	mkdir -p fastq_files
+    16	
+    17	# Convert all eight SRA datasets into paired-end FASTQ files
+    18	for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+    19	
+    20	    # Convert each dataset into separate read 1 and read 2 FASTQ files
+    21	fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+[fang.xink@explorer-02 Mapping_tutorial]$ nano scripts/fasterq_dump.sh
+[fang.xink@explorer-02 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+scripts/fasterq_dump.sh: line 22: syntax error: unexpected end of file
+[fang.xink@explorer-02 Mapping_tutorial]$ echo "done" >> scripts/fasterq_dump.sh
+[fang.xink@explorer-02 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+[fang.xink@explorer-02 Mapping_tutorial]$ tail -n 6 scripts/fasterq_dump.sh
+# Convert all eight SRA datasets into paired-end FASTQ files
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each dataset into separate read 1 and read 2 FASTQ files
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+done
+[fang.xink@explorer-02 Mapping_tutorial]$  fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+-bash: fasterq-dump: command not found
+[fang.xink@explorer-02 Mapping_tutorial]$ Read from remote host login.explorer.northeastern.edu: Operation timed out
+Connection to login.explorer.northeastern.edu closed.
+fang.xink@explorer-01 fang.xink]$ cd /courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/
+[fang.xink@explorer-01 Mapping_tutorial]$ cp scripts/fasterq_dump.sh scripts/fasterq_dump.sh.bak
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > scripts/fasterq_dump.sh <<'EOF'
+> #!/bin/bash
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH --mem=32G
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+# Stop the script if a command fails
+set -euo pipefail
+
+# Load the SRA Toolkit
+module load sratoolkit/12Dec2024
+
+# Create a folder for FASTQ files
+mkdir -p fastq_files
+
+# Convert all eight SRA samples into paired-end FASTQ files
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each sample
+    fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc/$acc.sra"
+
+done
+> 
+> 
+> ^C
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 5 scripts/fasterq_dump.sh
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each dataset into separate read 1 and read 2 FASTQ files
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+done
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ #add the script for fasterq and check for erros finishing up with checking up the bash syntax errors and ddisplay the firsddt 12 lines
+[fang.xink@explorer-01 Mapping_tutorial]$ head -n 12 scripts/fasterq_dump.sh
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"#!/bin/bash
+
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+
+# Load the SRA Toolkit module
+module load sratoolkit/12Dec2024
+[fang.xink@explorer-01 Mapping_tutorial]$ nano scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ head -n 3 scripts/fasterq_dump.sh
+#!/bin/bash
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ grep -E '^#SBATCH|fasterq-dump' scripts/fasterq_dump.sh
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the script's resource settings and conversion command
+[fang.xink@explorer-01 Mapping_tutorial]$ du -sh sra_files
+17G	sra_files
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the size of my dataset
+[fang.xink@explorer-01 Mapping_tutorial]$ srun --nodes=1 --ntasks=1 --time=00:10:00 --pty bash
+srun: job 11287247 queued and waiting for resources
+srun: job 11287247 has been allocated resources
+[fang.xink@c0614 Mapping_tutorial]$ df -h /tmp
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda12      821G  5.8G  815G   1% /tmp
+[fang.xink@c0614 Mapping_tutorial]$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           251Gi        10Gi        48Gi        93Mi       193Gi       240Gi
+Swap:           19Gi       445Mi        19Gi
+[fang.xink@c0614 Mapping_tutorial]$ exit
+exit
+[fang.xink@explorer-01 Mapping_tutorial]$ cat -n scripts/fasterq_dump.sh
+     1	#!/bin/bash
+     2	#SBATCH -J fastq_Fang
+     3	#SBATCH -N 1
+     4	#SBATCH -n 4
+     5	#SBATCH -o output_%j.txt
+     6	#SBATCH -e error_%j.txt
+     7	#SBATCH -t 24:00:00
+     8	
+     9	
+    10	# Load the SRA Toolkit module
+    11	module load sratoolkit/12Dec2024
+    12	
+    13	# Create the output directory if needed
+    14	mkdir -p fastq_files
+    15	
+    16	# Convert all eight SRA datasets into paired-end FASTQ files
+    17	for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+    18	
+    19	    # Convert each dataset into separate read 1 and read 2 FASTQ files
+    20	fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+    21	done
+[fang.xink@explorer-01 Mapping_tutorial]$ # Insert a temporary-storage check before the conversion loop
+sed -i '/^for acc in /i\
+# Stop if the assigned compute node has less than 200 GB free in /tmp\
+available_kb=$(df -Pk /tmp | awk "NR==2 {print \\$4}")\
+if (( available_kb < 200000000 )); then\
+    echo "ERROR: Not enough temporary disk space"\
+    exit 1\
+fi\
+' scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/fasterq_dump.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/fasterq_dump.sh
+Submitted batch job 11287294
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287294
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287294     short fastq_Fa fang.xin  R       0:34      1 d0097
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+6
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check how many FASTQ files have been created
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 error_11287294.txt
+spots read      : 22,935,521
+reads read      : 45,871,042
+reads written   : 45,871,042
+spots read      : 21,155,707
+reads read      : 42,311,414
+reads written   : 42,311,414
+spots read      : 28,136,282
+reads read      : 56,272,564
+reads written   : 56,272,564
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether the job reported any errors
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 output_11287294.txt
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the conversion messages
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287294
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287294     short fastq_Fa fang.xin  R       2:52      1 d0097
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether the job is still running
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+8
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 20 error_11287294.txt
+spots read      : 22,935,521
+reads read      : 45,871,042
+reads written   : 45,871,042
+spots read      : 21,155,707
+reads read      : 42,311,414
+reads written   : 42,311,414
+spots read      : 28,136,282
+reads read      : 56,272,564
+reads written   : 56,272,564
+spots read      : 43,356,464
+reads read      : 86,712,928
+reads written   : 60,179,552
+reads 0-length  : 26,533,376
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287294
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287294     short fastq_Fa fang.xin  R       4:31      1 d0097
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+12
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+14
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+16
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287294 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287294      COMPLETED      0:0 
+11287294.ba+  COMPLETED      0:0 
+11287294.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the final status of your conversion job
+[fang.xink@explorer-01 Mapping_tutorial]$ find fastq_files -name "*.fastq" | wc -l
+16
+[fang.xink@explorer-01 Mapping_tutorial]$ module avail fastqc
+------------------------------ /shared/EL9/explorer/modulefiles ------------------------------
+fastqc/0.12.1  
+
+Key:
+modulepath  
+[fang.xink@explorer-01 Mapping_tutorial]$ #run fastqc verisons are avaible making sure its able to be performed
+[fang.xink@explorer-01 Mapping_tutorial]$ nano scripts/fastqc.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/fastqc.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/fastqc.sh
+Submitted batch job 11287432
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the FastQC analysis
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287432
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287432     short fastqc_F fang.xin  R       0:13      1 c0668
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287432 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287432        RUNNING      0:0 
+11287432.ba+    RUNNING      0:0 
+11287432.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastqc_reports
+total 0
+[fang.xink@explorer-01 Mapping_tutorial]$ # See whether FastQC reports have been created
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287432 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287432        RUNNING      0:0 
+11287432.ba+    RUNNING      0:0 
+11287432.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastqc_reports
+total 2.8M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 638K Oct 21 13:21 SRR1039508_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 404K Oct 21 13:21 SRR1039508_1_fastqc.zip
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 596K Oct 21 13:21 SRR1039516_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 316K Oct 21 13:21 SRR1039516_1_fastqc.zip
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 595K Oct 21 13:21 SRR1039521_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 315K Oct 21 13:21 SRR1039521_1_fastqc.zip
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 10 fastqc_11287432.err
+Approx 75% complete for SRR1039516_1.fastq
+Approx 90% complete for SRR1039521_1.fastq
+Approx 85% complete for SRR1039508_1.fastq
+Approx 80% complete for SRR1039516_1.fastq
+Approx 95% complete for SRR1039521_1.fastq
+Approx 90% complete for SRR1039508_1.fastq
+Approx 85% complete for SRR1039516_1.fastq
+Approx 95% complete for SRR1039508_1.fastq
+Approx 90% complete for SRR1039516_1.fastq
+Approx 95% complete for SRR1039516_1.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ #cyecking for error and progress
+[fang.xink@explorer-01 Mapping_tutorial]$ [fang.xink@explorer-01 Mapping_tutorial]$ # See whether FastQC bden created
+-bash: [fang.xink@explorer-01: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastqc_reports
+total 2.8M
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 638K Oct 21 13:21 SRR1039508_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 404K Oct 21 13:21 SRR1039508_1_fastqc.zip
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 596K Oct 21 13:21 SRR1039516_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 316K Oct 21 13:21 SRR1039516_1_fastqc.zip
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 595K Oct 21 13:21 SRR1039521_1_fastqc.html
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 315K Oct 21 13:21 SRR1039521_1_fastqc.zip
+[fang.xink@explorer-01 Mapping_tutorial]$ for file in fastqc_reports/*_fastqc.zip; do
+    echo "===== $file ====="
+    unzip -p "$file" '*/summary.txt'
+done
+===== fastqc_reports/SRR1039508_1_fastqc.zip =====
+PASS	Basic Statistics	SRR1039508_1.fastq
+PASS	Per base sequence quality	SRR1039508_1.fastq
+WARN	Per tile sequence quality	SRR1039508_1.fastq
+PASS	Per sequence quality scores	SRR1039508_1.fastq
+PASS	Per base sequence content	SRR1039508_1.fastq
+PASS	Per sequence GC content	SRR1039508_1.fastq
+PASS	Per base N content	SRR1039508_1.fastq
+PASS	Sequence Length Distribution	SRR1039508_1.fastq
+FAIL	Sequence Duplication Levels	SRR1039508_1.fastq
+WARN	Overrepresented sequences	SRR1039508_1.fastq
+PASS	Adapter Content	SRR1039508_1.fastq
+===== fastqc_reports/SRR1039516_1_fastqc.zip =====
+PASS	Basic Statistics	SRR1039516_1.fastq
+PASS	Per base sequence quality	SRR1039516_1.fastq
+PASS	Per sequence quality scores	SRR1039516_1.fastq
+PASS	Per base sequence content	SRR1039516_1.fastq
+PASS	Per sequence GC content	SRR1039516_1.fastq
+PASS	Per base N content	SRR1039516_1.fastq
+PASS	Sequence Length Distribution	SRR1039516_1.fastq
+FAIL	Sequence Duplication Levels	SRR1039516_1.fastq
+PASS	Overrepresented sequences	SRR1039516_1.fastq
+PASS	Adapter Content	SRR1039516_1.fastq
+===== fastqc_reports/SRR1039521_1_fastqc.zip =====
+PASS	Basic Statistics	SRR1039521_1.fastq
+PASS	Per base sequence quality	SRR1039521_1.fastq
+PASS	Per sequence quality scores	SRR1039521_1.fastq
+PASS	Per base sequence content	SRR1039521_1.fastq
+PASS	Per sequence GC content	SRR1039521_1.fastq
+PASS	Per base N content	SRR1039521_1.fastq
+PASS	Sequence Length Distribution	SRR1039521_1.fastq
+FAIL	Sequence Duplication Levels	SRR1039521_1.fastq
+PASS	Overrepresented sequences	SRR1039521_1.fastq
+PASS	Adapter Content	SRR1039521_1.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ # Display the quality-control summary for all three samples
+[fang.xink@explorer-01 Mapping_tutorial]$ unzip -p fastqc_reports/SRR1039508_1_fastqc.zip '*/fastqc_data.txt' | \
+sed -n '/>>Overrepresented sequences/,/>>END_MODULE/p' | head -n 15
+>>Overrepresented sequences	warn
+#Sequence	Count	Percentage	Possible Source
+ACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGCCGTCTTCTGCTT	80680	0.35176876949950253	TruSeq Adapter, Index 2 (100% over 50bp)
+>>END_MODULE
+[fang.xink@explorer-01 Mapping_tutorial]$ # Inspect overrepresented sequences in SRR1039508
+[fang.xink@explorer-01 Mapping_tutorial]$ nano fastqc_notes.txt
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastqc_notes.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.5K Oct 21 13:28 fastqc_notes.txt
+[fang.xink@explorer-01 Mapping_tutorial]$ # Confirm the notes file was saved
+[fang.xink@explorer-01 Mapping_tutorial]$ module avail STAR
+------------------------------ /shared/EL9/explorer/modulefiles ------------------------------
+star/2.7.11b  starccm+/18.02.008  starccm+/18.04.009  
+
+Key:
+modulepath  
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether STAR is available
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -ld /courses/BIOL2406.202710/shared/star_env
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4096 Sep 26 13:24 /courses/BIOL2406.202710/shared/star_env
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the professor's shared STAR environment
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.0G Mar 23  2026 ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 928M Oct 17 13:15 ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the human reference genome and annotation files
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -ld /courses/BIOL2406.202710/shared/star_env
+drwxr-sr-x 2 jhenzy BIOL2406.202710-staff 4096 Sep 26 13:24 /courses/BIOL2406.202710/shared/star_env
+[fang.xink@explorer-01 Mapping_tutorial]$ module avail STAR
+------------------------------ /shared/EL9/explorer/modulefiles ------------------------------
+star/2.7.11b  starccm+/18.02.008  starccm+/18.04.009  
+
+Key:
+modulepath  
+[fang.xink@explorer-01 Mapping_tutorial]$ sinfo -o "%P %m %c"
+PARTITION MEMORY CPUS
+gpu 186000+ 28+
+short* 62000+ 20+
+courses-gpu 187000+ 28
+courses 62000+ 20+
+sharing 62000+ 20+
+gpu-short 186000+ 28+
+gpu-interactive 186000+ 28+
+[fang.xink@explorer-01 Mapping_tutorial]$ # Create the STAR genome indexing script
+cat > scripts/star_index.sh <<'EOF'
+#!/bin/bash
+#SBATCH -J STAR_index_Fang
+#SBATCH -p short
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=60G
+#SBATCH -t 12:00:00
+#SBATCH -o star_index_%j.out
+#SBATCH -e star_index_%j.err
+
+# Stop if any command fails
+set -euo pipefail
+
+# Load STAR
+module load star/2.7.11b
+
+# Create the genome index directory
+mkdir -p GenomeDir
+
+# Generate the human genome index
+STAR --runThreadN 8 \
+    --runMode genomeGenerate \
+    --genomeDir GenomeDir \
+    --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa \
+    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf \
+    --sjdbOverhang 99
+EOF
+
+# Check script syntax
+bash -n scripts/star_index.sh
+
+sbatch scripts/star_index.sh
+Submitted batch job 11287543
+[fang.xink@explorer-01 Mapping_tutorial]$ nano scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ nano scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ cat scripts/star_index.sh 
+#!/bin/bash
+#SBATCH -J STAR_index_Fang
+#SBATCH -p short
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=60G
+#SBATCH -t 12:00:00
+#SBATCH -o star_index_%j.out
+#SBATCH -e star_index_%j.err
+
+# Stop if any command fails
+set -euo pipefail
+
+# Load STAR
+module load star/2.7.11b
+
+# Create the genome index directory
+mkdir -p GenomeDir
+
+# Generate the human genome index
+STAR --runThreadN 8 \
+    --runMode genomeGenerate \
+    --genomeDir GenomeDir \
+    --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa \
+    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf \
+    --sjdbOverhang 99
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the script for syntax errors
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/star_index.sh
+Submitted batch job 11287583
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the STAR genome indexing job
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287583
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287583     short STAR_ind fang.xin PD       0:00      1 (Resources)
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        PENDING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 10 star_index_11287583.err
+tail: cannot open 'star_index_11287583.err' for reading: No such file or directory
+[fang.xink@explorer-01 Mapping_tutorial]$ queue -j 11287583
+-bash: queue: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287583
+# Check whether STAR has started
+
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287583     short STAR_ind fang.xin  R       0:48      1 d0142
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether STAR has started
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        RUNNING      0:0 
+11287583.ba+    RUNNING      0:0 
+11287583.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287583
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287583     short STAR_ind fang.xin  R       2:55      1 d0142
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 star_index_11287583.out
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 10 star_index_11287583.err
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        RUNNING      0:0 
+11287583.ba+    RUNNING      0:0 
+11287583.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 GenomeDir/Log.out
+runThreadN                        8
+genomeDir                         GenomeDir
+genomeFastaFiles                  ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa   
+sjdbGTFfile                       ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+sjdbOverhang                      99
+
+-------------------------------
+##### Final effective command line:
+STAR   --runMode genomeGenerate      --runThreadN 8   --genomeDir GenomeDir   --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa      --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf   --sjdbOverhang 99
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+Finished loading and checking parameters
+--genomeDir directory exists and will be overwritten: GenomeDir/
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh GenomeDir
+total 2.5K
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.1K Oct 21 13:36 Log.out
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287583
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11287583     short STAR_ind fang.xin  R       4:50      1 d0142
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 20 GenomeDir/Log.out
+sjdbOverhang                  99     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           genomeGenerate   
+runThreadN                        8
+genomeDir                         GenomeDir
+genomeFastaFiles                  ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa   
+sjdbGTFfile                       ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+sjdbOverhang                      99
+
+-------------------------------
+##### Final effective command line:
+STAR   --runMode genomeGenerate      --runThreadN 8   --genomeDir GenomeDir   --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa      --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf   --sjdbOverhang 99
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+Finished loading and checking parameters
+--genomeDir directory exists and will be overwritten: GenomeDir/
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 10 star_index_11287583.err
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        RUNNING      0:0 
+11287583.ba+    RUNNING      0:0 
+11287583.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 10 GenomeDir/Log.out
+
+-------------------------------
+##### Final effective command line:
+STAR   --runMode genomeGenerate      --runThreadN 8   --genomeDir GenomeDir   --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa      --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf   --sjdbOverhang 99
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+Finished loading and checking parameters
+--genomeDir directory exists and will be overwritten: GenomeDir/
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        RUNNING      0:0 
+11287583.ba+    RUNNING      0:0 
+11287583.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583        RUNNING      0:0 
+11287583.ba+    RUNNING      0:0 
+11287583.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether STAR has finished
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287583 -o "%.18i %.10T %.12M %.12l"
+             JOBID      STATE         TIME   TIME_LIMIT
+          11287583 COMPLETING        10:49     12:00:00
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287583 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287583         FAILED    104:0 
+11287583.ba+     FAILED    104:0 
+11287583.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 GenomeDir/Log.out
+KI270539.1	993
+KI270385.1	990
+KI270423.1	981
+KI270392.1	971
+KI270394.1	970
+Genome sequence total length = 3099750718
+Genome size with padding = 3138387968
+Oct 21 13:43:10 ..... processing annotations GTF
+
+Fatal INPUT FILE error, no exon lines in the GTF file: ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+Solution: check the formatting of the GTF file, it must contain some lines with exon in the 3rd column.
+          Make sure the GTF file is unzipped.
+          If exons are marked with a different word, use --sjdbGTFfeatureExon .
+
+Oct 21 13:43:47 ...... FATAL ERROR, exiting
+[fang.xink@explorer-01 Mapping_tutorial]$ file ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf: gzip compressed data, from Unix, original size modulo 2^32 3339739109
+[fang.xink@explorer-01 Mapping_tutorial]$ head -n 10 ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+?ɮ-?????S?0_?
+ l?-?0??D??t
+?????????????y?bk?3fcp?????????_??_?????????O???????_????????w?????????????????????????????????????????????????????????????????????????????????????w??3???k?[??W???'?????ݏ???ʿ?k?~????	β?=?_?j???Z??޿???????o?????Z??????????R?????f?v????}?5?????{??\k??????{????Y???y?8x?@?=P????K?k?VQ??W|?_???,?????7߻??@?|???W?\??~?˻?H???z/?x??o?V?????_???0?O???n???:w9???????~?w??źy?????Uo????b??ͮ?t?+?=???/?????uh?i?????j??s6:#?}=??????o?]?F??-????F|5??~`??ر?u???__?o?
+                                                                              ?}?y?:??5~:_?j???|????
+      ?s=?ҫ??ƫ[???W?/5?w???g?G4??dq&=?}?G?sT]?1≏W?x?y??:?׾??p????????֗?_?'<.?y???#H?O?
+                                                                                     1t5?kx????{?????4?̵?޿??q??s???7?????}?P??u?3w-???W???u????WO?
+                                                   ?JģW3z|?8V{??.?&???x?y?q?\?u}Т?z??	??ڌ???~^?t???ߋ???g?M?篎?Ƿ"?]3??bs??zD???Ze?+<??"??*???H
+                                                 ]F?>?{l???ć???w<禛?St޶??@????s?G^?s
+jA?x?E|Vq\?x??s?jQ?I?ŉ?ƻǙ?Z?D?????ƒ;???>?O\?Qֳ?ǭ?y?!l:׸&'?)??M??|Ӛ??F}+.z\?X?q!bE?G????y7?mS?l??z??kz|??Cq=?i???????Wg???j?s?;w;B?pp?Gօ??ˉ(?[Z?3?T?????#84n???G??[MD???-????V?h\E???,?2?Q?kQ[?`'qܯ
+?M߻?w??G:Ы?68?k=7?R???c?Z9?????\?]V??"?+??=x????f<??qxd?ޯ?RFo??׹??u'?n?#?ĳ?u4}????=?ϑ?%??C??V???????qnE???{Υ?S? 9??y?^?p(????sCt??P?bVV????L0h<p?M?k?????y?
+?{n?нR?h?+?\?c?%ű2Κm?+?u????y?t???s6Լ???Q?=P??}?{?8??H?ulƊDz??x??8:-sh9?_7@Y,?????}Bλl?qK??k?7eo]AFň?@i??L?Lx????+???;?????s??J?,?+?kz?c?FN3t'XP?t???o?a?J?o'??vn???*nM#???T?)?h$Ƥ????Fp?ITB3??u??8N???N?qj??????-?ZdB?~?zw??67?#???Bz"
+                                            f(??3????
+                                                     -????\I<ݿ?|?O~x^5w??o?yN\????V??Yx??jY*L,O?3B??86ø??!de?6'Y?\ø?Z1J*; ?(??C#?RAW]Sp????g???tg?????F=??m??c???6??j????焯?>?
+)?R???p??ό6d]ueJ?X?lq?
+                      ?k,Y?OS?]Tk)D?n????Ǖ?:J!?9P?_?\?%W??U>+1?7??g??R?+܌?],?S??8P4~?u??}?G?ڱ?f??W,??????j?H??T@l???V??J*?e???E?Wy????鈔?nŹ??zjS???<??~2?Z??H?#C??X?Z-Z?<l??b???-?f_???????Uɪ?%????/β?׵?]D??H?ȟ?????
+My?K"G-???6?)n?R T7???θx?$5"?Az?j^q''?)c?Q?ʸ?t®N?hc?ϡ+?i[???41??rDj????x?H??x?Qç?t=??>??_?'H??7b???;??	?VW?|??w???O???~\?:??z???y?\9??˫f	|?F? V|?ѵ{?i??[yҼ?)Tg???p??s?M
+                                                                                      '?
+
+?2?7?y????p?He(?>Ew?&?~??=+m?%2{??p?A??f??N%勐?׌??D??K??O?k57w:M&?????hW?????nh?Go
+                                                                                  ??ζ?J??Գޝ?1????7?>{????j}?T?	??֓???>?:iѽ?̈́v?z*?\]?RU??be?CڍJ??B?<?Ǉ??Z?j??{?Y6?Iݞp	?~?\Y??/?f>??9?`2??r~nӏ^?q!nL'?TC??r$??Ӄ\..zaWJ?Nf?]>?r??B????~uq??x?ҫ?R?Ѣ???.2?_??F??????SU??c???P??݃?]c?-fzA*	??l?
+??????NcHi>?4U??|?
+???P?? ?Ub1?G????gPxR?=
+                       ?ݕG????{n???e?.lG?͑? ??7???3?l????	uM?-??fTv??A?ިG??ˍ?b??ab?/???[?N???n??M??}|Row??X:?/??t?H?U?T>???L???3?H?U???????Ǯ{?f;"6Wn??nC?l?C?P??x}?[}??r?kؤ?cs?Bo??J=j?\?j?X<????:??S?y?/ϳ?0?r???@??6??luE{P(1?d?͘L:F8h??f??#S?8?B?Yy}FP?$a?~?'*|?2UE??f??
+??V]??s?t?X??<sx??]?ǭ??!?(E;???+?g:??^ؾ?nq?>?g?Z??L/b2??=:vV?"
+Jm?SI??Z?֕?)nH??ެ????߈LaG2?<MC??rV????(??O???*??nnݱ??q??֘r?ʌS?1?c#??t?n?*?|?+ӴJ????V??nPV2?pvL*wW?|#%sx?=??j#_ժG???}A?_U??MA-??>??????f??f????8	????pH??
+                                                        ?m}?Y9R???
+[fang.xink@explorer-01 Mapping_tutorial]$ awk -F '\t' '$3=="exon" {print; exit}' ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ gzip -dc ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf > ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.2G Oct 21 13:54 ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ file ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf: ASCII text
+[fang.xink@explorer-01 Mapping_tutorial]$ sed -i 's/Homo_sapiens.GRCh38.115.gtf/Homo_sapiens.GRCh38.115.uncompressed.gtf/' scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Replace the compressed GTF path with the decompressed GTF path
+[fang.xink@explorer-01 Mapping_tutorial]$ grep 'sjdbGTFfile' scripts/star_index.sh
+    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf \
+[fang.xink@explorer-01 Mapping_tutorial]$ # Confirm the script now uses the correct annotation 
+[fang.xink@explorer-01 Mapping_tutorial]$ --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf \
+> ^C
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the script for syntax errors
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/star_index.sh
+Submitted batch job 11287825
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit STAR genome indexing again
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11287825 -o "%.18i %.12T %.12M %.12l"
+             JOBID        STATE         TIME   TIME_LIMIT
+          11287825      RUNNING         2:06     12:00:00
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11287825 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11287825         FAILED    104:0 
+11287825.ba+     FAILED    104:0 
+11287825.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 25 GenomeDir/Log.out
+KI270395.1	1143
+KI270376.1	1136
+KI270337.1	1121
+KI270335.1	1048
+KI270378.1	1048
+KI270379.1	1045
+KI270329.1	1040
+KI270419.1	1029
+KI270336.1	1026
+KI270312.1	998
+KI270539.1	993
+KI270385.1	990
+KI270423.1	981
+KI270392.1	971
+KI270394.1	970
+Genome sequence total length = 3099750718
+Genome size with padding = 3138387968
+Oct 21 13:58:41 ..... processing annotations GTF
+
+Fatal INPUT FILE error, no exon lines in the GTF file: ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+Solution: check the formatting of the GTF file, it must contain some lines with exon in the 3rd column.
+          Make sure the GTF file is unzipped.
+          If exons are marked with a different word, use --sjdbGTFfeatureExon .
+
+Oct 21 13:59:05 ...... FATAL ERROR, exiting
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 25 star_index_11287825.err
+
+Fatal INPUT FILE error, no exon lines in the GTF file: ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+Solution: check the formatting of the GTF file, it must contain some lines with exon in the 3rd column.
+          Make sure the GTF file is unzipped.
+          If exons are marked with a different word, use --sjdbGTFfeatureExon .
+
+Oct 21 13:59:05 ...... FATAL ERROR, exiting
+[fang.xink@explorer-01 Mapping_tutorial]$ grep -n 'sjdbGTFfile' scripts/star_index.sh
+26:    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf \
+[fang.xink@explorer-01 Mapping_tutorial]$ head -n 15 ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+>NC_000001.11 Homo sapiens chromosome 1, GRCh38.p14 Primary Assembly
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+[fang.xink@explorer-01 Mapping_tutorial]$ awk -F '\t' '$3=="exon" {print; exit}' ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh ../Genomes_analysis/Annotation/
+total 4.1G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 928M Oct 17 13:15 Homo_sapiens.GRCh38.115.gtf
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.2G Oct 21 13:54 Homo_sapiens.GRCh38.115.uncompressed.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ find ../Genomes_analysis -type f \( -iname "*.gtf" -o -iname "*.gtf.gz" \)
+../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.gtf
+../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.uncompressed.gtf
+[fang.xink@explorer-01 Mapping_tutorial]$ # Search your course folder for GTF annotation files 
+[fang.xink@explorer-01 Mapping_tutorial]$ find /courses/BIOL2406.202710/shared -type f \( -iname "*.gtf" -o -iname "*.gtf.gz" \) 2>/dev/null
+[fang.xink@explorer-01 Mapping_tutorial]$ cd ../Genomes_analysis/Annotation
+[fang.xink@explorer-01 Annotation]$ # Go to your annotation folder
+[fang.xink@explorer-01 Annotation]$ wget -c https://ftp.ensembl.org/pub/release-115/gtf/homo_sapiens/Homo_sapiens.GRCh38.115.gtf.gz -O Homo_sapiens.GRCh38.115.correct.gtf.gz
+--2026-10-21 14:07:15--  https://ftp.ensembl.org/pub/release-115/gtf/homo_sapiens/Homo_sapiens.GRCh38.115.gtf.gz
+Connecting to 10.99.0.130:3128... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 104395529 (100M) [application/x-gzip]
+Saving to: ‘Homo_sapiens.GRCh38.115.correct.gtf.gz’
+
+Homo_sapiens.GRCh38.115 100%[=============================>]  99.56M  1.00MB/s    in 40s     
+
+2026-10-21 14:07:55 (2.52 MB/s) - ‘Homo_sapiens.GRCh38.115.correct.gtf.gz’ saved [104395529/104395529]
+
+[fang.xink@explorer-01 Annotation]$ gunzip -k Homo_sapiens.GRCh38.115.correct.gtf.gz
+[fang.xink@explorer-01 Annotation]$ awk -F '\t' '$3=="exon" {print; exit}' Homo_sapiens.GRCh38.115.correct.gtf
+1	havana	exon	3069168	3069296	.	+	.	gene_id "ENSG00000142611"; gene_version "17"; transcript_id "ENST00000511072"; transcript_version "5"; exon_number "1"; gene_name "PRDM16"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "PRDM16-206"; transcript_source "havana"; transcript_biotype "protein_coding"; exon_id "ENSE00002048533"; exon_version "1"; tag "gencode_basic"; tag "gencode_primary"; transcript_support_level "5";
+[fang.xink@explorer-01 Annotation]$ # Check that the GTF contains exon annotations
+[fang.xink@explorer-01 Annotation]$ cd ../../Mapping_tutorial
+[fang.xink@explorer-01 Mapping_tutorial]$ # Return to your Mapping_tutorial folder
+[fang.xink@explorer-01 Mapping_tutorial]$ sed -i 's/Homo_sapiens.GRCh38.115.uncompressed.gtf/Homo_sapiens.GRCh38.115.correct.gtf/' scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Update STAR to use the correct GTF annotation
+[fang.xink@explorer-01 Mapping_tutorial]$ sed -i 's/\*\*sjdbGTFfile\*\*/sjdbGTFfile/' scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Remove accidental asterisks from the STAR option
+[fang.xink@explorer-01 Mapping_tutorial]$ grep -n 'sjdbGTFfile' scripts/star_index.sh
+26:    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.correct.gtf \
+[fang.xink@explorer-01 Mapping_tutorial]$ # Verify the updated line
+[fang.xink@explorer-01 Mapping_tutorial]$ sed -i 's/\*\*//g' scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Remove the extra asterisks
+[fang.xink@explorer-01 Mapping_tutorial]$ grep -n 'sjdbGTFfile' scripts/star_index.sh
+26:    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.correct.gtf \
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the corrected line
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/star_index.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the script for syntax errors
+[fang.xink@explorer-01 Mapping_tutorial]$ cat -n scripts/star_index.sh
+     1	#!/bin/bash
+     2	#SBATCH -J STAR_index_Fang
+     3	#SBATCH -p short
+     4	#SBATCH -N 1
+     5	#SBATCH -n 1
+     6	#SBATCH --cpus-per-task=8
+     7	#SBATCH --mem=60G
+     8	#SBATCH -t 12:00:00
+     9	#SBATCH -o star_index_%j.out
+    10	#SBATCH -e star_index_%j.err
+    11	
+    12	# Stop if any command fails
+    13	set -euo pipefail
+    14	
+    15	# Load STAR
+    16	module load star/2.7.11b
+    17	
+    18	# Create the genome index directory
+    19	mkdir -p GenomeDir
+    20	
+    21	# Generate the human genome index
+    22	STAR --runThreadN 8 \
+    23	    --runMode genomeGenerate \
+    24	    --genomeDir GenomeDir \
+    25	    --genomeFastaFiles ../Genomes_analysis/Human/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa \
+    26	    --sjdbGTFfile ../Genomes_analysis/Annotation/Homo_sapiens.GRCh38.115.correct.gtf \
+    27	    --sjdbOverhang 99
+[fang.xink@explorer-01 Mapping_tutorial]$ # Show the STAR indexing script
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/star_index.sh
+Submitted batch job 11288081
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        PENDING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11288081 -o "%.18i %.12T %.12M %.12l"
+             JOBID        STATE         TIME   TIME_LIMIT
+          11288081      PENDING         0:00     12:00:00
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11288081 -o "%.18i %.12T %.12M %.12l"
+             JOBID        STATE         TIME   TIME_LIMIT
+          11288081      RUNNING         0:17     12:00:00
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ ^[[200~sacct -j 11288081 --format=JobID,State,ExitCode~
+-bash: $'\E[200~sacct': command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -f GenomeDir/Log.out
+Number of chunks: 27;   chunks size limit: 1854241784 bytes
+Oct 21 14:16:05 ... sorting Suffix Array chunks and saving them to disk...
+Writing 1625576352 bytes into GenomeDir//SA_2 ; empty space on disk = 1164191478054912 bytes ... done
+Writing 1791034696 bytes into GenomeDir//SA_7 ; empty space on disk = 1164251441922048 bytes ... done
+Writing 1802540216 bytes into GenomeDir//SA_5 ; empty space on disk = 1164281363038208 bytes ... done
+Writing 1695044400 bytes into GenomeDir//SA_3 ; empty space on disk = 1164287544393728 bytes ... done
+Writing 1842920360 bytes into GenomeDir//SA_6 ; empty space on disk = 1164287544393728 bytes ... done
+Writing 1817086728 bytes into GenomeDir//SA_0 ; empty space on disk = 1164250965868544 bytes ... done
+Writing 1641833696 bytes into GenomeDir//SA_1 ; empty space on disk = 1164203994906624 bytes ... done
+Writing 1732397648 bytes into GenomeDir//SA_4 ; empty space on disk = 1164496898883584 bytes ... done
+Writing 1739863496 bytes into GenomeDir//SA_10 ; empty space on disk = 1163825326850048 bytes ... done
+Writing 1817090664 bytes into GenomeDir//SA_9 ; empty space on disk = 1163772051849216 bytes ... done
+Writing 1610611616 bytes into GenomeDir//SA_8 ; empty space on disk = 1163760688431104 bytes ... done
+Writing 1834070088 bytes into GenomeDir//SA_15 ; empty space on disk = 1163785603645440 bytes ... done
+Writing 1778262496 bytes into GenomeDir//SA_11 ; empty space on disk = 1163813178048512 bytes ... done
+Writing 1749272088 bytes into GenomeDir//SA_12 ; empty space on disk = 1163813178048512 bytes ... done
+
+
+^C
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 GenomeDir/Log.out
+Writing 1791034696 bytes into GenomeDir//SA_7 ; empty space on disk = 1164251441922048 bytes ... done
+Writing 1802540216 bytes into GenomeDir//SA_5 ; empty space on disk = 1164281363038208 bytes ... done
+Writing 1695044400 bytes into GenomeDir//SA_3 ; empty space on disk = 1164287544393728 bytes ... done
+Writing 1842920360 bytes into GenomeDir//SA_6 ; empty space on disk = 1164287544393728 bytes ... done
+Writing 1817086728 bytes into GenomeDir//SA_0 ; empty space on disk = 1164250965868544 bytes ... done
+Writing 1641833696 bytes into GenomeDir//SA_1 ; empty space on disk = 1164203994906624 bytes ... done
+Writing 1732397648 bytes into GenomeDir//SA_4 ; empty space on disk = 1164496898883584 bytes ... done
+Writing 1739863496 bytes into GenomeDir//SA_10 ; empty space on disk = 1163825326850048 bytes ... done
+Writing 1817090664 bytes into GenomeDir//SA_9 ; empty space on disk = 1163772051849216 bytes ... done
+Writing 1610611616 bytes into GenomeDir//SA_8 ; empty space on disk = 1163760688431104 bytes ... done
+Writing 1834070088 bytes into GenomeDir//SA_15 ; empty space on disk = 1163785603645440 bytes ... done
+Writing 1778262496 bytes into GenomeDir//SA_11 ; empty space on disk = 1163813178048512 bytes ... done
+Writing 1749272088 bytes into GenomeDir//SA_12 ; empty space on disk = 1163813178048512 bytes ... done
+Writing 1731265392 bytes into GenomeDir//SA_14 ; empty space on disk = 1163715003023360 bytes ... done
+Writing 1667201488 bytes into GenomeDir//SA_13 ; empty space on disk = 1163695715516416 bytes ... done
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 5 GenomeDir/Log.out
+Writing 1834070088 bytes into GenomeDir//SA_15 ; empty space on disk = 1163785603645440 bytes ... done
+Writing 1778262496 bytes into GenomeDir//SA_11 ; empty space on disk = 1163813178048512 bytes ... done
+Writing 1749272088 bytes into GenomeDir//SA_12 ; empty space on disk = 1163813178048512 bytes ... done
+Writing 1731265392 bytes into GenomeDir//SA_14 ; empty space on disk = 1163715003023360 bytes ... done
+Writing 1667201488 bytes into GenomeDir//SA_13 ; empty space on disk = 1163695715516416 bytes ... done
+[fang.xink@explorer-01 Mapping_tutorial]$ sstat -j 11288081.batch --format=JobID,AveCPU,MaxRSS
+JobID            AveCPU     MaxRSS 
+------------ ---------- ---------- 
+11288081.ba+   02:54:26  50558868K 
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11288081 -o "%.18i %.12T %.12M %.12l"
+             JOBID        STATE         TIME   TIME_LIMIT
+          11288081      RUNNING        26:32     12:00:00
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check STAR indexing status and elapsed time
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sstat -j 11288081.batch --format=JobID,AveCPU,MaxRSS
+JobID            AveCPU     MaxRSS 
+------------ ---------- ---------- 
+11288081.ba+   03:27:05  50570148K 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081        RUNNING      0:0 
+11288081.ba+    RUNNING      0:0 
+11288081.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288081 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288081      COMPLETED      0:0 
+11288081.ba+  COMPLETED      0:0 
+11288081.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh GenomeDir/Genome GenomeDir/SA GenomeDir/genomeParameters.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.1G Oct 21 14:58 GenomeDir/Genome
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  833 Oct 21 14:58 GenomeDir/genomeParameters.txt
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff  24G Oct 21 14:58 GenomeDir/SA
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check that STAR created the essential genome index files
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 5 GenomeDir/Log.out
+Writing 8 bytes into GenomeDir//SAindex ; empty space on disk = 1163450921254912 bytes ... done
+Writing 120 bytes into GenomeDir//SAindex ; empty space on disk = 1163450921254912 bytes ... done
+Writing 1565873491 bytes into GenomeDir//SAindex ; empty space on disk = 1163450921254912 bytes ... done
+Oct 21 14:58:50 ..... finished successfully
+DONE: Genome generation, EXITING
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check STAR's final completion message
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastq_files/*fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.9G Oct 21 13:10 fastq_files/SRR1039508_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.9G Oct 21 13:10 fastq_files/SRR1039508_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.5G Oct 21 13:10 fastq_files/SRR1039509_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.5G Oct 21 13:10 fastq_files/SRR1039509_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.3G Oct 21 13:11 fastq_files/SRR1039512_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 7.3G Oct 21 13:11 fastq_files/SRR1039512_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.3G Oct 21 13:12 fastq_files/SRR1039513_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.4G Oct 21 13:12 fastq_files/SRR1039513_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.3G Oct 21 13:13 fastq_files/SRR1039516_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.8G Oct 21 13:13 fastq_files/SRR1039516_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.8G Oct 21 13:14 fastq_files/SRR1039517_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.8G Oct 21 13:14 fastq_files/SRR1039517_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.1G Oct 21 13:14 fastq_files/SRR1039520_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 6.7G Oct 21 13:15 fastq_files/SRR1039520_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 4.6G Oct 21 13:15 fastq_files/SRR1039521_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 8.0G Oct 21 13:15 fastq_files/SRR1039521_2.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ # List the paired-end FASTQ files
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > scripts/check_pairs.sh <<'EOF'
+> #!/bin/bash
+#SBATCH -J check_pairs
+#SBATCH -p short
+#SBATCH -c 2
+#SBATCH --mem=8G
+#SBATCH -t 01:00:00
+#SBATCH -o check_pairs_%j.out
+
+for f in fastq_files/*.fastq; do
+    lines=$(wc -l < "$f")
+    echo "$(basename "$f"): $((lines / 4)) reads"
+done
+EOF
+[fang.xink@explorer-01 Mapping_tutorial]$ # Create a Slurm script to check paired-end read counts
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/check_pairs.sh
+# Submit the FASTQ read-count check
+Submitted batch job 11288839
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the FASTQ read-count check
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288839 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288839        RUNNING      0:0 
+11288839.ba+    RUNNING      0:0 
+11288839.ex+    RUNNING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether the read-count job has finished
+[fang.xink@explorer-01 Mapping_tutorial]$ Read from remote host login.explorer.northeastern.edu: Operation timed out
+Connection to login.explorer.northeastern.edu closed.
+client_loop: send disconnect: Broken pipe
+kenfang@Kens-MacBook-Pro ~ % ssh fang.xink@login.explorer.northeastern.edu
+fang.xink@login.explorer.northeastern.edu's password: 
+Last login: Wed Oct 21 12:58:06 2026 from 10.110.46.40
+    _______  __ ____  __    ____  ____  __________ 
+   / ____/ |/ // __ \/ /   / __ \/ __ \/ ____/ __ \
+  / __/  |   // /_/ / /   / / / / /_/ / __/ / /_/ /
+ / /___ /   |/ ____/ /___/ /_/ / _, _/ /___/ _, _/ 
+/_____//_/|_/_/   /_____/\____/_/ |_/_____/_/ |_|  
+                                                  
++-----------------------------------------------------------+
+| You're now connected to the Explorer cluster. Visit our   |
+| website http://rc.northeastern.edu/support for links to   |
+| our service catalog, documentation, training, and consul- |
+| tations. You can also email us at rchelp@northeastern.edu |
+| to generate a help ticket.                                |
+|                                                           |
+| The Research Computing Team                               |
++-----------------------------------------------------------+
+
+The Research Computing team is thrilled to share that a new, state-of-the-art HPC cluster is coming soon to the Northeastern research computing community. All Northeastern faculty and PIs are eligible to submit a proposal, especially those who already use GPUs on the Explorer and Discovery HPC clusters. 
+
+If you are a student or researcher who is a current Explorer HPC cluster user, we highly encourage you to reach out to your account sponsor (faculty or PI) to make a submission.
+
+The application process is here: https://forms.gle/eTPsdQZN25efoJ3g6
+If you have questions or feedback, please email d.tiwari@northeastern.edu.
+
+[fang.xink@explorer-01 ~]$ cd /courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial
+[fang.xink@explorer-01 Mapping_tutorial]$ # Return to your RNA-seq mapping project
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11288839 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11288839      COMPLETED      0:0 
+11288839.ba+  COMPLETED      0:0 
+11288839.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ cat check_pairs_11288839.out
+SRR1039508_1.fastq: 22935521 reads
+SRR1039508_2.fastq: 22935521 reads
+SRR1039509_1.fastq: 21155707 reads
+SRR1039509_2.fastq: 21155707 reads
+SRR1039512_1.fastq: 28136282 reads
+SRR1039512_2.fastq: 28136282 reads
+SRR1039513_1.fastq: 16823088 reads
+SRR1039513_2.fastq: 43356464 reads
+SRR1039516_1.fastq: 27298970 reads
+SRR1039516_2.fastq: 30043024 reads
+SRR1039517_1.fastq: 34298260 reads
+SRR1039517_2.fastq: 34298260 reads
+SRR1039520_1.fastq: 21275888 reads
+SRR1039520_2.fastq: 34575286 reads
+SRR1039521_1.fastq: 23487860 reads
+SRR1039521_2.fastq: 41152075 reads
+[fang.xink@explorer-01 Mapping_tutorial]$ cat scripts/fasterq_dump.sh
+#!/bin/bash
+#SBATCH -J fastq_Fang
+#SBATCH -N 1
+#SBATCH -n 4
+#SBATCH -o output_%j.txt
+#SBATCH -e error_%j.txt
+#SBATCH -t 24:00:00
+
+
+# Load the SRA Toolkit module
+module load sratoolkit/12Dec2024
+
+# Create the output directory if needed
+mkdir -p fastq_files
+
+# Convert all eight SRA datasets into paired-end FASTQ files
+# Stop if the assigned compute node has less than 200 GB free in /tmp
+available_kb=$(df -Pk /tmp | awk "NR==2 {print \$4}")
+if (( available_kb < 200000000 )); then
+    echo "ERROR: Not enough temporary disk space"
+    exit 1
+fi
+
+for acc in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Convert each dataset into separate read 1 and read 2 FASTQ files
+fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+done
+[fang.xink@explorer-01 Mapping_tutorial]$ fasterq-dump --split-files --outdir fastq_files --temp /tmp "sra_files/$acc"
+-bash: fasterq-dump: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ module load sratoolkit/12Dec2024
+[fang.xink@explorer-01 Mapping_tutorial]$ # Load the SRA Toolkit
+[fang.xink@explorer-01 Mapping_tutorial]$ sra-stat --xml sra_files/SRR1039513.sra | head -c 3000
+2026-10-21T20:54:54 sra-stat.3.2.0 int: directory not found while opening manager within virtual file system module - 'sra_files/SRR1039513.sra'
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the original SRA read structure without changing files
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh sra_files/
+total 0
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:53 SRR1039508
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:54 SRR1039509
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:55 SRR1039512
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:56 SRR1039513
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:49 SRR1039516
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:51 SRR1039517
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 12:58 SRR1039520
+drwxr-sr-x 2 fang.xink BIOL2406.202710-staff 4.0K Oct 19 13:00 SRR1039521
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh sra_files/SRR1039513/
+total 2.3G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.3G Oct 19 12:56 SRR1039513.sra
+[fang.xink@explorer-01 Mapping_tutorial]$ sra-stat --xml sra_files/SRR1039513/SRR1039513.sra | head -c 3000
+
+^C
+^C
+[fang.xink@explorer-01 Mapping_tutorial]$ fasterq-dump -X 3 -Z sra_files/SRR1039513/SRR1039513.sra
+2026-10-21T21:07:15 fasterq-dump.3.2.0 err: name not found while resolving query within virtual file system module - failed to resolve accession '3' - Cannot resolve accession ( 404 ); ncbi_phid='9464EEBEAD92958100000000000A000A.m_1'
+2026-10-21T21:07:15 fasterq-dump.3.2.0 err: param unknown while parsing argument list within application support module - Unknown argument '-X'
+2026-10-21T21:07:15 fasterq-dump.3.2.0 err: ArgsMakeAndHandle() -> RC(rcApp,rcArgv,rcParsing,rcParam,rcUnknown)
+fasterq-dump quit with error code 3
+[fang.xink@explorer-01 Mapping_tutorial]$ grep -m 3 '^@SRR1039513\.' fastq_files/SRR1039513_1.fastq
+grep -m 3 '^@SRR1039513\.' fastq_files/SRR1039513_2.fastq
+@SRR1039513.1 1 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.3 3 length=63
+@SRR1039513.1 1 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.3 3 length=63
+[fang.xink@explorer-01 Mapping_tutorial]$ # Display the first 3 read identifiers from each FASTQ file
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 4 fastq_files/SRR1039513_1.fastq | head -n 1
+tail -n 4 fastq_files/SRR1039513_2.fastq | head -n 1
+@SRR1039513.16823088 16823088 length=63
+@SRR1039513.43356464 43356464 length=63
+[fang.xink@explorer-01 Mapping_tutorial]$ # Show the last read identifier in each FASTQ file
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ fasterq-dump --help | grep -A 5 -E 'split-files|split-3|concatenate-reads'
+  -S|--split-files                 write reads into different files 
+  -3|--split-3                     writes single reads in special file 
+  --concatenate-reads              writes whole spots into one file 
+  -Z|--stdout                      print output to stdout 
+  -f|--force                       force to overwrite existing file(s) 
+  --skip-technical                 skip technical reads 
+  --include-technical              include technical reads 
+  -M|--min-read-len                filter by sequence-len 
+[fang.xink@explorer-01 Mapping_tutorial]$ # Show available fasterq-dump options for splitting reads
+[fang.xink@explorer-01 Mapping_tutorial]$ fastq-dump -X 3 -Z --split-spot sra_files/SRR1039513/SRR1039513.sra
+Read 3 spots for sra_files/SRR1039513/SRR1039513.sra
+Written 3 spots for sra_files/SRR1039513/SRR1039513.sra
+@SRR1039513.1 1 length=63
+CCTTGAACCTGGTGCGCTGGCCGGCACGGGTCTGCTTCTGCACTGGCATAATCTTCAAAACCT
++SRR1039513.1 1 length=63
+CHBEDHIIIGIGFF@GIIII;DHGFHIAFA5=CAAED3.?BEE@ACBCDDCDDCCC:>C5??C
+@SRR1039513.1 1 length=63
+CTTCTCCCTGCCCATTAAGGAATCAGAGATCATTGATTTCTTCCTGGGGGCCTCTCTCAAGGA
++SRR1039513.1 1 length=63
+HDE<<?4CEGG@A@GHIFIA*?@BGHIH3??FEGEFGGE*?<D?DGGEEGAAA=??>@DB?;6
+@SRR1039513.2 2 length=63
+TTGCTGTACATCGTATTACACCTGAGGAGGCCAAGTACAAGTTGTGCAAAGTGAGAAAGATCT
++SRR1039513.2 2 length=63
+?FHBFGGEE>H@EGHIIIC<4DGE;FBBFAFDHGHFGGIEF=FHIG:CD@E>CACE@BDC>;;
+@SRR1039513.2 2 length=63
+ATCGGGGTAGCGGATGGGGCGGGCATCATGAGTCACCAGATGAGGGATTCCTTTTTTGCCCAC
++SRR1039513.2 2 length=63
+D@CFEG6EHADFG?@:F2C'53=&)+(++3(8A@C8CC<8(3(39?33++>ACCC########
+@SRR1039513.3 3 length=63
+GTTGGTCGAGAGAGTCATTCAGCAGTTGGAAGGTGCATTCGCGCTGGTTTTCAAGAGTGTCCA
++SRR1039513.3 3 length=63
+HJJJJIJJGIGJIJDHIIJJIJJIJIJJJIIJJGGIIIJJJJJJJHHBEFFEDEEEECCADCD
+@SRR1039513.3 3 length=63
+CCCACAGCATGCAGGCAGGCGGAGCTGTCCAGCCTCTTCATCCGTGTCTTACAGATATTCTTC
++SRR1039513.3 3 length=63
+HJJJJJJJIJJJJJJJIIJ0?F'5'.=7)=;@)?AE;B)777>=(555;@(55::>A@@(;A3
+[fang.xink@explorer-01 Mapping_tutorial]$ # Display the first few sequencing records from SRR1039513
+[fang.xink@explorer-01 Mapping_tutorial]$ fastq-dump -X 10 -Z --split-spot sra_files/SRR1039513/SRR1039513.sra | grep '^@SRR'
+Read 10 spots for sra_files/SRR1039513/SRR1039513.sra
+Written 10 spots for sra_files/SRR1039513/SRR1039513.sra
+@SRR1039513.1 1 length=63
+@SRR1039513.1 1 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.3 3 length=63
+@SRR1039513.3 3 length=63
+@SRR1039513.4 4 length=63
+@SRR1039513.4 4 length=63
+@SRR1039513.5 5 length=63
+@SRR1039513.5 5 length=63
+@SRR1039513.6 6 length=63
+@SRR1039513.6 6 length=63
+@SRR1039513.7 7 length=63
+@SRR1039513.7 7 length=63
+@SRR1039513.8 8 length=63
+@SRR1039513.8 8 length=63
+@SRR1039513.9 9 length=63
+@SRR1039513.9 9 length=63
+@SRR1039513.10 10 length=63
+@SRR1039513.10 10 length=63
+[fang.xink@explorer-01 Mapping_tutorial]$ # Show read statistics for SRR1039513
+[fang.xink@explorer-01 Mapping_tutorial]$ fastq-dump -N 16823089 -X 16823089 -Z --split-spot sra_files/SRR1039513/SRR1039513.sra
+Rejected 1 READS because READLEN < 1
+Read 1 spots for sra_files/SRR1039513/SRR1039513.sra
+Written 1 spots for sra_files/SRR1039513/SRR1039513.sra
+@SRR1039513.16823089 16823089 length=63
+CGGTGTCCGAGTTGCTGGATGACCCCTCTGGGCCTGCTGGCTCCCTGACTTCTGTTGAGTTCT
++SRR1039513.16823089 16823089 length=63
+HJICGFHIIJJHIJIJJJJJJJIIJJIIIJIIHIGGIGHIHFHHFDDDDEEA;;;A@AC(;@C
+[fang.xink@explorer-01 Mapping_tutorial]$ # Inspect sequencing spot 16823089 in the original SRA file
+[fang.xink@explorer-01 Mapping_tutorial]$ fasterq-dump --help | grep -A 12 'split-3'
+  -3|--split-3                     writes single reads in special file 
+  --concatenate-reads              writes whole spots into one file 
+  -Z|--stdout                      print output to stdout 
+  -f|--force                       force to overwrite existing file(s) 
+  --skip-technical                 skip technical reads 
+  --include-technical              include technical reads 
+  -M|--min-read-len                filter by sequence-len 
+  --table                          which seq-table to use in case of pacbio 
+  -B|--bases                       filter by bases 
+  -A|--append                      append to output-file 
+  --fasta                          produce FASTA output 
+  --fasta-unsorted                 produce FASTA output, unsorted 
+  --fasta-ref-tbl                  produce FASTA output from REFERENCE tbl 
+[fang.xink@explorer-01 Mapping_tutorial]$ df -h /tmp
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda11      337G   12G  325G   4% /tmp
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > scripts/test_split3.sh <<'EOF'
+> #!/bin/bash
+#SBATCH -J test_split3
+#SBATCH -p short
+#SBATCH -c 4
+#SBATCH --mem=16G
+#SBATCH -t 04:00:00
+#SBATCH -o test_split3_%j.out
+#SBATCH -e test_split3_%j.err
+
+# Stop if a command fails
+set -euo pipefail
+
+# Load SRA Toolkit
+module load sratoolkit/12Dec2024
+
+# Keep test results separate from original FASTQ files
+mkdir -p fastq_split3_test
+
+# Check temporary storage on the compute node
+df -h /tmp
+
+# Convert one sample using split-3
+fasterq-dump --split-3 \
+    --threads 4 \
+    --outdir fastq_split3_test \
+    --temp /tmp \
+    sra_files/SRR1039513/SRR1039513.sra
+
+# Display the resulting files
+ls -lh fastq_split3_test/
+EOF
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/test_split3.sh
+sbatch: error: Batch job submission failed: Unexpected message received
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -u "$USER"
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -u "$USER" --starttime today --format=JobID,JobName,State,ExitCode
+JobID           JobName      State ExitCode 
+------------ ---------- ---------- -------- 
+11287247           bash  COMPLETED      0:0 
+11287247.ex+     extern  COMPLETED      0:0 
+11287247.0         bash  COMPLETED      0:0 
+11287294     fastq_Fang  COMPLETED      0:0 
+11287294.ba+      batch  COMPLETED      0:0 
+11287294.ex+     extern  COMPLETED      0:0 
+11287432     fastqc_Fa+  COMPLETED      0:0 
+11287432.ba+      batch  COMPLETED      0:0 
+11287432.ex+     extern  COMPLETED      0:0 
+11287543     STAR_inde+     FAILED    104:0 
+11287543.ba+      batch     FAILED    104:0 
+11287543.ex+     extern  COMPLETED      0:0 
+11287583     STAR_inde+     FAILED    104:0 
+11287583.ba+      batch     FAILED    104:0 
+11287583.ex+     extern  COMPLETED      0:0 
+11287825     STAR_inde+     FAILED    104:0 
+11287825.ba+      batch     FAILED    104:0 
+11287825.ex+     extern  COMPLETED      0:0 
+11288081     STAR_inde+  COMPLETED      0:0 
+11288081.ba+      batch  COMPLETED      0:0 
+11288081.ex+     extern  COMPLETED      0:0 
+11288839     check_pai+  COMPLETED      0:0 
+11288839.ba+      batch  COMPLETED      0:0 
+11288839.ex+     extern  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/test_split3.sh
+Submitted batch job 11290559
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11290559 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11290559        PENDING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ utorial]$ sacct -j 11290559 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11290559        PENDING      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+-bash: utorial]$: command not found
+-bash: JobID: command not found
+-bash: ------------: command not found
+-bash: 11290559: command not found
+-bash: [fang.xink@explorer-01: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11290559 -o "%.18i %.12T %.12M %.30R"
+             JOBID        STATE         TIME               NODELIST(REASON)
+          11290559      RUNNING         3:25                          c0602
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11290559 -o "%.18i %.12T %.12M %.30R"
+             JOBID        STATE         TIME               NODELIST(REASON)
+          11290559   COMPLETING         6:38                          c0602
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11290559 --format=JobID,State,ExitCode
+JobID             State ExitCode 
+------------ ---------- -------- 
+11290559         FAILED      3:0 
+11290559.ba+     FAILED      3:0 
+11290559.ex+  COMPLETED      0:0 
+[fang.xink@explorer-01 Mapping_tutorial]$ cat test_split3_11290559.err
+2026-10-21T21:15:48 fasterq-dump.3.2.0 err: execute_concat_un_compressed() creating ouput-file '/courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/fastq_split3_test/SRR1039513.fastq' -> RC(rcExe,rcFile,rcPacking,rcName,rcExists)
+2026-10-21T21:15:48 fasterq-dump.3.2.0 err: execute_concat_un_compressed() creating ouput-file '/courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/fastq_split3_test/SRR1039513_1.fastq' -> RC(rcExe,rcFile,rcPacking,rcName,rcExists)
+2026-10-21T21:15:48 fasterq-dump.3.2.0 err: execute_concat_un_compressed() creating ouput-file '/courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/fastq_split3_test/SRR1039513_2.fastq' -> RC(rcExe,rcFile,rcPacking,rcName,rcExists)
+spots read      : 43,356,464
+reads read      : 86,712,928
+reads 0-length  : 26,533,376
+
+=============================================================
+An error occurred during processing.
+A report was generated into the file '/home/fang.xink/ncbi_error_report.txt'.
+If the problem persists, you may consider sending the file
+to 'sra-tools@ncbi.nlm.nih.gov' for assistance.
+=============================================================
+
+fasterq-dump quit with error code 3
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastq_split3_test/
+total 12G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.3G Oct 21 17:15 SRR1039513_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.3G Oct 21 17:15 SRR1039513_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.2G Oct 21 17:15 SRR1039513.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ # See which test FASTQ files already exist
+[fang.xink@explorer-01 Mapping_tutorial]$ wc -l fastq_split3_test/SRR1039513_{1,2}.fastq
+  67292352 fastq_split3_test/SRR1039513_1.fastq
+^C
+[fang.xink@explorer-01 Mapping_tutorial]$ wc -l fastq_split3_test/SRR1039513_2.fastq
+67292352 fastq_split3_test/SRR1039513_2.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ # Count reads in the second paired FASTQ file
+[fang.xink@explorer-01 Mapping_tutorial]$ head -n 20 fastq_split3_test/SRR1039513_1.fastq | grep '^@'
+head -n 20 fastq_split3_test/SRR1039513_2.fastq | grep '^@'
+@SRR1039513.1 1 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.3 3 length=63
+@SRR1039513.4 4 length=63
+@SRR1039513.5 5 length=63
+@SRR1039513.1 1 length=63
+@SRR1039513.2 2 length=63
+@SRR1039513.3 3 length=63
+@SRR1039513.4 4 length=63
+@SRR1039513.5 5 length=63
+[fang.xink@explorer-01 Mapping_tutorial]$ # Compare the first 5 read identifiers in each paired FASTQ file
+[fang.xink@explorer-01 Mapping_tutorial]$ tail -n 15 test_split3_11290559.out
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda12      821G  5.8G  815G   1% /tmp
+[fang.xink@explorer-01 Mapping_tutorial]$ # Display the conversion job's output
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh fastq_split3_test/
+total 12G
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.3G Oct 21 17:15 SRR1039513_1.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.3G Oct 21 17:15 SRR1039513_2.fastq
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 5.2G Oct 21 17:15 SRR1039513.fastq
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > scripts/split_remaining.sh <<'EOF'
+> #!/bin/bash
+#SBATCH -J split_remaining
+#SBATCH -p short
+#SBATCH -c 4
+#SBATCH --mem=16G
+#SBATCH -t 04:00:00
+#SBATCH -o split_remaining_%j.out
+#SBATCH -e split_remaining_%j.err
+
+set -euo pipefail
+
+# Load SRA Toolkit
+module load sratoolkit/12Dec2024
+
+# Create a new directory without touching original FASTQ files
+mkdir -p fastq_split3_remaining
+
+# Convert the three samples
+for acc in SRR1039516 SRR1039520 SRR1039521; do
+    fasterq-dump --split-3 \
+        --threads 4 \
+        --outdir fastq_split3_remaining \
+        --temp /tmp \
+        "sra_files/$acc/$acc.sra"
+done
+EOF
+[fang.xink@explorer-01 Mapping_tutorial]$ # Create a Slurm script for the remaining three samples
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/split_remaining.sh
+sbatch: error: This does not look like a batch script.  The first
+sbatch: error: line must start with #! followed by the path to an interpreter.
+sbatch: error: For instance: #!/bin/sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the FASTQ conversion job
+[fang.xink@explorer-01 Mapping_tutorial]$ sed -i '1c\#!/bin/bash' scripts/split_remaining.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Fix the first line of the script
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/split_remaining.sh
+Submitted batch job 11290829
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the job again
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11290829
+
+
+-
+# Check whether the conversion job is running or pending
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+
+          11290829     short split_re fang.xin PD       0:00      1 (Priority)
+-bash: -: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check whether the conversion job is running or pending
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -j 11290829
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          11290829     short split_re fang.xin PD       0:00      1 (Priority)
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11290829 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11290829        RUNNING   00:03:26 
+11290829.ba+    RUNNING   00:03:26 
+11290829.ex+    RUNNING   00:03:26 
+[fang.xink@explorer-01 Mapping_tutorial]$ rt split_re fang.xin PD       0:00      1 (Priority)
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11290829 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11290829        RUNNING   00:03:26 
+11290829.ba+    RUNNING   00:03:26 
+11290829.ex+    RUNNING   00:03:26 
+[fang.xink@explorer-01
+-bash: syntax error near unexpected token `('
+-bash: [fang.xink@explorer-01: command not found
+-bash: JobID: command not found
+-bash: ------------: command not found
+-bash: 11290829: command not found
+-bash: 11290829.ba+: command not found
+-bash: 11290829.ex+: command not found
+-bash: [fang.xink@explorer-01: command not found
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11290829 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11290829      COMPLETED   00:05:56 
+11290829.ba+  COMPLETED   00:05:56 
+11290829.ex+  COMPLETED   00:05:59 
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > scripts/star_align.sh <<'EOF'
+> #!/bin/bash
+#SBATCH -J alignJH
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -o align_%j.out
+#SBATCH -e align_%j.err
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=80G
+#SBATCH --time=12:00:00
+
+set -euo pipefail
+
+# Load STAR
+module load star/2.7.11b
+
+# Set directories
+GENOME_DIR="GenomeDir"
+OUT_DIR="aligned_output"
+
+mkdir -p "$OUT_DIR"
+
+# Align all eight samples
+for sample in SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 SRR1039521; do
+
+    # Select the correct FASTQ directory
+    case "$sample" in
+        SRR1039513)
+            FASTQ_DIR="fastq_split3_test"
+            ;;
+        SRR1039516|SRR1039520|SRR1039521)
+            FASTQ_DIR="fastq_split3_remaining"
+            ;;
+        *)
+            FASTQ_DIR="fastq_files"
+            ;;
+EOFe    --limitBAMsortRAM 40000000000dinate \e}_" \" "$FASTQ_DIR/${sample}_2.fastq" \
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/star_align.sh
+# Submit the alignment job
+
+sbatch: error: Batch job submission failed: Unexpected message received
+[fang.xink@explorer-01 Mapping_tutorial]$ # Submit the alignment job
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ bash -n scripts/star_align.sh && echo "Script syntax OK"
+Script syntax OK
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch scripts/star_align.sh
+sbatch: error: Batch job submission failed: Unexpected message received
+[fang.xink@explorer-01 Mapping_tutorial]$ sinfo -p short -o "%P %a %l %c %m %D"
+PARTITION AVAIL TIMELIMIT CPUS MEMORY NODES
+short* up 2-00:00:00 20+ 62000+ 252
+[fang.xink@explorer-01 Mapping_tutorial]$ squeue -u "$USER"
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+[fang.xink@explorer-01 Mapping_tutorial]$ sbatch -p short scripts/star_align.sh
+Submitted batch job 11291044
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        PENDING   00:00:00 
+[fang.xink@explorer-01 Mapping_tutorial]$ # Check the alignment job result
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:00:19 
+11291044.ba+    RUNNING   00:00:19 
+11291044.ex+    RUNNING   00:00:19 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:03:02 
+11291044.ba+    RUNNING   00:03:02 
+11291044.ex+    RUNNING   00:03:02 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:03:58 
+11291044.ba+    RUNNING   00:03:58 
+11291044.ex+    RUNNING   00:03:58 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:07:42 
+11291044.ba+    RUNNING   00:07:42 
+11291044.ex+    RUNNING   00:07:42 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:13:52 
+11291044.ba+    RUNNING   00:13:52 
+11291044.ex+    RUNNING   00:13:52 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:16:39 
+11291044.ba+    RUNNING   00:16:39 
+11291044.ex+    RUNNING   00:16:39 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:18:13 
+11291044.ba+    RUNNING   00:18:13 
+11291044.ex+    RUNNING   00:18:13 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044        RUNNING   00:19:56 
+11291044.ba+    RUNNING   00:19:56 
+11291044.ex+    RUNNING   00:19:56 
+[fang.xink@explorer-01 Mapping_tutorial]$ sacct -j 11291044 --format=JobID,State,Elapsed
+JobID             State    Elapsed 
+------------ ---------- ---------- 
+11291044      COMPLETED   00:23:05 
+11291044.ba+  COMPLETED   00:23:05 
+11291044.ex+  COMPLETED   00:23:05 
+[fang.xink@explorer-01 Mapping_tutorial]$ ls -lh aligned_output/*.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.3G Oct 21 17:59 aligned_output/SRR1039508_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.1G Oct 21 18:02 aligned_output/SRR1039509_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.9G Oct 21 18:04 aligned_output/SRR1039512_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 1.9G Oct 21 18:06 aligned_output/SRR1039513_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.9G Oct 21 18:09 aligned_output/SRR1039516_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 3.7G Oct 21 18:13 aligned_output/SRR1039517_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.3G Oct 21 18:15 aligned_output/SRR1039520_Aligned.sortedByCoord.out.bam
+-rw-r--r-- 1 fang.xink BIOL2406.202710-staff 2.6G Oct 21 18:17 aligned_output/SRR1039521_Aligned.sortedByCoord.out.bam
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > README.md <<'EOF'
+> # RNA-seq Mapping Tutorial 4
+
+Course: BIOL2406
+
+## Overview
+Analyzed eight RNA-seq datasets from the airway study,
+comparing untreated and dexamethasone-treated lung cells.
+
+## Workflow
+1. Downloaded eight SRA datasets using prefetch.
+2. Converted SRA files to FASTQ using fasterq-dump.
+3. Examined sequencing quality using FastQC.
+4. Generated a human GRCh38 genome index using STAR.
+5. Aligned paired-end reads using STAR.
+6. Generated eight coordinate-sorted BAM files.
+
+## Quality Control
+Three samples were examined using FastQC.
+Per-base sequence quality and adapter content passed.
+Sequence duplication levels were flagged.
+See fastqc_notes.txt for details.
+
+## Results
+All eight samples were successfully aligned.
+Eight nonempty, coordinate-sorted BAM files were generated
+in aligned_output/.
+
+## Scripts
+Scripts used for downloading, conversion, indexing,
+quality control, and alignment are stored in scripts/.
+
+## Data
+Large sequencing files, genome references, and alignment
+outputs are stored on Explorer and excluded from GitHub.
+EOF
+[fang.xink@explorer-01 Mapping_tutorial]$ git remote -v
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[fang.xink@explorer-01 Mapping_tutorial]$ git init
+# Initialize Git
+
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+Initialized empty Git repository in /courses/BIOL2406.202710/students/fang.xink/Mapping_tutorial/.git/
+[fang.xink@explorer-01 Mapping_tutorial]$ # Initialize Git
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+[fang.xink@explorer-01 Mapping_tutorial]$ cat > .gitignore <<'EOF'
+> *.fastq
+*.fastq.gz
+*.sra
+*.bam
+*.bai
+*.sam
+GenomeDir/
+sra_files/
+fastq_files/
+fastq_split3_test/
+fastq_split3_remaining/
+aligned_output/
+fastqc_reports/
+*.fa
+*.fasta
+*.gtf
+*.out
+*.err
+EOF
+[fang.xink@explorer-01 Mapping_tutorial]$ # Create a .gitignore file
+[fang.xink@explorer-01 Mapping_tutorial]$ git status --short
+?? .gitignore
+?? README.md
+?? accessions.txt
+?? error_11229530.txt
+?? error_11287294.txt
+?? fastqc_notes.txt
+?? output_11229530.txt
+?? output_11287294.txt
+?? scripts/
+[fang.xink@explorer-01 Mapping_tutorial]$ git add .gitignore README.md accessions.txt fastqc_notes.txt scripts/
+[fang.xink@explorer-01 Mapping_tutorial]$ # Add only the files needed for submission
+[fang.xink@explorer-01 Mapping_tutorial]$ git diff --cached --name-only
+.gitignore
+README.md
+accessions.txt
+fastqc_notes.txt
+scripts/check_pairs.sh
+scripts/fasterq_dump.sh
+scripts/fasterq_dump.sh.bak
+scripts/fastqc.sh
+scripts/prefetch.sh
+scripts/split_remaining.sh
+scripts/star_align.sh
+scripts/star_index.sh
+scripts/test_split3.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ \# Check exactly what will be committed
+\
+-bash: #: command not found
+> ^C
+[fang.xink@explorer-01 Mapping_tutorial]$ git restore --staged scripts/fasterq_dump.sh.bak
+fatal: could not resolve HEAD
+[fang.xink@explorer-01 Mapping_tutorial]$ git rm --cached scripts/fasterq_dump.sh.bak
+rm 'scripts/fasterq_dump.sh.bak'
+[fang.xink@explorer-01 Mapping_tutorial]$ # Remove the backup script from staging
+[fang.xink@explorer-01 Mapping_tutorial]$ git branch -M main
+[fang.xink@explorer-01 Mapping_tutorial]$ # Rename the branch to main
+[fang.xink@explorer-01 Mapping_tutorial]$ git commit -m "Complete RNA-seq mapping tutorial"
+[main (root-commit) f73b372] Complete RNA-seq mapping tutorial
+ 12 files changed, 300 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 accessions.txt
+ create mode 100644 fastqc_notes.txt
+ create mode 100644 scripts/check_pairs.sh
+ create mode 100644 scripts/fasterq_dump.sh
+ create mode 100644 scripts/fastqc.sh
+ create mode 100644 scripts/prefetch.sh
+ create mode 100644 scripts/split_remaining.sh
+ create mode 100644 scripts/star_align.sh
+ create mode 100644 scripts/star_index.sh
+ create mode 100644 scripts/test_split3.sh
+[fang.xink@explorer-01 Mapping_tutorial]$ # Commit your assignment
+[fang.xink@explorer-01 Mapping_tutorial]$ 
+
